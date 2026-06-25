@@ -1,0 +1,688 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lawn Star — GreenRewards Loyalty Program</title>
+<style>
+:root{--g:#2d7a3a;--gd:#1b5e20;--ac:#76c442;--bg:#f4f9f4;--text:#1a1a2e;--muted:#6b7280;--bd:#e2e8f0;--gold:#f59e0b;--plat:#6366f1}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+nav{background:linear-gradient(135deg,var(--gd),var(--g));height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.logo{color:#fff;font-size:1.5rem;font-weight:900;display:flex;align-items:center;gap:.4rem;text-decoration:none}
+.logo span{color:var(--ac)}
+.nav-links{display:flex;align-items:center;gap:.5rem}
+.nbtn{padding:.38rem .85rem;border-radius:20px;font-weight:700;font-size:.82rem;border:2px solid rgba(255,255,255,.3);color:#fff;background:transparent;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-block}
+.nbtn:hover{background:rgba(255,255,255,.15)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.hbg span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:var(--gd);padding:.8rem 1.5rem;gap:.5rem;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.mob-menu.on{display:flex}
+.mob-menu a{color:#fff;font-weight:700;font-size:.9rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#1b3a1f,#2d7a3a,#4caf50,#76c442);padding:4rem 2rem;text-align:center;color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+.hero-inner{position:relative;max-width:680px;margin:0 auto}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:.28rem .9rem;border-radius:20px;font-size:.8rem;margin-bottom:1rem;font-weight:700}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;margin-bottom:.7rem;line-height:1.15}
+.hero h1 span{color:var(--ac)}
+.hero p{font-size:1rem;opacity:.88;max-width:500px;margin:0 auto 2rem}
+.hero-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.hbtn{padding:.75rem 1.8rem;border-radius:26px;font-weight:800;font-size:.95rem;cursor:pointer;text-decoration:none;transition:all .25s}
+.hbtn-pri{background:var(--ac);color:var(--gd);border:none}
+.hbtn-pri:hover{background:#fff}
+.hbtn-sec{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}
+.hbtn-sec:hover{background:rgba(255,255,255,.1)}
+.hero-stats{display:flex;justify-content:center;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-num{font-size:1.8rem;font-weight:900;color:var(--ac)}
+.hstat-label{font-size:.78rem;opacity:.75;margin-top:.1rem}
+
+/* TIERS */
+.tiers-section{max-width:1100px;margin:3rem auto;padding:0 1.5rem}
+.section-label{font-size:.78rem;font-weight:800;color:var(--g);text-transform:uppercase;letter-spacing:2px;text-align:center;margin-bottom:.5rem}
+.section-title{font-size:clamp(1.4rem,3vw,2rem);font-weight:900;text-align:center;margin-bottom:.4rem}
+.section-sub{font-size:.9rem;color:var(--muted);text-align:center;margin-bottom:2.5rem}
+.tiers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.tier-card{border-radius:20px;padding:1.8rem 1.4rem;text-align:center;border:3px solid transparent;transition:all .3s;position:relative;overflow:hidden}
+.tier-card:hover{transform:translateY(-4px)}
+.tier-card.current::after{content:'YOUR TIER';position:absolute;top:12px;right:-22px;background:var(--ac);color:var(--gd);font-size:.6rem;font-weight:800;padding:.18rem 2rem;transform:rotate(45deg);letter-spacing:1px}
+.tier-seed{background:#fff;border-color:#c8e6c9}
+.tier-grow{background:linear-gradient(135deg,#fffde7,#fff9c4);border-color:var(--gold)}
+.tier-bloom{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border-color:var(--g)}
+.tier-elite{background:linear-gradient(135deg,#ede7f6,#d1c4e9);border-color:var(--plat)}
+.tier-icon{font-size:2.8rem;margin-bottom:.7rem}
+.tier-name{font-size:1.1rem;font-weight:900;margin-bottom:.3rem}
+.tier-pts{font-size:.78rem;color:var(--muted);margin-bottom:1rem;font-weight:600}
+.tier-perks{list-style:none;text-align:left;display:flex;flex-direction:column;gap:.4rem}
+.tier-perks li{font-size:.8rem;display:flex;align-items:flex-start;gap:.4rem;line-height:1.4}
+.tier-perks li::before{content:'✅';flex-shrink:0;font-size:.75rem}
+
+/* EARN SECTION */
+.earn-section{background:#fff;padding:3rem 2rem;margin:0}
+.earn-inner{max-width:1100px;margin:0 auto}
+.earn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;margin-top:2rem}
+.earn-card{background:var(--bg);border-radius:16px;padding:1.4rem;border:2px solid var(--bd);transition:all .2s}
+.earn-card:hover{border-color:var(--ac);transform:translateY(-2px)}
+.earn-icon{font-size:2rem;margin-bottom:.6rem}
+.earn-label{font-size:.9rem;font-weight:800;margin-bottom:.3rem}
+.earn-pts{font-size:.78rem;color:var(--g);font-weight:700;margin-bottom:.4rem}
+.earn-desc{font-size:.78rem;color:var(--muted);line-height:1.5}
+
+/* REWARDS STORE */
+.rewards-section{max-width:1100px;margin:3rem auto;padding:0 1.5rem}
+.rewards-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.rtab{padding:.38rem .9rem;border-radius:20px;border:2px solid var(--bd);font-size:.82rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s}
+.rtab:hover,.rtab.on{border-color:var(--g);color:var(--g);background:#f0faf0}
+.rewards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+.reward-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.07);border:2px solid transparent;transition:all .25s;cursor:pointer}
+.reward-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(45,122,58,.15);border-color:var(--ac)}
+.reward-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,#e8f5e9,#c8e6c9)}
+.reward-img.gold{background:linear-gradient(135deg,#fffde7,#fff9c4)}
+.reward-img.purple{background:linear-gradient(135deg,#ede7f6,#d1c4e9)}
+.reward-img.blue{background:linear-gradient(135deg,#e3f2fd,#bbdefb)}
+.reward-body{padding:.9rem}
+.reward-name{font-size:.88rem;font-weight:800;margin-bottom:.2rem}
+.reward-pts{font-size:.8rem;font-weight:900;color:var(--g);margin-bottom:.3rem}
+.reward-desc{font-size:.73rem;color:var(--muted);line-height:1.4}
+.reward-btn{width:100%;margin-top:.7rem;padding:.45rem;background:var(--g);color:#fff;border:none;border-radius:9px;font-weight:700;font-size:.8rem;cursor:pointer;transition:all .2s}
+.reward-btn:hover{background:var(--gd)}
+.reward-btn.locked{background:#ccc;cursor:not-allowed}
+
+/* POINTS SIMULATOR */
+.sim-section{background:linear-gradient(135deg,var(--gd),var(--g));padding:3rem 2rem;color:#fff;margin:0}
+.sim-inner{max-width:760px;margin:0 auto;text-align:center}
+.sim-inner h2{font-size:1.6rem;font-weight:900;margin-bottom:.4rem}
+.sim-inner p{font-size:.9rem;opacity:.85;margin-bottom:2rem}
+.sim-controls{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.5rem}
+.sim-group{text-align:left}
+.sim-label{font-size:.78rem;font-weight:700;opacity:.8;margin-bottom:.4rem;display:block}
+.sim-range{width:100%;accent-color:var(--ac)}
+.sim-val{font-size:1rem;font-weight:900;color:var(--ac)}
+.sim-result{background:rgba(255,255,255,.12);border-radius:16px;padding:1.2rem 1.8rem;display:flex;justify-content:space-around;flex-wrap:wrap;gap:.8rem}
+.sim-stat{text-align:center}
+.sim-stat-num{font-size:1.6rem;font-weight:900;color:var(--ac)}
+.sim-stat-label{font-size:.75rem;opacity:.8;margin-top:.15rem}
+
+/* FAQ MINI */
+.faq-section{max-width:760px;margin:3rem auto;padding:0 1.5rem}
+.faq-item{background:#fff;border-radius:14px;margin-bottom:.7rem;border:2px solid transparent;overflow:hidden;transition:border .2s}
+.faq-item:hover{border-color:#c8e6c9}
+.faq-item.open{border-color:var(--ac)}
+.faq-q{padding:1rem 1.3rem;font-size:.9rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-arr{color:var(--muted);transition:transform .3s}
+.faq-item.open .faq-arr{transform:rotate(180deg);color:var(--g)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.open .faq-a{max-height:300px}
+.faq-a-inner{padding:0 1.3rem 1rem;font-size:.85rem;color:var(--muted);line-height:1.65}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,var(--gd),var(--g));border-radius:20px;padding:2.5rem;text-align:center;color:#fff;max-width:700px;margin:0 auto 3rem}
+.cta-box h3{font-size:1.4rem;font-weight:900;margin-bottom:.5rem}
+.cta-box p{font-size:.9rem;opacity:.85;margin-bottom:1.5rem}
+.join-form{display:flex;gap:.5rem;max-width:420px;margin:0 auto}
+.join-form input{flex:1;padding:.6rem 1rem;border-radius:22px;border:none;font-size:.88rem;outline:none}
+.join-form button{padding:.6rem 1.3rem;background:var(--ac);color:var(--gd);border:none;border-radius:22px;font-weight:800;cursor:pointer;font-size:.88rem;white-space:nowrap}
+.join-form button:hover{background:#fff}
+.join-ok{display:none;color:var(--ac);font-weight:700;font-size:.9rem;margin-top:.8rem}
+
+footer{background:var(--gd);color:#fff;text-align:center;padding:1.4rem;font-size:.82rem}
+@media(max-width:900px){.tiers-grid{grid-template-columns:1fr 1fr}.nav-links{display:none}.hbg{display:flex}}
+@media(max-width:520px){.tiers-grid{grid-template-columns:1fr}.sim-controls{grid-template-columns:1fr}.hero-stats{gap:1.2rem}}
+</style>
+</head>
+<body>
+<div id="dealsBanner" style="background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.5rem 1rem;font-size:.82rem;font-weight:700;position:relative;z-index:101">
+  &#128293; <strong>FLASH SALE:</strong> Up to 30% off selected models this week &nbsp;&#183;&nbsp; Use code <strong>LAWN10</strong> for extra 10% &nbsp;
+  <a href="lawnstar-deals.html" style="color:#ffd700;text-decoration:underline;font-weight:800">Shop Deals &#8594;</a>
+  <button onclick="this.parentElement.style.display='none'" style="position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;opacity:.7">&#10005;</button>
+</div>
+<nav>
+  <a class="logo" href="lawnstar-homepage.html">🌿 Lawn<span>Star</span></a>
+  <div class="nav-links" id="navLinks">
+    <a class="nbtn" href="lawnstar-homepage.html">🏠 Home</a>
+    <a class="nbtn" href="lawnstar-all-mowers.html">🤖 All Mowers</a>
+    <a class="nbtn" href="lawnstar-quiz.html">🧠 Quiz</a>
+    <a class="nbtn" href="lawnstar-brands.html">🏷️ Brands</a>
+    <a class="nbtn" href="lawnstar-guide.html">📖 Guide</a>
+    <a class="nbtn" href="lawnstar-blog.html">&#128221; Blog</a>
+    <a class="nbtn" href="lawnstar-deals.html" style="background:rgba(229,57,53,.7);border-color:rgba(229,57,53,.9)">🔥 Deals</a>
+    <a class="nbtn" href="lawnstar-compare.html">⚖️ Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+    <a class="nbtn"     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html">⭐ Reviews</a>
+    <a class="nbtn" href="lawnstar-faq.html">❓ FAQ</a>
+    <a class="nbtn" href="lawnstar-contact.html">📬 Contact</a>
+    <a class="nbtn" href="lawnstar-loyalty.html">Rewards</a>
+    <a class="nbtn" href="lawnstar-track.html">&#128230; Track Order</a>
+    <a class="nbtn" href="lawnstar-vs-petrol.html">Robot vs Petrol</a>
+    <a class="nbtn" href="lawnstar-checkout.html" style="background:rgba(118,196,66,.25);border-color:#76c442">Cart</a>
+  </div>
+  <div class="hbg" id="hbg" onclick="document.getElementById('mobMenu').classList.toggle('on')"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="lawnstar-homepage.html">🏠 Home</a>
+  <a href="lawnstar-all-mowers.html">🤖 All Mowers</a>
+  <a href="lawnstar-quiz.html">🧠 Quiz</a>
+  <a href="lawnstar-guide.html">📖 Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+  <a href="lawnstar-deals.html">🔥 Deals</a>
+  <a href="lawnstar-faq.html">❓ FAQ</a>
+  <a href="lawnstar-contact.html">📬 Contact</a>
+  <a href="lawnstar-loyalty.html">Rewards</a>
+  <a href="lawnstar-track.html">&#128230; Track Order</a>
+  <a href="lawnstar-vs-petrol.html">Robot vs Petrol</a>
+  <a href="lawnstar-checkout.html">Cart</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🌿 Introducing GreenRewards</div>
+    <h1>Get Rewarded Every<br>Time You <span>Mow</span></h1>
+    <p>Earn GreenPoints on every purchase, review and referral — then redeem them for discounts, free blades and exclusive perks.</p>
+    <div class="hero-btns">
+      <a class="hbtn hbtn-pri" href="#join">🌱 Join Free — Start Earning</a>
+      <a class="hbtn hbtn-sec" href="#tiers">View All Tiers</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">12,400+</div><div class="hstat-label">Active Members</div></div>
+      <div class="hstat"><div class="hstat-num">A$890K</div><div class="hstat-label">Rewards Redeemed</div></div>
+      <div class="hstat"><div class="hstat-num">1pt</div><div class="hstat-label">per A$1 spent</div></div>
+      <div class="hstat"><div class="hstat-num">Free</div><div class="hstat-label">to Join</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TIERS -->
+<div class="tiers-section" id="tiers">
+  <div class="section-label">Membership Tiers</div>
+  <div class="section-title">The Greener You Grow, the More You Earn</div>
+  <div class="section-sub">Progress through 4 tiers based on your annual GreenPoints — each unlocks bigger rewards.</div>
+  <div class="tiers-grid">
+    <div class="tier-card tier-seed">
+      <div class="tier-icon">🌱</div>
+      <div class="tier-name">Seed</div>
+      <div class="tier-pts">0 – 999 pts · Entry</div>
+      <ul class="tier-perks">
+        <li>1 point per A$1 spent</li>
+        <li>Birthday 50pt bonus</li>
+        <li>Member-only email deals</li>
+        <li>Early access to new stock</li>
+      </ul>
+    </div>
+    <div class="tier-card tier-grow">
+      <div class="tier-icon">🌿</div>
+      <div class="tier-name">Grow</div>
+      <div class="tier-pts">1,000 – 4,999 pts</div>
+      <ul class="tier-perks">
+        <li>1.25× point multiplier</li>
+        <li>Free blade replacement pack</li>
+        <li>Priority customer support</li>
+        <li>Quarterly bonus point events</li>
+      </ul>
+    </div>
+    <div class="tier-card tier-bloom current">
+      <div class="tier-icon">🌸</div>
+      <div class="tier-name">Bloom</div>
+      <div class="tier-pts">5,000 – 14,999 pts</div>
+      <ul class="tier-perks">
+        <li>1.5× point multiplier</li>
+        <li>Annual free service voucher</li>
+        <li>Exclusive member pricing</li>
+        <li>Dedicated phone support line</li>
+      </ul>
+    </div>
+    <div class="tier-card tier-elite">
+      <div class="tier-icon">🏆</div>
+      <div class="tier-name">Elite</div>
+      <div class="tier-pts">15,000+ pts · Top Tier</div>
+      <ul class="tier-perks">
+        <li>2× point multiplier</li>
+        <li>Concierge setup service</li>
+        <li>First access to new products</li>
+        <li>Annual gift & VIP invitations</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- EARN SECTION -->
+<div class="earn-section">
+  <div class="earn-inner">
+    <div class="section-label">How to Earn</div>
+    <div class="section-title">10 Ways to Stack Your GreenPoints</div>
+    <div class="section-sub" style="text-align:center;max-width:500px;margin:.4rem auto 0">Every interaction earns — not just purchases.</div>
+    <div class="earn-grid">
+      <div class="earn-card"><div class="earn-icon">🛒</div><div class="earn-label">Make a Purchase</div><div class="earn-pts">+1 pt per A$1 spent</div><div class="earn-desc">Earn on every order. Higher tiers multiply your earn rate up to 2×.</div></div>
+      <div class="earn-card"><div class="earn-icon">⭐</div><div class="earn-label">Write a Review</div><div class="earn-pts">+50 pts per review</div><div class="earn-desc">Share your experience with a verified product review to earn bonus points.</div></div>
+      <div class="earn-card"><div class="earn-icon">👥</div><div class="earn-label">Refer a Friend</div><div class="earn-pts">+200 pts per referral</div><div class="earn-desc">When your referred friend places their first order, you both earn 200 points.</div></div>
+      <div class="earn-card"><div class="earn-icon">🧠</div><div class="earn-label">Complete the Quiz</div><div class="earn-pts">+25 pts</div><div class="earn-desc">Take our 5-question mower quiz and instantly earn 25 GreenPoints.</div></div>
+      <div class="earn-card"><div class="earn-icon">📱</div><div class="earn-label">Follow on Social</div><div class="earn-pts">+30 pts</div><div class="earn-desc">Follow @LawnStarAU on Instagram or Facebook to earn your social bonus.</div></div>
+      <div class="earn-card"><div class="earn-icon">🎂</div><div class="earn-label">Birthday Bonus</div><div class="earn-pts">+50 pts each year</div><div class="earn-desc">We'll automatically drop 50 points into your account on your birthday.</div></div>
+      <div class="earn-card"><div class="earn-icon">📸</div><div class="earn-label">Share a Photo</div><div class="earn-pts">+75 pts</div><div class="earn-desc">Post a photo of your mower in action on social and tag #LawnStarAU.</div></div>
+      <div class="earn-card"><div class="earn-icon">📬</div><div class="earn-label">Subscribe to Email</div><div class="earn-pts">+20 pts</div><div class="earn-desc">Opt in to our weekly deals newsletter and get 20 welcome points.</div></div>
+      <div class="earn-card"><div class="earn-icon">🔧</div><div class="earn-label">Book a Service</div><div class="earn-pts">+100 pts</div><div class="earn-desc">Earn extra points when you book an annual mower service through LawnStar.</div></div>
+      <div class="earn-card"><div class="earn-icon">🏆</div><div class="earn-label">Milestone Bonus</div><div class="earn-pts">+500 pts</div><div class="earn-desc">Reach a new tier and receive an automatic 500-point celebration bonus.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- REWARDS STORE -->
+<div class="rewards-section">
+  <div class="section-label">Rewards Store</div>
+  <div class="section-title">Spend Your GreenPoints</div>
+  <div class="section-sub">Redeem on discounts, accessories and premium services.</div>
+  <div class="rewards-tabs">
+    <div class="rtab on" id="rt0" onclick="rTab(0,'all')">All Rewards</div>
+    <div class="rtab" id="rt1" onclick="rTab(1,'disc')">💰 Discounts</div>
+    <div class="rtab" id="rt2" onclick="rTab(2,'acc')">🔧 Accessories</div>
+    <div class="rtab" id="rt3" onclick="rTab(3,'svc')">🛠️ Services</div>
+    <div class="rtab" id="rt4" onclick="rTab(4,'exc')">🏆 Exclusive</div>
+  </div>
+  <div class="rewards-grid" id="rewardsGrid"></div>
+</div>
+
+<!-- POINTS SIMULATOR -->
+<div class="sim-section">
+  <div class="sim-inner">
+    <div style="font-size:.8rem;font-weight:700;opacity:.7;text-transform:uppercase;letter-spacing:2px;margin-bottom:.4rem">Points Calculator</div>
+    <h2>How Much Could You Earn?</h2>
+    <p>Adjust the sliders to estimate your annual GreenPoints based on your spending habits.</p>
+    <div class="sim-controls">
+      <div class="sim-group">
+        <span class="sim-label">Annual spend on mowers</span>
+        <input type="range" class="sim-range" id="rSpend" min="500" max="8000" step="100" value="3000" oninput="calcSim()"/>
+        <div>A$<span class="sim-val" id="vSpend">3,000</span></div>
+      </div>
+      <div class="sim-group">
+        <span class="sim-label">Reviews written per year</span>
+        <input type="range" class="sim-range" id="rReviews" min="0" max="10" value="3" oninput="calcSim()"/>
+        <div><span class="sim-val" id="vReviews">3</span> reviews</div>
+      </div>
+      <div class="sim-group">
+        <span class="sim-label">Friends referred per year</span>
+        <input type="range" class="sim-range" id="rRef" min="0" max="10" value="2" oninput="calcSim()"/>
+        <div><span class="sim-val" id="vRef">2</span> referrals</div>
+      </div>
+      <div class="sim-group">
+        <span class="sim-label">Your membership tier</span>
+        <input type="range" class="sim-range" id="rTier" min="1" max="4" value="2" oninput="calcSim()"/>
+        <div>Tier: <span class="sim-val" id="vTier">Grow (1.25×)</span></div>
+      </div>
+    </div>
+    <div class="sim-result">
+      <div class="sim-stat"><div class="sim-stat-num" id="simPts">0</div><div class="sim-stat-label">Annual GreenPoints</div></div>
+      <div class="sim-stat"><div class="sim-stat-num" id="simVal">A$0</div><div class="sim-stat-label">Estimated Reward Value</div></div>
+      <div class="sim-stat"><div class="sim-stat-num" id="simTier">🌿 Grow</div><div class="sim-stat-label">Tier You'd Reach</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="section-title" style="text-align:center;margin-bottom:1.5rem">Common Questions</div>
+  <div id="faqWrap"></div>
+</div>
+
+<!-- JOIN CTA -->
+<div style="padding:0 1.5rem 3rem">
+<div class="cta-box" id="join">
+  <h3>🌱 Join GreenRewards Today</h3>
+  <p>It's free, instant and you start earning on your very next purchase.</p>
+  <div class="join-form">
+    <input type="email" id="joinEmail" placeholder="Enter your email address..."/>
+    <button onclick="joinRewards()">Join Free →</button>
+  </div>
+  <div class="join-ok" id="joinOk">🎉 You're in! Check your inbox for your welcome 100 bonus points.</div>
+  <div style="font-size:.78rem;opacity:.65;margin-top:.8rem">No spam, ever. Unsubscribe anytime.</div>
+</div>
+</div>
+
+<footer style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:3rem 2rem 1.5rem;margin-top:2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem">
+      <div>
+        <div style="font-size:1.4rem;font-weight:900;margin-bottom:.6rem">&#127807; Lawn<span style="color:#76c442">Star</span></div>
+        <div style="font-size:.82rem;opacity:.75;line-height:1.7;max-width:260px">Australia&#39;s most trusted destination for AI robot lawn mowers. Free delivery, 2-year warranty, 30-day returns.</div>
+        <div style="display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap">
+          <a href="lawnstar-loyalty.html" style="background:#76c442;color:#1b5e20;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:800;text-decoration:none">&#127942; Join Rewards</a>
+          <a href="lawnstar-checkout.html" style="background:rgba(255,255,255,.15);color:#fff;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.3)">&#128722; Cart</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Shop</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-all-mowers.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129302; All Mowers</a>
+          <a href="lawnstar-deals.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128293; Current Deals</a>
+          <a href="lawnstar-brands.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127991;&#65039; Brands</a>
+          <a href="lawnstar-compare.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9878;&#65039; Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+          <a href="lawnstar-vs-petrol.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9876;&#65039; Robot vs Petrol</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128722; Checkout</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Learn</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128218; Buying Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+          <a href="lawnstar-quiz.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129504; Find My Mower Quiz</a>
+          <a     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#11088; Customer Reviews</a>
+          <a href="lawnstar-faq.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#10067; FAQ</a>
+          <a href="lawnstar-loyalty.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127942; GreenRewards</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Help</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-contact.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128140; Contact Us</a>
+          <a href="lawnstar-track.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128230; Track My Order</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128521; Returns &amp; Refunds</a>
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128295; Setup Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+        </div>
+        <div style="margin-top:1.2rem;font-size:.78rem;opacity:.65;line-height:1.7">
+          &#128222; 1800 LAWNSTAR<br>
+          &#128231; help@lawnstar.com.au<br>
+          &#128336; Mon&#8211;Fri 8am&#8211;6pm AEST
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.15);padding-top:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+      <div style="font-size:.75rem;opacity:.6">&#127807; <strong>LawnStar</strong> &copy; 2026 &nbsp;&#183;&nbsp; All prices AUD inc. GST &nbsp;&#183;&nbsp; ABN 12 345 678 901 &nbsp;&#183;&nbsp; Free delivery Australia-wide</div>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#128274; SSL Secured</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Afterpay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Zip Pay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Humm</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── REWARDS DATA ─────────────────────────────────────────────────────────────
+const REWARDS = [
+  {id:1,em:'💸',cat:'disc',img:'',name:'A$10 Off Voucher',pts:200,desc:'Redeem 200 points for A$10 off your next order — no minimum spend.'},
+  {id:2,em:'💰',cat:'disc',img:'',name:'A$25 Off Voucher',pts:500,desc:'500 points = A$25 off any purchase. Perfect for accessories or blades.'},
+  {id:3,em:'🤑',cat:'disc',img:'gold',name:'A$50 Off Voucher',pts:1000,desc:'Save big — A$50 off your next mower or large order.'},
+  {id:4,em:'🔩',cat:'acc',img:'',name:'Replacement Blade Pack',pts:150,desc:'9-pack of replacement cutting blades. Fits Husqvarna, Mammotion & Segway.'},
+  {id:5,em:'🧰',cat:'acc',img:'',name:'Charging Dock Cleaner Kit',pts:250,desc:'Professional cleaning kit for mower deck and charging contacts.'},
+  {id:6,em:'🎒',cat:'acc',img:'blue',name:'LawnStar Gear Bag',pts:400,desc:'Premium carry bag for mower accessories, blades and charging cables.'},
+  {id:7,em:'🛠️',cat:'svc',img:'',name:'Annual Service Voucher',pts:800,desc:'Full mower service including blade replacement, sensor clean & firmware update.'},
+  {id:8,em:'📱',cat:'svc',img:'',name:'1:1 Setup Consultation',pts:350,desc:'30-min live video call with a LawnStar expert to optimise your mower setup.'},
+  {id:9,em:'🚀',cat:'exc',img:'purple',name:'Early Access Pass',pts:600,desc:'Be first to see and buy new 2027 models before public release.'},
+  {id:10,em:'🎁',cat:'exc',img:'gold',name:'Elite Member Gift Box',pts:1500,desc:'Exclusive Elite tier gift: premium accessories, blade packs & LawnStar merch.'},
+  {id:11,em:'🏅',cat:'exc',img:'purple',name:'VIP Event Invite',pts:2000,desc:'Invitation to our annual LawnStar Summit — demos, networking & product previews.'},
+  {id:12,em:'🔋',cat:'acc',img:'',name:'Solar Charging Pad',pts:900,desc:'Compatible solar charging expansion panel for EcoFlow Blade owners.'},
+];
+
+let activeTab = 'all';
+function rTab(i, cat) {
+  activeTab = cat;
+  [0,1,2,3,4].forEach(j => document.getElementById('rt'+j).classList.toggle('on', j===i));
+  renderRewards();
+}
+
+function renderRewards() {
+  const list = activeTab === 'all' ? REWARDS : REWARDS.filter(r => r.cat === activeTab);
+  document.getElementById('rewardsGrid').innerHTML = list.map(r => `
+    <div class="reward-card">
+      <div class="reward-img${r.img?' '+r.img:''}">${r.em}</div>
+      <div class="reward-body">
+        <div class="reward-name">${r.name}</div>
+        <div class="reward-pts">🌿 ${r.pts.toLocaleString()} GreenPoints</div>
+        <div class="reward-desc">${r.desc}</div>
+        <button class="reward-btn${r.pts>500?' locked':''}" onclick="${r.pts>500?'alert(\'Reach a higher tier to unlock this reward!\')':'alert(\'Reward added to cart! 🎉\')'}">
+          ${r.pts>500?'🔒 Unlock at Bloom':'🛒 Redeem Now'}
+        </button>
+      </div>
+    </div>`).join('');
+}
+renderRewards();
+
+// ─── SIMULATOR ────────────────────────────────────────────────────────────────
+const tierNames = ['','🌱 Seed (1×)','🌿 Grow (1.25×)','🌸 Bloom (1.5×)','🏆 Elite (2×)'];
+const tierMult = [0,1,1.25,1.5,2];
+function calcSim() {
+  const spend=+document.getElementById('rSpend').value;
+  const reviews=+document.getElementById('rReviews').value;
+  const refs=+document.getElementById('rRef').value;
+  const tier=+document.getElementById('rTier').value;
+  document.getElementById('vSpend').textContent=spend.toLocaleString();
+  document.getElementById('vReviews').textContent=reviews;
+  document.getElementById('vRef').textContent=refs;
+  document.getElementById('vTier').textContent=tierNames[tier];
+  const pts=Math.round(spend*tierMult[tier]+reviews*50+refs*200+150);
+  const val=Math.round(pts*0.05);
+  const reachedTier=pts<1000?tierNames[1]:pts<5000?tierNames[2]:pts<15000?tierNames[3]:tierNames[4];
+  document.getElementById('simPts').textContent=pts.toLocaleString();
+  document.getElementById('simVal').textContent='A$'+val.toLocaleString();
+  document.getElementById('simTier').textContent=reachedTier;
+}
+calcSim();
+
+// ─── FAQ ──────────────────────────────────────────────────────────────────────
+const FAQS=[
+  {q:'How do I join GreenRewards?',a:'Joining is free and instant. Simply enter your email above or create an account at checkout. You\'ll receive a welcome email with 100 bonus points to get started.'},
+  {q:'When do my points expire?',a:'GreenPoints are valid for 24 months from the date they were earned. Points activity (earning or redeeming) resets the 24-month clock on all your points.'},
+  {q:'How do I redeem my points?',a:'At checkout, select "Redeem GreenPoints" and choose the voucher you\'d like to apply. Points are deducted from your balance automatically.'},
+  {q:'Can I earn points on sale items?',a:'Yes! You earn GreenPoints on all purchases, including sale and discounted items. Points are calculated on the final amount paid.'},
+  {q:'How do tier upgrades work?',a:'Your tier is calculated on your rolling 12-month points total. When you cross a threshold, you\'re upgraded instantly and receive a 500-point bonus.'},
+  {q:'Can I transfer points to a friend?',a:'Points are personal and non-transferable. However, you can earn 200 points by referring a friend who makes their first purchase.'},
+];
+document.getElementById('faqWrap').innerHTML=FAQS.map((f,i)=>`
+  <div class="faq-item" id="lf${i}">
+    <div class="faq-q" onclick="tFAQ(${i})"><span>${f.q}</span><span class="faq-arr">▼</span></div>
+    <div class="faq-a"><div style="padding:0 1.3rem 1rem;font-size:.85rem;color:var(--muted);line-height:1.65">${f.a}</div></div>
+  </div>`).join('');
+
+function tFAQ(i){
+  const el=document.getElementById('lf'+i);
+  const was=el.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(x=>x.classList.remove('open'));
+  if(!was)el.classList.add('open');
+}
+
+// ─── JOIN ─────────────────────────────────────────────────────────────────────
+function joinRewards(){
+  const v=document.getElementById('joinEmail').value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){document.getElementById('joinEmail').style.borderColor='#e53935';return;}
+  document.getElementById('joinOk').style.display='block';
+  document.getElementById('joinEmail').style.display='none';
+  document.querySelector('.join-form button').style.display='none';
+}
+
+// Hamburger
+window.addEventListener('resize',()=>{if(window.innerWidth>820){document.getElementById('mobMenu').classList.remove('on');document.getElementById('hbg').style.display='none';document.getElementById('navLinks').style.display='flex';}else{document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}});
+if(window.innerWidth<=820){document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}
+</script>
+<!-- EXIT INTENT POPUP -->
+<div id="exitPop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center;animation:epfi .3s ease">
+  <div style="background:#fff;border-radius:24px;max-width:460px;width:90%;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+    <div style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:2rem;text-align:center;color:#fff">
+      <div style="font-size:3rem;margin-bottom:.5rem">&#128293;</div>
+      <div style="font-size:1.3rem;font-weight:900;margin-bottom:.3rem">Wait! Don&#39;t Go Yet</div>
+      <div style="font-size:.88rem;opacity:.85">Grab an extra 10% off before you leave</div>
+    </div>
+    <div style="padding:1.8rem;text-align:center">
+      <div style="background:#f0faf0;border:2px dashed #76c442;border-radius:12px;padding:.8rem 1.2rem;margin-bottom:1rem">
+        <div style="font-size:.75rem;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px">Your exclusive code</div>
+        <div style="font-size:1.6rem;font-weight:900;color:#1b5e20;letter-spacing:2px">STAY10</div>
+        <div style="font-size:.75rem;color:#6b7280;margin-top:.2rem">10% off Â· Valid 24 hours only</div>
+      </div>
+      <a href="lawnstar-all-mowers.html" style="display:block;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:.75rem;border-radius:12px;font-weight:800;font-size:.95rem;text-decoration:none;margin-bottom:.7rem" onclick="document.getElementById('exitPop').style.display='none'">&#129302; Shop Now &amp; Save 10%</a>
+      <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="background:none;border:none;color:#6b7280;font-size:.8rem;cursor:pointer;text-decoration:underline">No thanks, I&#39;ll pay full price</button>
+    </div>
+    <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="position:absolute;top:.8rem;right:.8rem;background:rgba(255,255,255,.2);border:none;border-radius:50%;width:30px;height:30px;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">&#10005;</button>
+  </div>
+</div>
+<style>@keyframes epfi{from{opacity:0}to{opacity:1}}</style>
+<script>
+(function(){
+  if(localStorage.getItem('ls_exit_seen')) return;
+  var shown=false;
+  document.addEventListener('mouseleave',function(e){
+    if(e.clientY<=0&&!shown){
+      shown=true;
+      var pop=document.getElementById('exitPop');
+      if(pop){pop.style.display='flex';}
+    }
+  });
+  setTimeout(function(){
+    if(!shown){shown=true;var pop=document.getElementById('exitPop');if(pop)pop.style.display='flex';}
+  },45000);
+})();
+</script>
+$chatWidget = @'
+
+<!-- LAWNSTAR LIVE CHAT WIDGET -->
+<style>
+#ls-chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:8000;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;font-family:'Segoe UI',system-ui,sans-serif}
+#ls-chat-pop{background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;display:none;animation:chatIn .25s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+#ls-chat-pop.on{display:block}
+.lsc-header{background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.lsc-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.lsc-hinfo{flex:1}
+.lsc-name{color:#fff;font-size:.88rem;font-weight:800}
+.lsc-status{color:rgba(255,255,255,.75);font-size:.72rem;display:flex;align-items:center;gap:.3rem}
+.lsc-dot{width:7px;height:7px;border-radius:50%;background:#76c442;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.lsc-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.1rem;cursor:pointer;padding:.2rem;line-height:1}
+.lsc-msgs{height:220px;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.7rem;background:#f8fbf8}
+.lsc-msg{max-width:82%;padding:.6rem .85rem;border-radius:14px;font-size:.8rem;line-height:1.5;animation:msgIn .2s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lsc-msg.bot{background:#fff;border:1px solid #e2e8f0;align-self:flex-start;border-radius:4px 14px 14px 14px;color:#1a1a2e}
+.lsc-msg.user{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
+.lsc-chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .9rem .7rem;background:#f8fbf8}
+.lsc-chip{background:#e8f5e9;color:#2d7a3a;border:1px solid #c8e6c9;border-radius:20px;padding:.25rem .75rem;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lsc-chip:hover{background:#2d7a3a;color:#fff}
+.lsc-input-row{display:flex;gap:0;border-top:1px solid #e2e8f0;background:#fff}
+.lsc-input{flex:1;border:none;outline:none;padding:.75rem .9rem;font-size:.85rem;font-family:inherit;background:transparent}
+.lsc-send{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;padding:.5rem .85rem;cursor:pointer;font-size:1rem;transition:opacity .2s}
+.lsc-send:hover{opacity:.85}
+.lsc-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1b5e20,#2d7a3a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(45,122,58,.4);transition:all .25s;position:relative}
+.lsc-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(45,122,58,.55)}
+.lsc-notif{position:absolute;top:-2px;right:-2px;background:#e53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.lsc-typing{display:flex;gap:4px;align-items:center;padding:.6rem .85rem;background:#fff;border:1px solid #e2e8f0;border-radius:4px 14px 14px 14px;align-self:flex-start;width:52px}
+.lsc-typing span{width:7px;height:7px;border-radius:50%;background:#76c442;animation:typ .9s infinite}
+.lsc-typing span:nth-child(2){animation-delay:.15s}
+.lsc-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typ{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+<div id="ls-chat-bubble">
+  <div id="ls-chat-pop">
+    <div class="lsc-header">
+      <div class="lsc-avatar">&#127807;</div>
+      <div class="lsc-hinfo">
+        <div class="lsc-name">LawnStar Support</div>
+        <div class="lsc-status"><span class="lsc-dot"></span> Online now &bull; Avg reply &lt; 2 min</div>
+      </div>
+      <button class="lsc-close" onclick="lscToggle()">&#10005;</button>
+    </div>
+    <div class="lsc-msgs" id="lscMsgs"></div>
+    <div class="lsc-chips" id="lscChips">
+      <div class="lsc-chip" onclick="lscQuick('Which mower suits my lawn?')">&#129302; Find my mower</div>
+      <div class="lsc-chip" onclick="lscQuick('What are your current deals?')">&#128293; Deals &amp; sales</div>
+      <div class="lsc-chip" onclick="lscQuick('I need help with my order')">&#128230; Order help</div>
+      <div class="lsc-chip" onclick="lscQuick('Warranty question')">&#128737; Warranty</div>
+    </div>
+    <div class="lsc-input-row">
+      <input class="lsc-input" id="lscInput" placeholder="Ask us anything..." onkeydown="if(event.key==='Enter')lscSend()"/>
+      <button class="lsc-send" onclick="lscSend()">&#10148;</button>
+    </div>
+  </div>
+  <button class="lsc-btn" onclick="lscToggle()" id="lscMainBtn" title="Chat with LawnStar">
+    <span id="lscBtnIcon">&#128172;</span>
+    <div class="lsc-notif" id="lscNotif">1</div>
+  </button>
+</div>
+<script>
+(function(){
+var open=false,welcomed=false;
+var RESPONSES={
+  'which mower':'Great question! Can you tell me your lawn size? Under 500m2, 500-1000m2, or over 1000m2? I can find the perfect match &#128269;',
+  'lawn size':'For up to 1,000m2, the Mammotion Yuka 1000 (A$899) is our top pick. For 1,000–3,000m2, the Segway Navimow i108E is brilliant. For larger lawns, Mammotion Luba 2 AWD covers up to 5,000m2! &#127807;',
+  'deal':'Right now we have up to 30% off! Use code <strong>LAWN10</strong> at checkout for an extra 10% off everything. <a href="lawnstar-deals.html" style="color:#76c442;font-weight:700">See all deals &#8594;</a>',
+  'order':'I can help with that! Please email orders@lawnstar.com.au with your order number, or use our <a href="lawnstar-track.html" style="color:#76c442;font-weight:700">order tracker</a>. &#128230;',
+  'warranty':'All our mowers come with at least 3 years warranty (manufacturer + LawnStar top-up). You can <a href="lawnstar-warranty.html" style="color:#76c442;font-weight:700">view full warranty details here</a>. &#128737;',
+  'price':'Our mowers range from A$899 to A$6,900 depending on features. The most popular is the Segway Navimow i108E at A$1,299. Want me to help find one in your budget?',
+  'install':'Great news — we offer professional installation from A$199! Our technicians set up the boundary wire, configure the app, and do a test run. <a href="lawnstar-store-locator.html" style="color:#76c442;font-weight:700">Book via a local store</a>.',
+  'compare':'Our <a href="lawnstar-compare.html" style="color:#76c442;font-weight:700">comparison tool</a> lets you compare up to 4 mowers side by side with animated score charts. Really handy! &#9878;',
+  'bundle':'Yes! We have bundle deals where you save 10% when you add 2+ accessories. Check out the <a href="lawnstar-bundle-builder.html" style="color:#76c442;font-weight:700">Bundle Builder</a> &#127873;',
+  'shipping':'We offer free shipping on all orders over A$500 Australia-wide. Standard delivery is 3–7 business days. Express available. &#128666;',
+  'default':'Thanks for your message! A LawnStar expert will reply within 2 minutes. In the meantime, our <a href="lawnstar-faq.html" style="color:#76c442;font-weight:700">FAQ page</a> might have a quick answer. &#128075;'
+};
+function addMsg(txt,type,delay){
+  delay=delay||0;
+  setTimeout(function(){
+    var msgs=document.getElementById('lscMsgs');
+    if(!msgs)return;
+    // Show typing for bot
+    if(type==='bot'&&delay>0){
+      var typ=document.createElement('div');typ.className='lsc-typing';typ.id='lsc-typing-ind';
+      typ.innerHTML='<span></span><span></span><span></span>';
+      msgs.appendChild(typ);msgs.scrollTop=msgs.scrollHeight;
+      setTimeout(function(){
+        var t=document.getElementById('lsc-typing-ind');if(t)t.remove();
+        var m=document.createElement('div');m.className='lsc-msg '+type;m.innerHTML=txt;
+        msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+      },900);
+    } else {
+      var m=document.createElement('div');m.className='lsc-msg '+(type||'bot');m.innerHTML=txt;
+      msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+    }
+  },delay);
+}
+function getReply(txt){
+  var t=txt.toLowerCase();
+  for(var k in RESPONSES){if(t.indexOf(k)>-1)return RESPONSES[k];}
+  return RESPONSES['default'];
+}
+window.lscToggle=function(){
+  open=!open;
+  var pop=document.getElementById('ls-chat-pop');
+  var notif=document.getElementById('lscNotif');
+  var icon=document.getElementById('lscBtnIcon');
+  if(open){
+    pop.classList.add('on');
+    if(notif)notif.style.display='none';
+    if(icon)icon.textContent='\u2715';
+    if(!welcomed){
+      welcomed=true;
+      addMsg('&#127807; Hey! Welcome to <strong>LawnStar</strong>. I\'m here to help you find the perfect robot mower &#129302;','bot',100);
+      addMsg('What can I help you with today?','bot',1200);
+    }
+  } else {
+    pop.classList.remove('on');
+    if(icon)icon.textContent='\u{1F4AC}';
+  }
+};
+window.lscSend=function(){
+  var inp=document.getElementById('lscInput');
+  var txt=inp.value.trim();
+  if(!txt)return;
+  addMsg(txt,'user');
+  inp.value='';
+  addMsg(getReply(txt),'bot',400);
+};
+window.lscQuick=function(txt){
+  addMsg(txt,'user');
+  addMsg(getReply(txt),'bot',400);
+  document.getElementById('lscChips').style.display='none';
+};
+// Show greeting bubble after 8s
+setTimeout(function(){
+  if(!open){
+    var notif=document.getElementById('lscNotif');
+    if(notif)notif.style.display='flex';
+  }
+},8000);
+})();
+</script>
+</body>
+</html>

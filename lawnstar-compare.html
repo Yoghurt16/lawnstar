@@ -1,0 +1,473 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Compare Robot Mowers – LawnStar Australia</title>
+<style>
+:root{--g:#2d7a3a;--gd:#1b5e20;--ac:#76c442;--bg:#f4f9f4;--text:#1a1a2e;--muted:#6b7280;--bd:#e2e8f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+nav{background:linear-gradient(135deg,var(--gd),var(--g));height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.logo{color:#fff;font-size:1.5rem;font-weight:900;text-decoration:none}.logo span{color:var(--ac)}
+.nav-links{display:flex;align-items:center;gap:.4rem}
+.nbtn{padding:.32rem .75rem;border-radius:20px;font-weight:700;font-size:.78rem;border:2px solid rgba(255,255,255,.3);color:#fff;background:transparent;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap}
+.nbtn:hover{background:rgba(255,255,255,.15)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.hbg span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:var(--gd);padding:.8rem 1.5rem;gap:.4rem;z-index:199;max-height:80vh;overflow-y:auto}
+.mob-menu.on{display:flex}
+.mob-menu a{color:#fff;font-weight:700;font-size:.88rem;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none}
+#dealsBanner{background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.45rem 1rem;font-size:.8rem;font-weight:700;position:relative}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--gd),var(--g));padding:2.5rem 2rem;text-align:center;color:#fff}
+.hero h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:900;margin-bottom:.4rem}
+.hero p{font-size:.88rem;opacity:.85}
+/* MOWER SELECTOR */
+.selector-wrap{max-width:1100px;margin:1.5rem auto 0;padding:0 1.5rem}
+.selector-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1.5rem}
+.sel-card{background:#fff;border-radius:14px;border:2px solid var(--bd);padding:.9rem;cursor:pointer;transition:all .2s;text-align:center;position:relative}
+.sel-card:hover{border-color:var(--ac);transform:translateY(-2px)}
+.sel-card.on{border-color:var(--g);background:#f0faf0;box-shadow:0 4px 16px rgba(45,122,58,.15)}
+.sel-check{position:absolute;top:.5rem;right:.5rem;width:20px;height:20px;border-radius:50%;background:var(--g);color:#fff;font-size:.65rem;display:none;align-items:center;justify-content:center;font-weight:900}
+.sel-card.on .sel-check{display:flex}
+.sel-em{font-size:2.2rem;margin-bottom:.3rem}
+.sel-name{font-size:.75rem;font-weight:800;line-height:1.3;margin-bottom:.2rem}
+.sel-price{font-size:.82rem;font-weight:900;color:var(--gd)}
+/* COMPARE HINT */
+.compare-hint{text-align:center;font-size:.82rem;color:var(--muted);margin-bottom:1rem}
+.compare-hint span{color:var(--g);font-weight:700}
+/* COMPARE TABLE */
+.compare-wrap{max-width:1100px;margin:0 auto 2rem;padding:0 1.5rem;overflow-x:auto}
+.ctable{width:100%;border-collapse:separate;border-spacing:0;min-width:600px}
+/* Product header row */
+.ctable .hrow td{background:#fff;padding:.9rem .8rem;border-bottom:2px solid var(--bd);vertical-align:bottom;text-align:center}
+.ctable .hrow td:first-child{text-align:left;background:var(--bg);font-size:.75rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;border-radius:12px 0 0 0}
+.prod-header{display:flex;flex-direction:column;align-items:center;gap:.3rem}
+.ph-em{font-size:2.5rem}
+.ph-name{font-size:.8rem;font-weight:800;line-height:1.3;text-align:center}
+.ph-price{font-size:.95rem;font-weight:900;color:var(--gd)}
+.ph-rating{font-size:.72rem;color:var(--muted)}
+.ph-btn{background:var(--g);color:#fff;border:none;border-radius:8px;padding:.35rem .7rem;font-size:.72rem;font-weight:800;cursor:pointer;margin-top:.3rem;text-decoration:none;display:inline-block}
+/* Section header rows */
+.ctable .srow td{background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;font-size:.75rem;font-weight:800;padding:.5rem .8rem;text-transform:uppercase;letter-spacing:1px}
+/* Data rows */
+.ctable .drow td{padding:.7rem .8rem;border-bottom:1px solid var(--bd);font-size:.83rem;vertical-align:middle;text-align:center}
+.ctable .drow:nth-child(even) td{background:#fafcfa}
+.ctable .drow td:first-child{text-align:left;font-weight:700;color:var(--muted);font-size:.78rem;background:#fff;white-space:nowrap}
+.ctable .drow td.best{background:#f0faf0;font-weight:800;color:var(--gd)}
+.ctable .drow td.worst{color:var(--muted)}
+/* Score bars */
+.score-bar{height:8px;background:var(--bd);border-radius:4px;overflow:hidden;margin-top:.3rem;width:80%;margin-left:auto;margin-right:auto}
+.score-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.score-label{font-size:.85rem;font-weight:800}
+/* VERDICT SECTION */
+.verdict-wrap{max-width:1100px;margin:0 auto 2rem;padding:0 1.5rem}
+.verdict-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.verdict-card{background:#fff;border-radius:16px;border:2px solid var(--bd);padding:1.1rem;text-align:center;transition:all .25s}
+.verdict-card:hover{border-color:var(--ac);transform:translateY(-2px)}
+.v-crown{font-size:1.8rem;margin-bottom:.4rem}
+.v-label{font-size:.7rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem}
+.v-name{font-size:.88rem;font-weight:900;margin-bottom:.2rem}
+.v-reason{font-size:.75rem;color:var(--muted);line-height:1.5}
+/* FOOTER */
+footer{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:2.5rem 2rem 1.5rem;margin-top:2rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
+.fc-title{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.6rem}
+.footer-grid a{display:block;color:rgba(255,255,255,.8);font-size:.8rem;text-decoration:none;margin-bottom:.35rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.15);padding-top:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;font-size:.73rem;opacity:.6}
+@media(max-width:900px){.selector-grid{grid-template-columns:1fr 1fr}.verdict-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.nav-links{display:none}.hbg{display:flex}.selector-grid{grid-template-columns:1fr 1fr}.verdict-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="dealsBanner" style="background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.45rem 1rem;font-size:.8rem;font-weight:700;position:relative">
+  &#128293; <strong>FLASH SALE:</strong> Up to 30% off &nbsp;&#183;&nbsp; Code <strong>LAWN10</strong> &nbsp;
+  <a href="lawnstar-deals.html" style="color:#ffd700;text-decoration:underline;font-weight:800">Shop &#8594;</a>
+  <button onclick="this.parentElement.style.display='none'" style="position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;opacity:.7">&#10005;</button>
+</div>
+<nav>
+  <a class="logo" href="lawnstar-homepage.html">&#127807; Lawn<span>Star</span></a>
+  <div class="nav-links" id="navLinks">
+    <a class="nbtn" href="lawnstar-homepage.html">&#127968; Home</a>
+    <a class="nbtn" href="lawnstar-all-mowers.html">&#129302; Mowers</a>
+    <a class="nbtn" href="lawnstar-quiz.html">&#129504; Quiz</a>
+    <a class="nbtn" href="lawnstar-brands.html">&#127991; Brands</a>
+    <a class="nbtn" href="lawnstar-guide.html">&#128218; Guide</a>
+    <a class="nbtn" href="lawnstar-blog.html">&#128221; Blog</a>
+    <a class="nbtn" href="lawnstar-deals.html" style="background:rgba(229,57,53,.7);border-color:rgba(229,57,53,.9)">&#128293; Deals</a>
+    <a class="nbtn" href="lawnstar-compare.html" style="background:rgba(118,196,66,.25);border-color:#76c442">&#9878;&#65039; Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+    <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    <a class="nbtn" href="lawnstar-reviews.html">&#11088; Reviews</a>
+    <a class="nbtn" href="lawnstar-loyalty.html">&#127942; Rewards</a>
+    <a class="nbtn" href="lawnstar-checkout.html">&#128722; Cart</a>
+  </div>
+  <div class="hbg" id="hbg" onclick="document.getElementById('mobMenu').classList.toggle('on')"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="lawnstar-homepage.html">&#127968; Home</a><a href="lawnstar-all-mowers.html">&#129302; All Mowers</a>
+  <a href="lawnstar-deals.html">&#128293; Deals</a><a href="lawnstar-compare.html">&#9878; Compare</a>
+  <a href="lawnstar-bundle-builder.html">&#127873; Bundles</a><a href="lawnstar-store-locator.html">&#128205; Stores</a>
+  <a href="lawnstar-reviews.html">&#11088; Reviews</a><a href="lawnstar-checkout.html">&#128722; Cart</a>
+</div>
+
+<div class="hero">
+  <div style="display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:.25rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;margin-bottom:.7rem">⚖️ Side-by-Side Comparison</div>
+  <h1>⚖️ Compare Robot Mowers</h1>
+  <p>Select up to 4 mowers to compare specs, scores, and features side by side.</p>
+</div>
+
+<!-- MOWER SELECTOR -->
+<div class="selector-wrap">
+  <div class="compare-hint">Select up to <span>4 mowers</span> to compare — <span id="selectedCount">0</span> selected</div>
+  <div class="selector-grid" id="selectorGrid"></div>
+  <div style="text-align:center;margin-bottom:1.5rem">
+    <button onclick="renderTable()" style="background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;border:none;border-radius:25px;padding:.65rem 2rem;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">⚖️ Compare Selected</button>
+  </div>
+</div>
+
+<!-- COMPARE TABLE -->
+<div class="compare-wrap" id="compareWrap" style="display:none">
+  <div id="compareTable"></div>
+</div>
+
+<!-- VERDICT -->
+<div class="verdict-wrap">
+  <div style="font-size:1.1rem;font-weight:900;margin-bottom:1rem;text-align:center">🏆 Our Verdict — Best For Each Category</div>
+  <div class="verdict-grid">
+    <div class="verdict-card" style="border-color:#ffd700">
+      <div class="v-crown">🏆</div>
+      <div class="v-label">Best Overall</div>
+      <div class="v-name">Husqvarna 430X</div>
+      <div class="v-reason">Premium build, 70% slope, GPS tracking, 4G connectivity — the benchmark for residential robot mowing</div>
+    </div>
+    <div class="verdict-card" style="border-color:#76c442">
+      <div class="v-crown">💰</div>
+      <div class="v-label">Best Value</div>
+      <div class="v-name">Segway Navimow i108E</div>
+      <div class="v-reason">Wire-free GPS, solid app, 800m2 — exceptional features at a mid-range price point</div>
+    </div>
+    <div class="verdict-card" style="border-color:#64b5f6">
+      <div class="v-crown">🍃</div>
+      <div class="v-label">Best Wire-Free</div>
+      <div class="v-name">Mammotion Luba 2 AWD</div>
+      <div class="v-reason">No boundary wire needed, 5,000m2, all-wheel-drive for challenging terrain</div>
+    </div>
+    <div class="verdict-card" style="border-color:#81c784">
+      <div class="v-crown">🌱</div>
+      <div class="v-label">Best Budget</div>
+      <div class="v-name">Mammotion Yuka 1000</div>
+      <div class="v-reason">Under $900, 1,000m2, GPS navigation — best entry point into robot mowing</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div style="font-size:1.3rem;font-weight:900;margin-bottom:.4rem">&#127807; Lawn<span style="color:#76c442">Star</span></div><div style="font-size:.78rem;opacity:.7;line-height:1.7;max-width:240px">Australia's most trusted robot mower destination.</div></div>
+      <div><div class="fc-title">Shop</div><a href="lawnstar-all-mowers.html">All Mowers</a><a href="lawnstar-deals.html">Deals</a><a href="lawnstar-brands.html">Brands</a><a href="lawnstar-bundle-builder.html">Bundles</a></div>
+      <div><div class="fc-title">Learn</div><a href="lawnstar-blog.html">Blog</a><a href="lawnstar-guide.html">Buying Guide</a><a href="lawnstar-quiz.html">Find My Mower</a><a href="lawnstar-faq.html">FAQ</a></div>
+      <div><div class="fc-title">Help</div><a href="lawnstar-contact.html">Contact</a><a href="lawnstar-track.html">Track Order</a><a href="lawnstar-store-locator.html">Find a Store</a><a href="lawnstar-loyalty.html">Rewards</a></div>
+    </div>
+    <div class="footer-bottom"><span>&#127807; LawnStar &copy; 2026 · ABN 12 345 678 901</span></div>
+  </div>
+</footer>
+
+<script>
+const MOWERS=[
+  {id:0,em:'🤖',name:'Automower 430X',brand:'Husqvarna',price:4619,rating:4.9,reviews:847,area:4000,slope:70,noise:58,battery:320,weight:13.9,nav:'Wire + GPS',app:'iOS/Android',alexa:true,solar:false,wire:true,scores:{value:72,ease:85,power:98,quiet:90,smart:95,slope:98}},
+  {id:1,em:'🍃',name:'Luba 2 AWD',brand:'Mammotion',price:2199,rating:4.8,reviews:612,area:5000,slope:75,noise:62,battery:240,weight:14.2,nav:'Wire-free GPS',app:'iOS/Android',alexa:true,solar:false,wire:false,scores:{value:88,ease:92,power:95,quiet:84,smart:90,slope:100}},
+  {id:2,em:'🌀',name:'Navimow i108E',brand:'Segway',price:1299,rating:4.7,reviews:489,area:800,slope:45,noise:60,battery:180,weight:9.8,nav:'Wire-free GPS',app:'iOS/Android',alexa:true,solar:false,wire:false,scores:{value:95,ease:90,power:72,quiet:87,smart:85,slope:72}},
+  {id:3,em:'⚡',name:'EcoFlow Blade',brand:'EcoFlow',price:1549,rating:4.6,reviews:334,area:1600,slope:35,noise:63,battery:270,weight:17.5,nav:'Wire-free GPS',app:'iOS/Android',alexa:false,solar:true,wire:false,scores:{value:85,ease:88,power:80,quiet:82,smart:82,slope:62}},
+  {id:4,em:'🌿',name:'Automower 315X',brand:'Husqvarna',price:2199,rating:4.8,reviews:723,area:1600,slope:40,noise:58,battery:240,weight:9.4,nav:'Wire + GPS',app:'iOS/Android',alexa:true,solar:false,wire:true,scores:{value:82,ease:86,power:82,quiet:92,smart:90,slope:68}},
+  {id:5,em:'🌱',name:'Yuka 1000',brand:'Mammotion',price:899,rating:4.5,reviews:298,area:1000,slope:35,noise:65,battery:180,weight:10.2,nav:'GPS',app:'iOS/Android',alexa:false,solar:false,wire:false,scores:{value:98,ease:88,power:65,quiet:78,smart:75,slope:62}},
+  {id:6,em:'🔵',name:'Landroid M700',brand:'Worx',price:1199,rating:4.5,reviews:412,area:700,slope:35,noise:61,battery:180,weight:9.6,nav:'Wire',app:'iOS/Android',alexa:true,solar:false,wire:true,scores:{value:90,ease:82,power:68,quiet:86,smart:80,slope:62}},
+  {id:7,em:'🌸',name:'SILENO City 250',brand:'Gardena',price:1499,rating:4.6,reviews:287,area:250,slope:25,noise:57,battery:65,weight:7.8,nav:'Wire',app:'iOS/Android',alexa:false,solar:false,wire:true,scores:{value:80,ease:95,power:52,quiet:95,smart:72,slope:45}},
+];
+
+let selected=new Set([0,1,2,3]);
+
+function renderSelector(){
+  document.getElementById('selectorGrid').innerHTML=MOWERS.map(m=>`
+    <div class="sel-card ${selected.has(m.id)?'on':''}" onclick="toggleSel(${m.id})" id="sc-${m.id}">
+      <div class="sel-check">✓</div>
+      <div class="sel-em">${m.em}</div>
+      <div class="sel-name">${m.brand} ${m.name}</div>
+      <div class="sel-price">A$${m.price.toLocaleString()}</div>
+    </div>`).join('');
+  document.getElementById('selectedCount').textContent=selected.size;
+}
+
+function toggleSel(id){
+  if(selected.has(id)){selected.delete(id);}
+  else{if(selected.size>=4){alert('Maximum 4 mowers. Deselect one first.');return;}selected.add(id);}
+  renderSelector();
+}
+
+const SCORE_COLORS={value:'#4caf50',ease:'#2196f3',power:'#e53935',quiet:'#9c27b0',smart:'#ff9800',slope:'#795548'};
+const SCORE_LABELS={value:'Value',ease:'Ease of Use',power:'Performance',quiet:'Quiet',smart:'Smart Features',slope:'Slope Handling'};
+
+function scoreBar(val,key){
+  const color=SCORE_COLORS[key]||'var(--g)';
+  return `<div class="score-label">${val}/100</div><div class="score-bar"><div class="score-fill" style="width:${val}%;background:${color}"></div></div>`;
+}
+
+function best(arr){const max=Math.max(...arr);return arr.map(v=>v===max);}
+function worst(arr){const min=Math.min(...arr);return arr.map(v=>v===min);}
+function cell(val,isBest,isWorst){return `<td class="${isBest?'best':isWorst?'worst':''}">${val}</td>`;}
+
+function renderTable(){
+  const list=MOWERS.filter(m=>selected.has(m.id));
+  if(list.length<2){alert('Please select at least 2 mowers to compare.');return;}
+  const wrap=document.getElementById('compareWrap');
+  wrap.style.display='block';
+  wrap.scrollIntoView({behavior:'smooth',block:'start'});
+
+  let h=`<table class="ctable">`;
+  // HEADER ROW
+  h+=`<tr class="hrow"><td>Mower</td>`;
+  list.forEach(m=>{
+    h+=`<td><div class="prod-header"><div class="ph-em">${m.em}</div><div class="ph-name">${m.brand} ${m.name}</div><div class="ph-price">A$${m.price.toLocaleString()}</div><div class="ph-rating">★ ${m.rating} (${m.reviews})</div><a class="ph-btn" href="lawnstar-all-mowers.html">Buy Now</a></div></td>`;
+  });
+  h+=`</tr>`;
+
+  // SCORE SECTION
+  h+=`<tr class="srow"><td colspan="${list.length+1}">📊 Performance Scores</td></tr>`;
+  ['value','ease','power','quiet','smart','slope'].forEach(key=>{
+    const vals=list.map(m=>m.scores[key]);
+    const bests=best(vals),worsts=worst(vals);
+    h+=`<tr class="drow"><td>${SCORE_LABELS[key]}</td>`;
+    list.forEach((m,i)=>{
+      h+=`<td class="${bests[i]?'best':worsts[i]?'worst':''}">${scoreBar(m.scores[key],key)}</td>`;
+    });
+    h+=`</tr>`;
+  });
+
+  // SPECS SECTION
+  h+=`<tr class="srow"><td colspan="${list.length+1}">📐 Key Specifications</td></tr>`;
+
+  const rows=[
+    {label:'Price',key:'price',fmt:v=>'A$'+v.toLocaleString(),lowerBetter:true},
+    {label:'Lawn Area (m2)',key:'area',fmt:v=>v.toLocaleString()+'m2',lowerBetter:false},
+    {label:'Max Slope',key:'slope',fmt:v=>v+'%',lowerBetter:false},
+    {label:'Noise Level',key:'noise',fmt:v=>v+' dB',lowerBetter:true},
+    {label:'Battery Life',key:'battery',fmt:v=>v+' min',lowerBetter:false},
+    {label:'Weight',key:'weight',fmt:v=>v+' kg',lowerBetter:true},
+    {label:'Navigation',key:'nav',fmt:v=>v},
+    {label:'App Control',key:'app',fmt:v=>v},
+    {label:'Alexa/Google',key:'alexa',fmt:v=>v?'✅ Yes':'❌ No'},
+    {label:'Solar Compatible',key:'solar',fmt:v=>v?'✅ Yes':'➖ No'},
+    {label:'Wire Required',key:'wire',fmt:v=>v?'⚠️ Yes':'✅ No'},
+  ];
+
+  rows.forEach(r=>{
+    const vals=list.map(m=>m[r.key]);
+    h+=`<tr class="drow"><td>${r.label}</td>`;
+    if(typeof vals[0]==='number'&&r.lowerBetter!==undefined){
+      const numVals=vals;
+      const bests=r.lowerBetter?worst(numVals):best(numVals);
+      const worsts=r.lowerBetter?best(numVals):worst(numVals);
+      list.forEach((m,i)=>{h+=`<td class="${bests[i]?'best':worsts[i]?'worst':''}">${r.fmt(m[r.key])}</td>`;});
+    } else {
+      list.forEach(m=>{h+=`<td>${r.fmt(m[r.key])}</td>`;});
+    }
+    h+=`</tr>`;
+  });
+
+  h+=`</table>`;
+  document.getElementById('compareTable').innerHTML=h;
+
+  // Animate score bars
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.score-fill').forEach(el=>{
+      const w=el.style.width;el.style.width='0';
+      setTimeout(()=>{el.style.width=w;},50);
+    });
+  });
+}
+
+// Init
+renderSelector();
+renderTable(); // Auto-render with default 4 selection
+
+// EXIT INTENT
+(function(){
+  if(localStorage.getItem('ls_exit_seen'))return;
+  var shown=false;
+  document.addEventListener('mouseleave',function(e){
+    if(e.clientY<=0&&!shown){shown=true;document.getElementById('exitPop').style.display='flex';}
+  });
+})();
+if(window.innerWidth<=620){document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}
+</script>
+
+<!-- EXIT POPUP -->
+<div id="exitPop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:24px;max-width:420px;width:90%;overflow:hidden;position:relative">
+    <div style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:1.8rem;text-align:center;color:#fff">
+      <div style="font-size:2.5rem;margin-bottom:.4rem">&#128293;</div>
+      <div style="font-size:1.2rem;font-weight:900;margin-bottom:.2rem">Wait! Don't Go Yet</div>
+      <div style="font-size:.85rem;opacity:.85">Get an extra 10% off with code STAY10</div>
+    </div>
+    <div style="padding:1.5rem;text-align:center">
+      <div style="background:#f0faf0;border:2px dashed #76c442;border-radius:12px;padding:.7rem 1rem;margin-bottom:.9rem">
+        <div style="font-size:.72rem;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px">Your code</div>
+        <div style="font-size:1.5rem;font-weight:900;color:#1b5e20;letter-spacing:2px">STAY10</div>
+      </div>
+      <a href="lawnstar-all-mowers.html" style="display:block;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:.7rem;border-radius:12px;font-weight:800;font-size:.9rem;text-decoration:none;margin-bottom:.6rem" onclick="document.getElementById('exitPop').style.display='none'">&#129302; Shop Now &amp; Save 10%</a>
+      <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="background:none;border:none;color:#6b7280;font-size:.78rem;cursor:pointer;text-decoration:underline">No thanks</button>
+    </div>
+    <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="position:absolute;top:.7rem;right:.7rem;background:rgba(255,255,255,.2);border:none;border-radius:50%;width:28px;height:28px;color:#fff;font-size:.9rem;cursor:pointer">&#10005;</button>
+  </div>
+</div>
+$chatWidget = @'
+
+<!-- LAWNSTAR LIVE CHAT WIDGET -->
+<style>
+#ls-chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:8000;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;font-family:'Segoe UI',system-ui,sans-serif}
+#ls-chat-pop{background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;display:none;animation:chatIn .25s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+#ls-chat-pop.on{display:block}
+.lsc-header{background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.lsc-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.lsc-hinfo{flex:1}
+.lsc-name{color:#fff;font-size:.88rem;font-weight:800}
+.lsc-status{color:rgba(255,255,255,.75);font-size:.72rem;display:flex;align-items:center;gap:.3rem}
+.lsc-dot{width:7px;height:7px;border-radius:50%;background:#76c442;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.lsc-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.1rem;cursor:pointer;padding:.2rem;line-height:1}
+.lsc-msgs{height:220px;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.7rem;background:#f8fbf8}
+.lsc-msg{max-width:82%;padding:.6rem .85rem;border-radius:14px;font-size:.8rem;line-height:1.5;animation:msgIn .2s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lsc-msg.bot{background:#fff;border:1px solid #e2e8f0;align-self:flex-start;border-radius:4px 14px 14px 14px;color:#1a1a2e}
+.lsc-msg.user{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
+.lsc-chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .9rem .7rem;background:#f8fbf8}
+.lsc-chip{background:#e8f5e9;color:#2d7a3a;border:1px solid #c8e6c9;border-radius:20px;padding:.25rem .75rem;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lsc-chip:hover{background:#2d7a3a;color:#fff}
+.lsc-input-row{display:flex;gap:0;border-top:1px solid #e2e8f0;background:#fff}
+.lsc-input{flex:1;border:none;outline:none;padding:.75rem .9rem;font-size:.85rem;font-family:inherit;background:transparent}
+.lsc-send{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;padding:.5rem .85rem;cursor:pointer;font-size:1rem;transition:opacity .2s}
+.lsc-send:hover{opacity:.85}
+.lsc-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1b5e20,#2d7a3a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(45,122,58,.4);transition:all .25s;position:relative}
+.lsc-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(45,122,58,.55)}
+.lsc-notif{position:absolute;top:-2px;right:-2px;background:#e53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.lsc-typing{display:flex;gap:4px;align-items:center;padding:.6rem .85rem;background:#fff;border:1px solid #e2e8f0;border-radius:4px 14px 14px 14px;align-self:flex-start;width:52px}
+.lsc-typing span{width:7px;height:7px;border-radius:50%;background:#76c442;animation:typ .9s infinite}
+.lsc-typing span:nth-child(2){animation-delay:.15s}
+.lsc-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typ{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+<div id="ls-chat-bubble">
+  <div id="ls-chat-pop">
+    <div class="lsc-header">
+      <div class="lsc-avatar">&#127807;</div>
+      <div class="lsc-hinfo">
+        <div class="lsc-name">LawnStar Support</div>
+        <div class="lsc-status"><span class="lsc-dot"></span> Online now &bull; Avg reply &lt; 2 min</div>
+      </div>
+      <button class="lsc-close" onclick="lscToggle()">&#10005;</button>
+    </div>
+    <div class="lsc-msgs" id="lscMsgs"></div>
+    <div class="lsc-chips" id="lscChips">
+      <div class="lsc-chip" onclick="lscQuick('Which mower suits my lawn?')">&#129302; Find my mower</div>
+      <div class="lsc-chip" onclick="lscQuick('What are your current deals?')">&#128293; Deals &amp; sales</div>
+      <div class="lsc-chip" onclick="lscQuick('I need help with my order')">&#128230; Order help</div>
+      <div class="lsc-chip" onclick="lscQuick('Warranty question')">&#128737; Warranty</div>
+    </div>
+    <div class="lsc-input-row">
+      <input class="lsc-input" id="lscInput" placeholder="Ask us anything..." onkeydown="if(event.key==='Enter')lscSend()"/>
+      <button class="lsc-send" onclick="lscSend()">&#10148;</button>
+    </div>
+  </div>
+  <button class="lsc-btn" onclick="lscToggle()" id="lscMainBtn" title="Chat with LawnStar">
+    <span id="lscBtnIcon">&#128172;</span>
+    <div class="lsc-notif" id="lscNotif">1</div>
+  </button>
+</div>
+<script>
+(function(){
+var open=false,welcomed=false;
+var RESPONSES={
+  'which mower':'Great question! Can you tell me your lawn size? Under 500m2, 500-1000m2, or over 1000m2? I can find the perfect match &#128269;',
+  'lawn size':'For up to 1,000m2, the Mammotion Yuka 1000 (A$899) is our top pick. For 1,000–3,000m2, the Segway Navimow i108E is brilliant. For larger lawns, Mammotion Luba 2 AWD covers up to 5,000m2! &#127807;',
+  'deal':'Right now we have up to 30% off! Use code <strong>LAWN10</strong> at checkout for an extra 10% off everything. <a href="lawnstar-deals.html" style="color:#76c442;font-weight:700">See all deals &#8594;</a>',
+  'order':'I can help with that! Please email orders@lawnstar.com.au with your order number, or use our <a href="lawnstar-track.html" style="color:#76c442;font-weight:700">order tracker</a>. &#128230;',
+  'warranty':'All our mowers come with at least 3 years warranty (manufacturer + LawnStar top-up). You can <a href="lawnstar-warranty.html" style="color:#76c442;font-weight:700">view full warranty details here</a>. &#128737;',
+  'price':'Our mowers range from A$899 to A$6,900 depending on features. The most popular is the Segway Navimow i108E at A$1,299. Want me to help find one in your budget?',
+  'install':'Great news — we offer professional installation from A$199! Our technicians set up the boundary wire, configure the app, and do a test run. <a href="lawnstar-store-locator.html" style="color:#76c442;font-weight:700">Book via a local store</a>.',
+  'compare':'Our <a href="lawnstar-compare.html" style="color:#76c442;font-weight:700">comparison tool</a> lets you compare up to 4 mowers side by side with animated score charts. Really handy! &#9878;',
+  'bundle':'Yes! We have bundle deals where you save 10% when you add 2+ accessories. Check out the <a href="lawnstar-bundle-builder.html" style="color:#76c442;font-weight:700">Bundle Builder</a> &#127873;',
+  'shipping':'We offer free shipping on all orders over A$500 Australia-wide. Standard delivery is 3–7 business days. Express available. &#128666;',
+  'default':'Thanks for your message! A LawnStar expert will reply within 2 minutes. In the meantime, our <a href="lawnstar-faq.html" style="color:#76c442;font-weight:700">FAQ page</a> might have a quick answer. &#128075;'
+};
+function addMsg(txt,type,delay){
+  delay=delay||0;
+  setTimeout(function(){
+    var msgs=document.getElementById('lscMsgs');
+    if(!msgs)return;
+    // Show typing for bot
+    if(type==='bot'&&delay>0){
+      var typ=document.createElement('div');typ.className='lsc-typing';typ.id='lsc-typing-ind';
+      typ.innerHTML='<span></span><span></span><span></span>';
+      msgs.appendChild(typ);msgs.scrollTop=msgs.scrollHeight;
+      setTimeout(function(){
+        var t=document.getElementById('lsc-typing-ind');if(t)t.remove();
+        var m=document.createElement('div');m.className='lsc-msg '+type;m.innerHTML=txt;
+        msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+      },900);
+    } else {
+      var m=document.createElement('div');m.className='lsc-msg '+(type||'bot');m.innerHTML=txt;
+      msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+    }
+  },delay);
+}
+function getReply(txt){
+  var t=txt.toLowerCase();
+  for(var k in RESPONSES){if(t.indexOf(k)>-1)return RESPONSES[k];}
+  return RESPONSES['default'];
+}
+window.lscToggle=function(){
+  open=!open;
+  var pop=document.getElementById('ls-chat-pop');
+  var notif=document.getElementById('lscNotif');
+  var icon=document.getElementById('lscBtnIcon');
+  if(open){
+    pop.classList.add('on');
+    if(notif)notif.style.display='none';
+    if(icon)icon.textContent='\u2715';
+    if(!welcomed){
+      welcomed=true;
+      addMsg('&#127807; Hey! Welcome to <strong>LawnStar</strong>. I\'m here to help you find the perfect robot mower &#129302;','bot',100);
+      addMsg('What can I help you with today?','bot',1200);
+    }
+  } else {
+    pop.classList.remove('on');
+    if(icon)icon.textContent='\u{1F4AC}';
+  }
+};
+window.lscSend=function(){
+  var inp=document.getElementById('lscInput');
+  var txt=inp.value.trim();
+  if(!txt)return;
+  addMsg(txt,'user');
+  inp.value='';
+  addMsg(getReply(txt),'bot',400);
+};
+window.lscQuick=function(txt){
+  addMsg(txt,'user');
+  addMsg(getReply(txt),'bot',400);
+  document.getElementById('lscChips').style.display='none';
+};
+// Show greeting bubble after 8s
+setTimeout(function(){
+  if(!open){
+    var notif=document.getElementById('lscNotif');
+    if(notif)notif.style.display='flex';
+  }
+},8000);
+})();
+</script>
+</body>
+</html>

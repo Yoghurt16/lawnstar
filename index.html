@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LawnStar — Project Index</title>
+<style>
+  :root{
+    --g:#2d7a3a;--gd:#1b5e20;--ac:#76c442;--bg:#f4f9f4;
+    --text:#1a1a2e;--muted:#6b7280;--bd:#e2e8f0;--card:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+  /* ── HEADER ── */
+  header{background:linear-gradient(135deg,var(--gd) 0%,var(--g) 60%,#3a9e4f 100%);padding:3rem 2rem 2.5rem;text-align:center;position:relative;overflow:hidden}
+  header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+  .h-logo{font-size:2.8rem;font-weight:900;color:#fff;letter-spacing:-1px;position:relative}
+  .h-logo span{color:var(--ac)}
+  .h-sub{color:rgba(255,255,255,.8);margin-top:.4rem;font-size:1rem;position:relative}
+  .h-badges{display:flex;gap:.6rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap;position:relative}
+  .h-badge{background:rgba(255,255,255,.15);backdrop-filter:blur(4px);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:.3rem .9rem;font-size:.78rem;font-weight:700}
+  .h-badge.green{background:rgba(118,196,66,.25);border-color:var(--ac);color:var(--ac)}
+
+  /* ── STATS BAR ── */
+  .stats-bar{background:#fff;border-bottom:1px solid var(--bd);padding:1rem 2rem;display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+  .stat{text-align:center}
+  .stat-n{font-size:1.6rem;font-weight:900;color:var(--g);line-height:1}
+  .stat-l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-top:.2rem}
+
+  /* ── LAYOUT ── */
+  .wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+
+  /* ── SECTION TITLE ── */
+  .sec-title{display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem;margin-top:2rem}
+  .sec-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+  .sec-icon.green{background:#e8f5e9}
+  .sec-icon.blue{background:#e3f2fd}
+  .sec-icon.amber{background:#fff8e1}
+  .sec-icon.purple{background:#f3e5f5}
+  .sec-icon.red{background:#fce4ec}
+  .sec-icon.teal{background:#e0f7fa}
+  .sec-h{font-size:1.1rem;font-weight:800;color:var(--text)}
+  .sec-h span{font-weight:400;color:var(--muted);font-size:.85rem;margin-left:.4rem}
+
+  /* ── CARDS GRID ── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem}
+  .grid.wide{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+
+  /* ── PAGE CARD ── */
+  .pcard{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:1.1rem 1.2rem;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:.5rem;transition:all .2s;position:relative;overflow:hidden}
+  .pcard:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(45,122,58,.12);border-color:#b9d9c0}
+  .pcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g),var(--ac))}
+  .pcard-top{display:flex;align-items:center;justify-content:space-between}
+  .pcard-icon{font-size:1.5rem}
+  .pcard-kb{font-size:.7rem;color:var(--muted);background:#f1f5f9;border-radius:8px;padding:.15rem .45rem;font-weight:700}
+  .pcard-name{font-size:.88rem;font-weight:800;color:var(--text)}
+  .pcard-file{font-size:.72rem;color:var(--muted);font-family:'Courier New',monospace}
+  .pcard-desc{font-size:.76rem;color:var(--muted);line-height:1.5}
+  .pcard-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.2rem}
+  .tag{font-size:.65rem;font-weight:700;border-radius:20px;padding:.15rem .5rem;text-transform:uppercase;letter-spacing:.03em}
+  .tag.new{background:#e8f5e9;color:#2d7a3a;border:1px solid #c8e6c9}
+  .tag.wave6{background:#e3f2fd;color:#1565c0;border:1px solid #bbdefb}
+  .tag.wave7{background:#f3e5f5;color:#7b1fa2;border:1px solid #e1bee7}
+  .tag.core{background:#fff3e0;color:#e65100;border:1px solid #ffe0b2}
+
+  /* ── FEATURE PILLS ── */
+  .feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem}
+  .feat-pill{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:.8rem 1rem;display:flex;align-items:flex-start;gap:.7rem}
+  .feat-pill-icon{font-size:1.3rem;flex-shrink:0;margin-top:.1rem}
+  .feat-pill-body{}
+  .feat-pill-name{font-size:.82rem;font-weight:800;color:var(--text)}
+  .feat-pill-desc{font-size:.74rem;color:var(--muted);margin-top:.15rem;line-height:1.45}
+
+  /* ── TECH TABLE ── */
+  .tech-table{background:#fff;border:1px solid var(--bd);border-radius:14px;overflow:hidden;width:100%}
+  .tech-table table{width:100%;border-collapse:collapse}
+  .tech-table th{background:#f8fdf8;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:.6rem 1rem;text-align:left;border-bottom:1px solid var(--bd)}
+  .tech-table td{padding:.65rem 1rem;font-size:.8rem;border-bottom:1px solid #f1f5f9;vertical-align:top}
+  .tech-table tr:last-child td{border-bottom:none}
+  .tech-table code{background:#f1f5f9;border-radius:5px;padding:.1rem .35rem;font-size:.75rem;font-family:'Courier New',monospace;color:#c7254e}
+
+  /* ── CTA ── */
+  .cta-row{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin:2.5rem 0 1rem}
+  .cta{padding:.85rem 2rem;border-radius:10px;font-size:.9rem;font-weight:800;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:all .2s}
+  .cta-primary{background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;box-shadow:0 4px 16px rgba(45,122,58,.3)}
+  .cta-primary:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(45,122,58,.4)}
+  .cta-sec{background:#fff;color:var(--g);border:2px solid var(--g)}
+  .cta-sec:hover{background:#f0f9f1}
+
+  /* ── FOOTER ── */
+  footer{text-align:center;padding:2rem;font-size:.76rem;color:var(--muted);border-top:1px solid var(--bd);margin-top:3rem;background:#fff}
+  footer strong{color:var(--g)}
+
+  /* ── WAVE BADGE ON CARD ── */
+  .wave-corner{position:absolute;top:.6rem;right:.6rem;font-size:.6rem;font-weight:900;border-radius:6px;padding:.15rem .4rem;text-transform:uppercase;letter-spacing:.04em}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-logo">🌿 Lawn<span>Star</span></div>
+  <div class="h-sub">Australian AI Robot Mower E-Commerce — Project Index</div>
+  <div class="h-badges">
+    <div class="h-badge">20 Pages</div>
+    <div class="h-badge">~955 KB</div>
+    <div class="h-badge">Wave 7 Complete</div>
+    <div class="h-badge green">✅ All Inline — Zero Dependencies</div>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-n">20</div><div class="stat-l">HTML Pages</div></div>
+  <div class="stat"><div class="stat-n">955</div><div class="stat-l">KB Total</div></div>
+  <div class="stat"><div class="stat-n">7</div><div class="stat-l">Build Waves</div></div>
+  <div class="stat"><div class="stat-n">8</div><div class="stat-l">Blog Articles</div></div>
+  <div class="stat"><div class="stat-n">28</div><div class="stat-l">FAQ Entries</div></div>
+  <div class="stat"><div class="stat-n">8</div><div class="stat-l">AU Showrooms</div></div>
+</div>
+
+<div class="wrap">
+
+  <!-- LAUNCH SITE -->
+  <div class="cta-row">
+    <a href="lawnstar-homepage.html" class="cta cta-primary">🚀 Launch Site — Homepage</a>
+    <a href="lawnstar-all-mowers.html" class="cta cta-sec">🤖 Browse All Mowers</a>
+    <a href="lawnstar-quiz.html" class="cta cta-sec">🎯 Take the Quiz</a>
+  </div>
+
+  <!-- ── CORE PAGES ── -->
+  <div class="sec-title">
+    <div class="sec-icon green">🏠</div>
+    <div class="sec-h">Core Pages <span>— 6 pages</span></div>
+  </div>
+  <div class="grid">
+
+    <a href="lawnstar-homepage.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">🏠</span><span class="pcard-kb">85.7 KB</span></div>
+      <div class="pcard-name">Homepage</div>
+      <div class="pcard-file">lawnstar-homepage.html</div>
+      <div class="pcard-desc">Hero banner, featured products, brand logos, why LawnStar section, newsletter signup.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-all-mowers.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">🤖</span><span class="pcard-kb">94.5 KB</span></div>
+      <div class="pcard-name">All Mowers</div>
+      <div class="pcard-file">lawnstar-all-mowers.html</div>
+      <div class="pcard-desc">Full product grid with filter/sort, carousel cards, wishlist, Quick View modal, price range slider.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span><span class="tag new">Quick View</span></div>
+    </a>
+
+    <a href="lawnstar-quiz.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">🎯</span><span class="pcard-kb">51.1 KB</span></div>
+      <div class="pcard-name">Mower Finder Quiz</div>
+      <div class="pcard-file">lawnstar-quiz.html</div>
+      <div class="pcard-desc">5-step recommendation quiz — lawn size, terrain, budget, features — with personalised results.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-brands.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">🏷️</span><span class="pcard-kb">42.1 KB</span></div>
+      <div class="pcard-name">Brands</div>
+      <div class="pcard-file">lawnstar-brands.html</div>
+      <div class="pcard-desc">Brand showcase — Husqvarna, Segway, Mammotion, Gardena, WORX, EcoFlow with model listings.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-guide.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">📖</span><span class="pcard-kb">46 KB</span></div>
+      <div class="pcard-name">Buying Guide</div>
+      <div class="pcard-file">lawnstar-guide.html</div>
+      <div class="pcard-desc">Comprehensive 2025 buying guide — area coverage, slope ratings, connectivity, installation tips.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-blog.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">📰</span><span class="pcard-kb">53.1 KB</span></div>
+      <div class="pcard-name">Blog</div>
+      <div class="pcard-file">lawnstar-blog.html</div>
+      <div class="pcard-desc">8 articles — robot mower trends, lawn care tips, seasonal guides, brand spotlights.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+  </div>
+
+  <!-- ── SHOPPING ── -->
+  <div class="sec-title" style="margin-top:2rem">
+    <div class="sec-icon amber">🛒</div>
+    <div class="sec-h">Shopping & Deals <span>— 5 pages</span></div>
+  </div>
+  <div class="grid">
+
+    <a href="lawnstar-deals.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">🔥</span><span class="pcard-kb">42 KB</span></div>
+      <div class="pcard-name">Flash Deals</div>
+      <div class="pcard-file">lawnstar-deals.html</div>
+      <div class="pcard-desc">9 live deals with per-deal countdown timers, discount badges, Flash Deals banner, urgency CTAs.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-compare.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">⚖️</span><span class="pcard-kb">31.4 KB</span></div>
+      <div class="pcard-name">Compare Mowers</div>
+      <div class="pcard-file">lawnstar-compare.html</div>
+      <div class="pcard-desc">8-mower selector, animated radar score bars (6 axes), best/worst cell highlighting, verdict section.</div>
+      <div class="pcard-tags"><span class="tag wave6">Wave 6</span></div>
+    </a>
+
+    <a href="lawnstar-bundle-builder.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">🎁</span><span class="pcard-kb">33.3 KB</span></div>
+      <div class="pcard-name">Bundle Builder</div>
+      <div class="pcard-file">lawnstar-bundle-builder.html</div>
+      <div class="pcard-desc">3-step configurator — 6 mowers + 8 accessories, 10% bundle discount, 3 pre-made bundles, sticky summary.</div>
+      <div class="pcard-tags"><span class="tag wave6">Wave 6</span></div>
+    </a>
+
+    <a href="lawnstar-checkout.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">💳</span><span class="pcard-kb">49.1 KB</span></div>
+      <div class="pcard-name">Cart & Checkout</div>
+      <div class="pcard-file">lawnstar-checkout.html</div>
+      <div class="pcard-desc">3-step checkout — cart review, shipping/billing form, order confirmation. BNPL options, promo codes.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-loyalty.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">⭐</span><span class="pcard-kb">47.3 KB</span></div>
+      <div class="pcard-name">Loyalty & Rewards</div>
+      <div class="pcard-file">lawnstar-loyalty.html</div>
+      <div class="pcard-desc">LawnStar Rewards program — tier tiers (Silver/Gold/Platinum), points calculator, member benefits, referral.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+  </div>
+
+  <!-- ── PRODUCT & SUPPORT ── -->
+  <div class="sec-title" style="margin-top:2rem">
+    <div class="sec-icon blue">🔧</div>
+    <div class="sec-h">Product & Support <span>— 5 pages</span></div>
+  </div>
+  <div class="grid">
+
+    <a href="lawnstar-product.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">📦</span><span class="pcard-kb">44.5 KB</span></div>
+      <div class="pcard-name">Product Detail</div>
+      <div class="pcard-file">lawnstar-product.html</div>
+      <div class="pcard-desc">Emoji gallery (5 thumbs), sticky Add to Cart bar, tabbed specs/reviews/FAQ, BNPL row, related products.</div>
+      <div class="pcard-tags"><span class="tag wave6">Wave 6</span></div>
+    </a>
+
+    <a href="lawnstar-reviews.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">⭐</span><span class="pcard-kb">41.6 KB</span></div>
+      <div class="pcard-name">Reviews</div>
+      <div class="pcard-file">lawnstar-reviews.html</div>
+      <div class="pcard-desc">Customer reviews hub — star breakdown, filter by rating/brand, verified purchase badges, review cards.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-faq.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">❓</span><span class="pcard-kb">51.7 KB</span></div>
+      <div class="pcard-name">FAQ</div>
+      <div class="pcard-file">lawnstar-faq.html</div>
+      <div class="pcard-desc">28 questions across 6 categories — setup, safety, connectivity, maintenance, billing, returns.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-warranty.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">🛡️</span><span class="pcard-kb">41.4 KB</span></div>
+      <div class="pcard-name">Warranty & Returns</div>
+      <div class="pcard-file">lawnstar-warranty.html</div>
+      <div class="pcard-desc">5 tabs — Warranty/Returns/Coverage/Claims/FAQ. Brand table, ACL consumer rights, live claim form.</div>
+      <div class="pcard-tags"><span class="tag wave7">Wave 7</span></div>
+    </a>
+
+    <a href="lawnstar-contact.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">📬</span><span class="pcard-kb">44.3 KB</span></div>
+      <div class="pcard-name">Contact Us</div>
+      <div class="pcard-file">lawnstar-contact.html</div>
+      <div class="pcard-desc">Contact form, phone/email/chat channels, business hours, store address map, support ticket tracker.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+  </div>
+
+  <!-- ── TOOLS & PARTNERS ── -->
+  <div class="sec-title" style="margin-top:2rem">
+    <div class="sec-icon purple">🤝</div>
+    <div class="sec-h">Tools & Partners <span>— 4 pages</span></div>
+  </div>
+  <div class="grid">
+
+    <a href="lawnstar-store-locator.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">📍</span><span class="pcard-kb">34.4 KB</span></div>
+      <div class="pcard-name">Store Locator</div>
+      <div class="pcard-file">lawnstar-store-locator.html</div>
+      <div class="pcard-desc">8 AU showrooms, mock map with pins, state filter tabs, Book Demo modal, virtual demo option.</div>
+      <div class="pcard-tags"><span class="tag wave6">Wave 6</span></div>
+    </a>
+
+    <a href="lawnstar-track.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">🚚</span><span class="pcard-kb">39.4 KB</span></div>
+      <div class="pcard-name">Order Tracking</div>
+      <div class="pcard-file">lawnstar-track.html</div>
+      <div class="pcard-desc">Live order status tracker — order number lookup, step-by-step timeline, estimated delivery, courier link.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-vs-petrol.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">⚡</span><span class="pcard-kb">42.8 KB</span></div>
+      <div class="pcard-name">Robot vs Petrol</div>
+      <div class="pcard-file">lawnstar-vs-petrol.html</div>
+      <div class="pcard-desc">Animated comparison — cost/time/noise/emissions/effort. Interactive 5-year TCO calculator.</div>
+      <div class="pcard-tags"><span class="tag core">Core</span></div>
+    </a>
+
+    <a href="lawnstar-affiliate.html" class="pcard">
+      <div class="pcard-top"><span class="pcard-icon">💰</span><span class="pcard-kb">39 KB</span></div>
+      <div class="pcard-name">Affiliate Program</div>
+      <div class="pcard-file">lawnstar-affiliate.html</div>
+      <div class="pcard-desc">3 commission tiers (5/6.5/8%), earnings calculator with sliders, 6 partner types, tool kit, apply form.</div>
+      <div class="pcard-tags"><span class="tag wave7">Wave 7</span></div>
+    </a>
+
+  </div>
+
+  <!-- ── SITEWIDE FEATURES ── -->
+  <div class="sec-title" style="margin-top:2.5rem">
+    <div class="sec-icon teal">✨</div>
+    <div class="sec-h">Sitewide Features</div>
+  </div>
+  <div class="feature-grid">
+
+    <div class="feat-pill">
+      <div class="feat-pill-icon">📌</div>
+      <div class="feat-pill-body">
+        <div class="feat-pill-name">Sticky Navigation</div>
+        <div class="feat-pill-desc">Consistent nav on all 20 pages — Home, Mowers, Deals, Compare, Bundles, Stores, Quiz, Cart with live count.</div>
+      </div>
+    </div>
+
+    <div class="feat-pill">
+      <div class="feat-pill-icon">🦶</div>
+      <div class="feat-pill-body">
+        <div class="feat-pill-name">Rich Footer</div>
+        <div class="feat-pill-desc">4-column footer — quick links, brands, customer service, social icons, trust badges, newsletter on all pages.</div>
+      </div>
+    </div>
+
+    <div class="feat-pill">
+      <div class="feat-pill-icon">🔥</div>
+      <div class="feat-pill-body">
+        <div class="feat-pill-name">Flash Deals Banner</div>
+        <div class="feat-pill-desc">Dismissible top banner with live countdown timer — drives urgency across all pages.</div>
+      </div>
+    </div>
+
+    <div class="feat-pill">
+      <div class="feat-pill-icon">🚪</div>
+      <div class="feat-pill-body">
+        <div class="feat-pill-name">Exit-Intent Popup</div>
+        <div class="feat-pill-desc">10% off coupon popup triggered on mouse-leave — email capture, once-per-session, on all pages.</div>
+      </div>
+    </div>
+
+    <div class="feat-pill">
+      <div class="feat-pill-icon">📱</div>
+      <div class="feat-pill-body">
+        <div class="feat-pill-name">Mobile Responsive</div>
+        <div class="feat-pill-desc">Fully responsive layouts — hamburger menu, fluid grids, touch-friendly carousels on all 20 pages.</div>
+      </div>
+    </div>
+
+    <div class="feat-pill">
+      <div class="feat-pill-icon">💬</div>
+      <div class="feat-pill-body">
+        <div class="feat-pill-name">Live Chat Widget</div>
+        <div class="feat-pill-desc">Floating chat bubble with smart keyword replies, typing indicator, quick chips, auto greeting — all 20 pages.</div>
+      </div>
+    </div>
+
+    <div class="feat-pill">
+      <div class="feat-pill-icon">🔍</div>
+      <div class="feat-pill-body">
+        <div class="feat-pill-name">Quick View Modal</div>
+        <div class="feat-pill-desc">Hover-to-reveal Quick View button on every product card — animated spec display, add to cart in-place.</div>
+      </div>
+    </div>
+
+    <div class="feat-pill">
+      <div class="feat-pill-icon">❤️</div>
+      <div class="feat-pill-body">
+        <div class="feat-pill-name">Wishlist & Cart</div>
+        <div class="feat-pill-desc">Persistent via localStorage — wishlist (WL_KEY) and cart (ls_cart) survive page navigations.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── TECH REFERENCE ── -->
+  <div class="sec-title" style="margin-top:2.5rem">
+    <div class="sec-icon red">⚙️</div>
+    <div class="sec-h">Technical Reference</div>
+  </div>
+  <div class="tech-table">
+    <table>
+      <thead>
+        <tr><th>Key</th><th>Value / Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>CSS Variables</strong></td><td><code>--g:#2d7a3a</code> <code>--gd:#1b5e20</code> <code>--ac:#76c442</code> <code>--bg:#f4f9f4</code> <code>--text:#1a1a2e</code> <code>--muted:#6b7280</code> <code>--bd:#e2e8f0</code></td></tr>
+        <tr><td><strong>Product Array</strong></td><td><code>const P=[...]</code> — fields: id, br, nm, em, bg, bt, p, op, rt, rv, area, an, bat, ch, ns, sl, wf, gps, ai, con, wt, wr, ds, cat, pros, cons, fea, lif</td></tr>
+        <tr><td><strong>Currency</strong></td><td><code>const R=1.54</code> · <code>const toA=u=>Math.round(u*R/10)*10</code> — USD to AUD conversion, rounded to nearest $10</td></tr>
+        <tr><td><strong>Cart Storage</strong></td><td><code>localStorage</code> key: <code>ls_cart</code> — array of <code>{id, qty}</code> objects</td></tr>
+        <tr><td><strong>Wishlist Storage</strong></td><td><code>localStorage</code> key: <code>WL_KEY</code> — set of product IDs</td></tr>
+        <tr><td><strong>Architecture</strong></td><td>100% inline HTML/CSS/JS — zero external dependencies, zero build step, open any file directly in browser</td></tr>
+        <tr><td><strong>File Naming</strong></td><td>All pages: <code>lawnstar-*.html</code> on Desktop (<code>C:/Users/liangho/Desktop/</code>)</td></tr>
+        <tr><td><strong>Key Functions</strong></td><td><code>render()</code> product grid · <code>openPD(id)</code> product detail · <code>openQV(id)</code> quick view · <code>addToCart(id)</code> · <code>toggleWish(id)</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── WAVE LEGEND ── -->
+  <div class="sec-title" style="margin-top:2.5rem">
+    <div class="sec-icon green">🌊</div>
+    <div class="sec-h">Build Wave Log</div>
+  </div>
+  <div class="feature-grid">
+    <div class="feat-pill"><div class="feat-pill-icon">🌊</div><div class="feat-pill-body"><div class="feat-pill-name">Waves 1–5 — Foundation</div><div class="feat-pill-desc">Homepage, All Mowers, Quiz, Brands, Buying Guide, Blog, Deals, Reviews, FAQ, Contact, Loyalty, Robot vs Petrol, Cart/Checkout, Order Tracking</div></div></div>
+    <div class="feat-pill"><div class="feat-pill-icon">🌊</div><div class="feat-pill-body"><div class="feat-pill-name">Wave 6 — Product Experience</div><div class="feat-pill-desc">Product Detail PDP, Store Locator (8 showrooms), Bundle Builder (3-step), Compare upgrade (animated score bars)</div></div></div>
+    <div class="feat-pill"><div class="feat-pill-icon">🌊</div><div class="feat-pill-body"><div class="feat-pill-name">Wave 7 — Engagement Layer</div><div class="feat-pill-desc">Warranty &amp; Returns, Affiliate Program, Quick View Modal on All Mowers, Live Chat Widget on all 20 pages</div></div></div>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  Built with ❤️ by <strong>Orcha</strong> &nbsp;·&nbsp;
+  LawnStar Project &nbsp;·&nbsp;
+  20 pages · 955 KB &nbsp;·&nbsp;
+  Wave 7 Complete &nbsp;·&nbsp;
+  June 2026
+</footer>
+
+</body>
+</html>

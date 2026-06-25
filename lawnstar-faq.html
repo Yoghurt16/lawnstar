@@ -1,0 +1,549 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lawn Star — Frequently Asked Questions</title>
+<style>
+:root{--g:#2d7a3a;--gd:#1b5e20;--ac:#76c442;--bg:#f4f9f4;--text:#1a1a2e;--muted:#6b7280;--bd:#e2e8f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+nav{background:linear-gradient(135deg,var(--gd),var(--g));height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.logo{color:#fff;font-size:1.5rem;font-weight:900;display:flex;align-items:center;gap:.4rem;text-decoration:none}
+.logo span{color:var(--ac)}
+.nav-links{display:flex;align-items:center;gap:.5rem}
+.nbtn{padding:.38rem .85rem;border-radius:20px;font-weight:700;font-size:.82rem;border:2px solid rgba(255,255,255,.3);color:#fff;background:transparent;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-block}
+.nbtn:hover{background:rgba(255,255,255,.15)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.hbg span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:var(--gd);padding:.8rem 1.5rem;gap:.5rem;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.mob-menu.on{display:flex}
+.mob-menu a{color:#fff;font-weight:700;font-size:.9rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none}
+.hero{background:linear-gradient(135deg,var(--gd),var(--g),var(--ac));padding:3.5rem 2rem;text-align:center;color:#fff}
+.hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;margin-bottom:.6rem}
+.hero p{font-size:.95rem;opacity:.88;max-width:500px;margin:0 auto 1.5rem}
+.search-wrap{max-width:480px;margin:0 auto;position:relative}
+.faq-search{width:100%;padding:.75rem 1.2rem .75rem 3rem;border-radius:28px;border:none;font-size:.95rem;outline:none;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.search-wrap::before{content:'🔍';position:absolute;left:1rem;top:50%;transform:translateY(-50%);font-size:1rem}
+.main{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+.cat-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.ctab{padding:.38rem .9rem;border-radius:20px;border:2px solid var(--bd);background:#fff;font-size:.8rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s}
+.ctab:hover,.ctab.on{border-color:var(--g);color:var(--g);background:#f0faf0}
+.faq-section{margin-bottom:2.5rem}
+.faq-section-title{font-size:.78rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--bd);display:flex;align-items:center;gap:.5rem}
+.faq-item{background:#fff;border-radius:14px;margin-bottom:.7rem;border:2px solid transparent;transition:border-color .2s;overflow:hidden}
+.faq-item:hover{border-color:#c8e6c9}
+.faq-item.open{border-color:var(--ac)}
+.faq-q{padding:1.1rem 1.3rem;font-size:.92rem;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;user-select:none}
+.faq-q:hover{color:var(--g)}
+.faq-arr{font-size:1rem;color:var(--muted);transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-arr{transform:rotate(180deg);color:var(--g)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+.faq-item.open .faq-a{max-height:400px}
+.faq-a-inner{padding:0 1.3rem 1.2rem;font-size:.88rem;color:var(--muted);line-height:1.7}
+.faq-a-inner a{color:var(--g);font-weight:700;text-decoration:underline}
+.faq-a-inner strong{color:var(--text)}
+.tip-box{background:#f0faf0;border:1px solid #c8e6c9;border-radius:10px;padding:.7rem 1rem;margin-top:.7rem;font-size:.82rem;color:var(--g);font-weight:600}
+.no-results{text-align:center;padding:3rem;color:var(--muted);display:none}
+.cta-section{background:linear-gradient(135deg,var(--gd),var(--g));border-radius:20px;padding:2.5rem;text-align:center;color:#fff;margin-top:3rem}
+.cta-section h3{font-size:1.3rem;font-weight:900;margin-bottom:.5rem}
+.cta-section p{font-size:.88rem;opacity:.85;margin-bottom:1.5rem}
+.cta-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.cbtn{padding:.65rem 1.4rem;border-radius:22px;font-weight:700;font-size:.88rem;cursor:pointer;text-decoration:none;display:inline-block}
+.cbtn-pri{background:var(--ac);color:var(--gd);border:none}
+.cbtn-sec{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}
+.cbtn-pri:hover{background:#fff}
+.cbtn-sec:hover{background:rgba(255,255,255,.1)}
+footer{background:var(--gd);color:#fff;text-align:center;padding:1.4rem;font-size:.82rem}
+@media(max-width:640px){.nav-links{display:none}.hbg{display:flex}}
+</style>
+</head>
+<body>
+<div id="dealsBanner" style="background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.5rem 1rem;font-size:.82rem;font-weight:700;position:relative;z-index:101">
+  &#128293; <strong>FLASH SALE:</strong> Up to 30% off selected models this week &nbsp;&#183;&nbsp; Use code <strong>LAWN10</strong> for extra 10% &nbsp;
+  <a href="lawnstar-deals.html" style="color:#ffd700;text-decoration:underline;font-weight:800">Shop Deals &#8594;</a>
+  <button onclick="this.parentElement.style.display='none'" style="position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;opacity:.7">&#10005;</button>
+</div>
+<nav>
+  <a class="logo" href="lawnstar-homepage.html">🌿 Lawn<span>Star</span></a>
+  <div class="nav-links" id="navLinks">
+    <a class="nbtn" href="lawnstar-homepage.html">🏠 Home</a>
+    <a class="nbtn" href="lawnstar-all-mowers.html">🤖 All Mowers</a>
+    <a class="nbtn" href="lawnstar-quiz.html">🧠 Quiz</a>
+    <a class="nbtn" href="lawnstar-brands.html">🏷️ Brands</a>
+    <a class="nbtn" href="lawnstar-guide.html">📖 Guide</a>
+    <a class="nbtn" href="lawnstar-blog.html">&#128221; Blog</a>
+    <a class="nbtn" href="lawnstar-deals.html" style="background:rgba(229,57,53,.7);border-color:rgba(229,57,53,.9)">🔥 Deals</a>
+    <a class="nbtn" href="lawnstar-compare.html">⚖️ Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+    <a class="nbtn"     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html">⭐ Reviews</a>
+    <a class="nbtn" style="background:rgba(118,196,66,.25);border-color:#76c442" href="lawnstar-faq.html">❓ FAQ</a>
+    <a class="nbtn" href="lawnstar-contact.html">📬 Contact</a>
+    <a class="nbtn" href="lawnstar-loyalty.html">Rewards</a>
+    <a class="nbtn" href="lawnstar-track.html">&#128230; Track Order</a>
+    <a class="nbtn" href="lawnstar-vs-petrol.html">Robot vs Petrol</a>
+    <a class="nbtn" href="lawnstar-checkout.html" style="background:rgba(118,196,66,.25);border-color:#76c442">Cart</a>
+  </div>
+  <div class="hbg" id="hbg" onclick="document.getElementById('mobMenu').classList.toggle('on')"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="lawnstar-homepage.html">🏠 Home</a>
+  <a href="lawnstar-all-mowers.html">🤖 All Mowers</a>
+  <a href="lawnstar-quiz.html">🧠 Quiz</a>
+  <a href="lawnstar-brands.html">🏷️ Brands</a>
+  <a href="lawnstar-guide.html">📖 Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+  <a href="lawnstar-deals.html">🔥 Deals</a>
+  <a href="lawnstar-compare.html">⚖️ Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+  <a     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html">⭐ Reviews</a>
+  <a href="lawnstar-faq.html" style="color:#76c442">❓ FAQ</a>
+  <a href="lawnstar-contact.html">📬 Contact</a>
+  <a href="lawnstar-loyalty.html">Rewards</a>
+  <a href="lawnstar-track.html">&#128230; Track Order</a>
+  <a href="lawnstar-vs-petrol.html">Robot vs Petrol</a>
+  <a href="lawnstar-checkout.html">Cart</a>
+</div>
+
+<div class="hero">
+  <h1>❓ Frequently Asked Questions</h1>
+  <p>Everything you need to know about AI robot lawn mowers in Australia.</p>
+  <div class="search-wrap">
+    <input class="faq-search" id="faqSearch" type="text" placeholder="Search questions... e.g. 'wire-free' or 'slope'" oninput="searchFAQ(this.value)"/>
+  </div>
+</div>
+
+<div class="main">
+  <div class="cat-tabs">
+    <button class="ctab on" onclick="filterCat('all',this)">All Questions</button>
+    <button class="ctab" onclick="filterCat('getting-started',this)">🚀 Getting Started</button>
+    <button class="ctab" onclick="filterCat('technology',this)">🤖 Technology</button>
+    <button class="ctab" onclick="filterCat('setup',this)">🔧 Setup & Installation</button>
+    <button class="ctab" onclick="filterCat('buying',this)">💰 Buying & Pricing</button>
+    <button class="ctab" onclick="filterCat('delivery',this)">🚚 Delivery & Warranty</button>
+    <button class="ctab" onclick="filterCat('maintenance',this)">🛠️ Maintenance</button>
+  </div>
+
+  <div id="faqContainer"></div>
+  <div class="no-results" id="noResults">
+    <div style="font-size:3rem;margin-bottom:.8rem">🔍</div>
+    <h3>No questions found</h3>
+    <p>Try a different search term or <a href="lawnstar-guide.html" style="color:var(--g)">read our full guide</a></p>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+  </div>
+
+  <div class="cta-section">
+    <h3>Still have questions?</h3>
+    <p>Our Australian experts are here to help you find the perfect mower for your lawn.</p>
+    <div class="cta-btns">
+      <a class="cbtn cbtn-pri" href="lawnstar-quiz.html">🧠 Take the Quiz</a>
+      <a class="cbtn cbtn-sec" href="lawnstar-guide.html">📖 Read the Buying Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+      <a class="cbtn cbtn-sec" href="https://wa.me/61400000000" target="_blank">💬 Chat on WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<footer style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:3rem 2rem 1.5rem;margin-top:2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem">
+      <div>
+        <div style="font-size:1.4rem;font-weight:900;margin-bottom:.6rem">&#127807; Lawn<span style="color:#76c442">Star</span></div>
+        <div style="font-size:.82rem;opacity:.75;line-height:1.7;max-width:260px">Australia&#39;s most trusted destination for AI robot lawn mowers. Free delivery, 2-year warranty, 30-day returns.</div>
+        <div style="display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap">
+          <a href="lawnstar-loyalty.html" style="background:#76c442;color:#1b5e20;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:800;text-decoration:none">&#127942; Join Rewards</a>
+          <a href="lawnstar-checkout.html" style="background:rgba(255,255,255,.15);color:#fff;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.3)">&#128722; Cart</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Shop</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-all-mowers.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129302; All Mowers</a>
+          <a href="lawnstar-deals.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128293; Current Deals</a>
+          <a href="lawnstar-brands.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127991;&#65039; Brands</a>
+          <a href="lawnstar-compare.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9878;&#65039; Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+          <a href="lawnstar-vs-petrol.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9876;&#65039; Robot vs Petrol</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128722; Checkout</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Learn</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128218; Buying Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+          <a href="lawnstar-quiz.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129504; Find My Mower Quiz</a>
+          <a     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#11088; Customer Reviews</a>
+          <a href="lawnstar-faq.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#10067; FAQ</a>
+          <a href="lawnstar-loyalty.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127942; GreenRewards</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Help</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-contact.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128140; Contact Us</a>
+          <a href="lawnstar-track.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128230; Track My Order</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128521; Returns &amp; Refunds</a>
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128295; Setup Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+        </div>
+        <div style="margin-top:1.2rem;font-size:.78rem;opacity:.65;line-height:1.7">
+          &#128222; 1800 LAWNSTAR<br>
+          &#128231; help@lawnstar.com.au<br>
+          &#128336; Mon&#8211;Fri 8am&#8211;6pm AEST
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.15);padding-top:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+      <div style="font-size:.75rem;opacity:.6">&#127807; <strong>LawnStar</strong> &copy; 2026 &nbsp;&#183;&nbsp; All prices AUD inc. GST &nbsp;&#183;&nbsp; ABN 12 345 678 901 &nbsp;&#183;&nbsp; Free delivery Australia-wide</div>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#128274; SSL Secured</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Afterpay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Zip Pay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Humm</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:#2d7a3a;color:#fff;border:none;font-size:1.3rem;font-weight:900;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);opacity:0;transform:translateY(10px);transition:all .3s;z-index:999">↑</button>
+
+<script>
+const FAQS=[
+  // Getting Started
+  {cat:'getting-started',q:'What is a robot lawn mower and how does it work?',a:'A robot lawn mower is an autonomous device that cuts your grass automatically on a set schedule. It navigates your lawn using GPS, boundary wires, or vision AI, returns to its charging dock when the battery is low, and resumes mowing automatically. Modern models like the Husqvarna 430X or Mammotion Luba use RTK GPS for centimetre-level precision — no human involvement needed.',tip:'Most robot mowers mulch the grass clippings back into the lawn, acting as a natural fertiliser.'},
+  {cat:'getting-started',q:'Are robot mowers suitable for Australian lawns?',a:'Absolutely. Robot mowers work excellently on Australian lawns, including popular varieties like couch, buffalo (Sir Walter), kikuyu and zoysia. The frequent light-cutting approach of robot mowers actually promotes thick, healthy growth and reduces weeds. They handle the full Australian climate — heat, humidity, and rain sensors pause mowing in wet conditions.',tip:null},
+  {cat:'getting-started',q:'How much lawn area can a robot mower handle?',a:'It depends on the model. Entry-level models (e.g. Worx M700) cover 400–700m2. Mid-range models handle 1,000–3,000m2. Premium models like the Segway H800E cover up to 8,000m2. For most suburban Australian homes (500–1,000m2), a mid-range model is perfect.',tip:'Measure your lawn area before buying. Most product pages list exact coverage capacity.'},
+  {cat:'getting-started',q:'Can a robot mower handle my sloped lawn?',a:'Many modern models are built for slopes. The <strong>Mammotion Luba AWD 5000</strong> handles up to <strong>75% gradients</strong> with all-wheel drive. Most standard models handle 35–45% slopes. If your lawn is significantly sloped, filter by "Slopes" in our All Mowers page to find compatible models.',tip:null},
+  {cat:'getting-started',q:'Is a robot mower safe around children and pets?',a:'Yes — modern robot mowers have multiple safety features including lift sensors (blades stop instantly if the mower is lifted), tilt sensors, and collision sensors. They operate at very low blade heights and speeds. However, we recommend supervising young children and pets initially until they are accustomed to the mower.',tip:'Most mowers can be scheduled to run at night or during times when children and pets are indoors.'},
+  // Technology
+  {cat:'technology',q:'What is the difference between wire-free GPS and boundary wire mowers?',a:'<strong>Wire-free GPS mowers</strong> (e.g. Mammotion, Segway, EcoFlow) use RTK GPS or vision AI to know exactly where they are, requiring no physical boundary wire installation. Setup is fast (15–30 mins). <strong>Boundary wire mowers</strong> (e.g. older Husqvarna, Gardena, Robomow) require a perimeter wire to be buried or staked around your lawn — taking 1–4 hours to set up but offering very reliable containment.',tip:'Wire-free is the modern standard. All new LawnStar arrivals in 2026 are wire-free.'},
+  {cat:'technology',q:'What is RTK GPS and why does it matter?',a:'RTK (Real-Time Kinematic) GPS is a high-precision satellite positioning system that achieves <strong>centimetre-level accuracy</strong> — compared to standard GPS which is accurate to 3–5 metres. This means the mower cuts in precise parallel lines, covers every millimetre of your lawn, and can repeat the exact same path. Brands using RTK include Husqvarna EPOS, Mammotion Luba AWD, Segway Navimow and EcoFlow Blade.',tip:null},
+  {cat:'technology',q:'What is EFLS technology (Segway Navimow)?',a:"EFLS stands for <strong>Error-Free Locating System</strong> — Segway's proprietary fusion of satellite GPS, GNSS, and sensor data. It delivers wire-free navigation similar to RTK GPS without requiring a base station. It's very reliable in most conditions and used in the H800E which covers up to 8,000m2.",tip:null},
+  {cat:'technology',q:'Can robot mowers handle obstacles like trees, garden beds and furniture?',a:'Yes — modern models with Vision AI (Worx Vision L1000, EcoFlow Blade) or GPS mapping can detect and navigate around obstacles in real time. Basic models may bump into obstacles but have bump sensors to redirect. For complex gardens, choose a model with obstacle detection listed in the specs.',tip:'You can also define "no-go zones" in the app to permanently exclude flower beds, sandpits or furniture areas.'},
+  {cat:'technology',q:'Do robot mowers need a Wi-Fi connection?',a:'Most modern mowers connect via Wi-Fi + Bluetooth for app control and scheduling. Premium models (Segway H800E, Husqvarna 450X) also support <strong>4G cellular</strong> connectivity, meaning they work even without Wi-Fi — useful for rural properties or holiday homes.',tip:null},
+  {cat:'technology',q:'What is the difference between Husqvarna EPOS and standard GPS?',a:'Standard Husqvarna models use EPOS satellite precision positioning, which is accurate to <strong>2–5cm</strong>. The top-end 450X EPOS uses full RTK positioning for <strong>sub-centimetre accuracy</strong>. Both are wire-free, but RTK gives you straighter cutting lines and better edge coverage.',tip:null},
+  // Setup & Installation
+  {cat:'setup',q:'How long does installation take?',a:'<strong>Wire-free GPS models:</strong> 15–30 minutes — download the app, calibrate GPS, draw your lawn map on screen, done. <strong>Boundary wire models:</strong> 1–4 hours depending on lawn complexity — involves staking or burying the perimeter wire. All LawnStar purchases include a detailed setup guide and video tutorial link.',tip:'Wire-free setup is done entirely on your smartphone — no tools required.'},
+  {cat:'setup',q:'Do I need a professional to install a robot mower?',a:'For wire-free models — no. Setup is designed to be DIY-friendly. For boundary wire models on complex properties (multiple zones, obstacles, large areas), professional installation is available through each brand\'s Australian service network.',tip:null},
+  {cat:'setup',q:'How do I set up multiple mowing zones?',a:'Wire-free GPS models with multi-zone support (Mammotion Luba AWD, Segway H800E) let you draw multiple zones — front yard, back yard, side paths — directly in the app. You assign different schedules and cutting heights to each zone. The mower transitions between zones automatically.',tip:'You can name zones in the app: "Front Lawn", "Back Yard", "Side Strip" for easy management.'},
+  {cat:'setup',q:'What mowing height can I set?',a:'Most robot mowers offer adjustable cutting heights between <strong>20mm and 60mm</strong>. The height is set via the app or a physical dial on the mower. For Australian buffalo and couch lawns, 35–45mm is typically recommended. Check the product specifications for the exact height range of each model.',tip:null},
+  // Buying & Pricing
+  {cat:'buying',q:'What is the best robot mower for a budget under A$1,500?',a:'Our top picks under A$1,500:<br><br>• <strong>Mammotion Yuka 1000</strong> — A$1,390 · Wire-free · RTK GPS · Great value<br>• <strong>Segway Navimow i108E</strong> — A$1,470 · Wire-free · EFLS GPS<br>• <strong>Gardena Sileno City 600</strong> — A$1,310 · German quality · Very quiet<br><br>Use our <a href="lawnstar-quiz.html">free quiz</a> to get a personalised recommendation.',tip:null},
+  {cat:'buying',q:'What is the best mower for steep slopes?',a:'The <strong>Mammotion Luba AWD 5000</strong> (A$5,390) is our #1 slope pick — handling up to <strong>75% gradients</strong> with all-wheel drive. The Mammotion Luba AWD 3000 handles 70% slopes at a lower price. For moderate slopes under 45%, most GPS wire-free models are suitable.',tip:'Filter by "🏔️ Slopes" on the All Mowers page to see all slope-capable options.'},
+  {cat:'buying',q:'Do prices include GST?',a:'Yes — all prices on LawnStar are displayed in <strong>Australian Dollars (AUD) inclusive of GST</strong>. No surprise charges at checkout. Free delivery is included nationwide for all orders.',tip:null},
+  {cat:'buying',q:'Is buy now pay later available?',a:'Yes. LawnStar supports <strong>Afterpay, Zip Pay, and Humm</strong> at checkout, allowing you to spread payments over 4 instalments with zero interest. Available on all orders.',tip:null},
+  {cat:'buying',q:'Which brands are the most reliable?',a:'Based on our customer review data:<br><br>1. <strong>Husqvarna</strong> — 4.8★ avg, Swedish engineering, longest track record<br>2. <strong>Mammotion</strong> — 4.7★ avg, best wire-free value, fast innovation<br>3. <strong>Segway</strong> — 4.6★ avg, excellent large-area coverage<br>4. <strong>EcoFlow</strong> — 4.5★ avg, solar innovation, great app<br>5. <strong>Gardena</strong> — 4.4★ avg, ultra-quiet German quality',tip:null},
+  {cat:'buying',q:'What does "wire-free" actually mean in practice?',a:'"Wire-free" means <strong>no boundary wire installation is required</strong>. Instead, the mower uses GPS or vision AI to know where it is and where your lawn boundaries are. You simply draw your lawn boundary on the app map. It\'s the modern approach — faster setup, no wire to maintain, and easier to change boundaries if your garden layout changes.',tip:null},
+  // Delivery & Warranty
+  {cat:'delivery',q:'How fast is delivery and what are the costs?',a:'All LawnStar orders include <strong>free standard delivery Australia-wide</strong>. Estimated delivery times: Sydney/Melbourne/Brisbane — 2–4 business days. Perth/Darwin/Regional — 4–7 business days. Express options are available at checkout for an additional fee.',tip:null},
+  {cat:'delivery',q:'What warranty comes with a robot mower?',a:'All mowers sold by LawnStar include the manufacturer\'s Australian warranty:<br><br>• <strong>Husqvarna:</strong> 2 years<br>• <strong>Mammotion:</strong> 2 years<br>• <strong>Segway:</strong> 2 years<br>• <strong>EcoFlow:</strong> 2 years<br>• <strong>Worx:</strong> 2 years<br>• <strong>Gardena:</strong> 2 years<br>• <strong>LawnMaster:</strong> 1 year<br><br>All warranties cover manufacturing defects. In-home service is available for most brands in metro areas.',tip:null},
+  {cat:'delivery',q:'What is the returns policy?',a:'LawnStar offers a <strong>30-day satisfaction guarantee</strong>. If you\'re not happy with your mower for any reason, return it in original condition for a full refund. Return shipping is free for faulty items. Change-of-mind returns require the customer to arrange return shipping.',tip:null},
+  // Maintenance
+  {cat:'maintenance',q:'How often do the blades need replacing?',a:'Robot mower blades are small, lightweight cutting blades (not the large rotary blades of traditional mowers). They typically need replacing every <strong>1–3 months</strong> depending on lawn size and grass type. Replacement blades cost approximately A$10–25 for a pack of 9. The process takes under 5 minutes.',tip:'Set a recurring calendar reminder for blade checks. Most apps will also alert you.'},
+  {cat:'maintenance',q:'Does the robot mower need servicing?',a:'Robot mowers require minimal maintenance: clean the chassis and sensors after wet conditions (monthly), replace cutting blades every 1–3 months, check the charging contacts are clean (seasonally), and update firmware via the app. An annual professional service is recommended for premium models.',tip:null},
+  {cat:'maintenance',q:'Can the robot mower handle rain?',a:'Yes — all LawnStar robot mowers are <strong>IPX4 or higher weather-rated</strong>, meaning they are splash-proof and can continue mowing in light rain. Most models have built-in rain sensors that detect heavy rain and automatically return the mower to its charging dock until conditions improve.',tip:'You can also set a "no-mow in rain" rule in the app if you prefer your mower to always pause during any rain.'},
+  {cat:'maintenance',q:'What happens in winter — do I need to store the mower?',a:'In most of Australia, robot mowers can operate year-round since grass keeps growing. In cooler regions (Canberra, alpine areas, Tasmania), you may want to pause the schedule in the coldest months. Store the mower in a sheltered, frost-free location. All models can hibernate in the app with a single tap.',tip:null},
+  {cat:'maintenance',q:'How do I clean my robot mower?',a:'Use a <strong>damp cloth or soft brush</strong> to remove grass clippings from the chassis, wheels and underside after each mowing session (or weekly if you mow daily). Never use a pressure washer directly on the mower. Clean the charging contacts with a dry cloth. Blow out debris from the cutting deck with compressed air.',tip:'A quick weekly clean extends blade and sensor life significantly.'},
+];
+
+let currentCat='all';
+let currentSearch='';
+
+function renderFAQ(){
+  const container=document.getElementById('faqContainer');
+  const noRes=document.getElementById('noResults');
+  let filtered=FAQS.filter(f=>{
+    const matchCat=currentCat==='all'||f.cat===currentCat;
+    const matchSearch=!currentSearch||f.q.toLowerCase().includes(currentSearch)||f.a.toLowerCase().includes(currentSearch);
+    return matchCat&&matchSearch;
+  });
+  if(!filtered.length){container.innerHTML='';noRes.style.display='block';return;}
+  noRes.style.display='none';
+  const cats=[
+    {id:'getting-started',label:'🚀 Getting Started'},
+    {id:'technology',label:'🤖 Technology & Features'},
+    {id:'setup',label:'🔧 Setup & Installation'},
+    {id:'buying',label:'💰 Buying & Pricing'},
+    {id:'delivery',label:'🚚 Delivery, Warranty & Returns'},
+    {id:'maintenance',label:'🛠️ Maintenance & Care'},
+  ];
+  let html='';
+  if(currentCat==='all'){
+    cats.forEach(cat=>{
+      const items=filtered.filter(f=>f.cat===cat.id);
+      if(!items.length)return;
+      html+=`<div class="faq-section" data-cat="${cat.id}">
+        <div class="faq-section-title">${cat.label}</div>
+        ${items.map((f,i)=>faqCard(f,cat.id+i)).join('')}
+      </div>`;
+    });
+  } else {
+    html=`<div class="faq-section">${filtered.map((f,i)=>faqCard(f,'item'+i)).join('')}</div>`;
+  }
+  container.innerHTML=html;
+}
+
+function faqCard(f,uid){
+  return`<div class="faq-item" id="faq-${uid}">
+    <div class="faq-q" onclick="togFAQ('faq-${uid}')">
+      <span>${f.q}</span>
+      <span class="faq-arr">▼</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-inner">
+        ${f.a}
+        ${f.tip?`<div class="tip-box">💡 Pro tip: ${f.tip}</div>`:''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function togFAQ(id){
+  const el=document.getElementById(id);
+  const wasOpen=el.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item.open').forEach(x=>x.classList.remove('open'));
+  if(!wasOpen)el.classList.add('open');
+}
+
+function filterCat(cat,btn){
+  currentCat=cat;
+  document.querySelectorAll('.ctab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderFAQ();
+}
+
+function searchFAQ(val){
+  currentSearch=val.toLowerCase().trim();
+  renderFAQ();
+  // Open first result if search active
+  if(currentSearch){
+    setTimeout(()=>{
+      const first=document.querySelector('.faq-item');
+      if(first)first.classList.add('open');
+    },50);
+  }
+}
+
+// Render on load
+renderFAQ();
+
+// Back to top
+window.addEventListener('scroll',()=>{const b=document.getElementById('btt');if(b){b.style.opacity=window.scrollY>400?'1':'0';b.style.transform=window.scrollY>400?'translateY(0)':'translateY(10px)';}});
+
+// Hamburger
+if(window.innerWidth<=640){document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}
+window.addEventListener('resize',()=>{if(window.innerWidth>640){document.getElementById('mobMenu').classList.remove('on');document.getElementById('navLinks').style.display='flex';document.getElementById('hbg').style.display='none';}else{document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}});
+</script>
+
+<!-- LIVE CHAT WIDGET -->
+<script>
+(function(){
+  const R={default:["Thanks for your message! Our team will get back to you shortly.","Got it! Anything else I can help with?","Great question! Let me connect you with a mower expert."],price:["We price-match any Australian retailer! Send us the link and we'll match it. 💰","Our prices are already among Australia's best, but we'll always try to match a cheaper offer."],delivery:["Free delivery Australia-wide! Most metro orders arrive within 2–3 business days. 🚚","We ship to all Australian states and territories at no charge."],setup:["Wire-free mower setup typically takes 20–30 minutes. We have video guides too! 📱","Check our Guide section for setup walkthroughs. Happy to help!"],warranty:["All mowers come with at least a 2-year manufacturer warranty. Extended options also available. 🛡️","Warranty claims are straightforward — just contact us and we sort it quickly."],recommend:["I'd love to help find your perfect mower! Have you tried our 5-question quiz? 🧠","Tell me about your lawn — size, slope and budget — and I'll point you in the right direction!"],hello:["👋 G'day! Welcome to LawnStar. How can I help you today?","G'day! What can I help you with? 🌿"]};
+  function getR(m){m=m.toLowerCase();if(/hello|hi|hey|g'day/.test(m))return R.hello[~~(Math.random()*R.hello.length)];if(/price|cheap|cost|discount|deal/.test(m))return R.price[~~(Math.random()*R.price.length)];if(/deliver|ship/.test(m))return R.delivery[~~(Math.random()*R.delivery.length)];if(/setup|install/.test(m))return R.setup[~~(Math.random()*R.setup.length)];if(/warrant|return|refund/.test(m))return R.warranty[~~(Math.random()*R.warranty.length)];if(/recommend|best|which|suggest/.test(m))return R.recommend[~~(Math.random()*R.recommend.length)];return R.default[~~(Math.random()*R.default.length)];}
+  const wrap=document.createElement('div');
+  wrap.innerHTML=`<style>#lc-btn{position:fixed;bottom:2rem;right:5.5rem;width:54px;height:54px;background:#2d7a3a;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:998;box-shadow:0 4px 18px rgba(0,0,0,.25);transition:transform .2s;border:none}#lc-btn:hover{transform:scale(1.1)}#lc-badge{position:absolute;top:-4px;right:-4px;background:#e53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:800;display:none;align-items:center;justify-content:center}#lc-box{position:fixed;bottom:5.5rem;right:2rem;width:320px;background:#fff;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.2);z-index:997;display:none;flex-direction:column;overflow:hidden;border:1px solid #e2e8f0;max-height:480px}#lc-box.on{display:flex;animation:lcSlide .25s ease}@keyframes lcSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}#lc-hdr{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.7rem}#lc-av{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}#lc-name{font-weight:800;font-size:.9rem}#lc-status{font-size:.72rem;opacity:.8;display:flex;align-items:center;gap:.3rem}#lc-dot{width:7px;height:7px;border-radius:50%;background:#76c442;display:inline-block}#lc-cls{background:none;border:none;color:#fff;cursor:pointer;font-size:1.1rem;opacity:.7;padding:.2rem;margin-left:auto}#lc-msgs{flex:1;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.65rem;min-height:200px}.lcm{max-width:78%;padding:.55rem .8rem;border-radius:14px;font-size:.83rem;line-height:1.45;animation:lcMsg .2s ease}@keyframes lcMsg{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}.lcm.a{background:#f0faf0;color:#1a1a2e;border-bottom-left-radius:4px;align-self:flex-start}.lcm.u{background:#2d7a3a;color:#fff;border-bottom-right-radius:4px;align-self:flex-end}.lctyp{display:flex;gap:4px;align-items:center;padding:.55rem .8rem;background:#f0faf0;border-radius:14px;border-bottom-left-radius:4px;align-self:flex-start;width:52px}.lctyp span{width:7px;height:7px;border-radius:50%;background:#6b7280;animation:lcD 1.2s infinite}.lctyp span:nth-child(2){animation-delay:.2s}.lctyp span:nth-child(3){animation-delay:.4s}@keyframes lcD{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}#lc-quick{padding:.4rem .9rem;display:flex;gap:.4rem;flex-wrap:wrap;border-top:1px solid #e2e8f0}.lcq{padding:.28rem .65rem;border-radius:20px;border:1px solid #c8e6c9;background:#f0faf0;font-size:.72rem;font-weight:600;color:#2d7a3a;cursor:pointer;white-space:nowrap;transition:all .15s}.lcq:hover{background:#2d7a3a;color:#fff}#lc-ir{display:flex;gap:.5rem;padding:.7rem .8rem;border-top:1px solid #e2e8f0}#lc-in{flex:1;border:2px solid #e2e8f0;border-radius:22px;padding:.45rem .9rem;font-size:.85rem;outline:none;font-family:inherit;transition:border .2s}#lc-in:focus{border-color:#2d7a3a}#lc-snd{background:#2d7a3a;color:#fff;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;transition:background .2s}#lc-snd:hover{background:#1b5e20}</style>
+  <button id="lc-btn" title="Chat with us"><span id="lc-badge"></span><svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg></button>
+  <div id="lc-box"><div id="lc-hdr"><div id="lc-av">🌿</div><div><div id="lc-name">LawnStar Support</div><div id="lc-status"><span id="lc-dot"></span> Online — replies instantly</div></div><button id="lc-cls">✕</button></div><div id="lc-msgs"><div class="lcm a">👋 G'day! I'm Alex from LawnStar AU. How can I help you today?</div><div class="lcm a">Ask me about any of our 17 AI mowers, pricing, delivery or setup. 🌿</div></div><div id="lc-quick"><button class="lcq" onclick="lcQ('Which mower suits me?')">🧠 Which mower?</button><button class="lcq" onclick="lcQ('How does delivery work?')">🚚 Delivery</button><button class="lcq" onclick="lcQ('Do you price match?')">💰 Price Match</button><button class="lcq" onclick="lcQ('Tell me about warranties')">🛡️ Warranty</button></div><div id="lc-ir"><input id="lc-in" type="text" placeholder="Type your message..."/><button id="lc-snd">&#10148;</button></div></div>`;
+  document.body.appendChild(wrap);
+  let open=false;
+  document.getElementById('lc-btn').addEventListener('click',()=>{open=!open;document.getElementById('lc-box').classList.toggle('on',open);document.getElementById('lc-badge').style.display='none';if(open)document.getElementById('lc-in').focus();});
+  document.getElementById('lc-cls').addEventListener('click',()=>{open=false;document.getElementById('lc-box').classList.remove('on');});
+  function addM(t,type){const msgs=document.getElementById('lc-msgs');const m=document.createElement('div');m.className='lcm '+type;m.textContent=t;msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;}
+  function showTyp(){const msgs=document.getElementById('lc-msgs');const t=document.createElement('div');t.className='lctyp';t.id='lc-typ';t.innerHTML='<span></span><span></span><span></span>';msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;return t;}
+  function send(t){if(!t.trim())return;addM(t,'u');document.getElementById('lc-in').value='';const ty=showTyp();setTimeout(()=>{ty.remove();addM(getR(t),'a');},900+Math.random()*600);}
+  window.lcQ=function(t){send(t);};
+  document.getElementById('lc-snd').addEventListener('click',()=>send(document.getElementById('lc-in').value));
+  document.getElementById('lc-in').addEventListener('keydown',e=>{if(e.key==='Enter')send(e.target.value);});
+  setTimeout(()=>{if(!open){const b=document.getElementById('lc-badge');b.style.display='flex';}},8000);
+})();
+</script>
+<!-- EXIT INTENT POPUP -->
+<div id="exitPop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center;animation:epfi .3s ease">
+  <div style="background:#fff;border-radius:24px;max-width:460px;width:90%;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+    <div style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:2rem;text-align:center;color:#fff">
+      <div style="font-size:3rem;margin-bottom:.5rem">&#128293;</div>
+      <div style="font-size:1.3rem;font-weight:900;margin-bottom:.3rem">Wait! Don&#39;t Go Yet</div>
+      <div style="font-size:.88rem;opacity:.85">Grab an extra 10% off before you leave</div>
+    </div>
+    <div style="padding:1.8rem;text-align:center">
+      <div style="background:#f0faf0;border:2px dashed #76c442;border-radius:12px;padding:.8rem 1.2rem;margin-bottom:1rem">
+        <div style="font-size:.75rem;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px">Your exclusive code</div>
+        <div style="font-size:1.6rem;font-weight:900;color:#1b5e20;letter-spacing:2px">STAY10</div>
+        <div style="font-size:.75rem;color:#6b7280;margin-top:.2rem">10% off Â· Valid 24 hours only</div>
+      </div>
+      <a href="lawnstar-all-mowers.html" style="display:block;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:.75rem;border-radius:12px;font-weight:800;font-size:.95rem;text-decoration:none;margin-bottom:.7rem" onclick="document.getElementById('exitPop').style.display='none'">&#129302; Shop Now &amp; Save 10%</a>
+      <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="background:none;border:none;color:#6b7280;font-size:.8rem;cursor:pointer;text-decoration:underline">No thanks, I&#39;ll pay full price</button>
+    </div>
+    <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="position:absolute;top:.8rem;right:.8rem;background:rgba(255,255,255,.2);border:none;border-radius:50%;width:30px;height:30px;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">&#10005;</button>
+  </div>
+</div>
+<style>@keyframes epfi{from{opacity:0}to{opacity:1}}</style>
+<script>
+(function(){
+  if(localStorage.getItem('ls_exit_seen')) return;
+  var shown=false;
+  document.addEventListener('mouseleave',function(e){
+    if(e.clientY<=0&&!shown){
+      shown=true;
+      var pop=document.getElementById('exitPop');
+      if(pop){pop.style.display='flex';}
+    }
+  });
+  setTimeout(function(){
+    if(!shown){shown=true;var pop=document.getElementById('exitPop');if(pop)pop.style.display='flex';}
+  },45000);
+})();
+</script>
+$chatWidget = @'
+
+<!-- LAWNSTAR LIVE CHAT WIDGET -->
+<style>
+#ls-chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:8000;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;font-family:'Segoe UI',system-ui,sans-serif}
+#ls-chat-pop{background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;display:none;animation:chatIn .25s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+#ls-chat-pop.on{display:block}
+.lsc-header{background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.lsc-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.lsc-hinfo{flex:1}
+.lsc-name{color:#fff;font-size:.88rem;font-weight:800}
+.lsc-status{color:rgba(255,255,255,.75);font-size:.72rem;display:flex;align-items:center;gap:.3rem}
+.lsc-dot{width:7px;height:7px;border-radius:50%;background:#76c442;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.lsc-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.1rem;cursor:pointer;padding:.2rem;line-height:1}
+.lsc-msgs{height:220px;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.7rem;background:#f8fbf8}
+.lsc-msg{max-width:82%;padding:.6rem .85rem;border-radius:14px;font-size:.8rem;line-height:1.5;animation:msgIn .2s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lsc-msg.bot{background:#fff;border:1px solid #e2e8f0;align-self:flex-start;border-radius:4px 14px 14px 14px;color:#1a1a2e}
+.lsc-msg.user{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
+.lsc-chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .9rem .7rem;background:#f8fbf8}
+.lsc-chip{background:#e8f5e9;color:#2d7a3a;border:1px solid #c8e6c9;border-radius:20px;padding:.25rem .75rem;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lsc-chip:hover{background:#2d7a3a;color:#fff}
+.lsc-input-row{display:flex;gap:0;border-top:1px solid #e2e8f0;background:#fff}
+.lsc-input{flex:1;border:none;outline:none;padding:.75rem .9rem;font-size:.85rem;font-family:inherit;background:transparent}
+.lsc-send{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;padding:.5rem .85rem;cursor:pointer;font-size:1rem;transition:opacity .2s}
+.lsc-send:hover{opacity:.85}
+.lsc-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1b5e20,#2d7a3a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(45,122,58,.4);transition:all .25s;position:relative}
+.lsc-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(45,122,58,.55)}
+.lsc-notif{position:absolute;top:-2px;right:-2px;background:#e53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.lsc-typing{display:flex;gap:4px;align-items:center;padding:.6rem .85rem;background:#fff;border:1px solid #e2e8f0;border-radius:4px 14px 14px 14px;align-self:flex-start;width:52px}
+.lsc-typing span{width:7px;height:7px;border-radius:50%;background:#76c442;animation:typ .9s infinite}
+.lsc-typing span:nth-child(2){animation-delay:.15s}
+.lsc-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typ{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+<div id="ls-chat-bubble">
+  <div id="ls-chat-pop">
+    <div class="lsc-header">
+      <div class="lsc-avatar">&#127807;</div>
+      <div class="lsc-hinfo">
+        <div class="lsc-name">LawnStar Support</div>
+        <div class="lsc-status"><span class="lsc-dot"></span> Online now &bull; Avg reply &lt; 2 min</div>
+      </div>
+      <button class="lsc-close" onclick="lscToggle()">&#10005;</button>
+    </div>
+    <div class="lsc-msgs" id="lscMsgs"></div>
+    <div class="lsc-chips" id="lscChips">
+      <div class="lsc-chip" onclick="lscQuick('Which mower suits my lawn?')">&#129302; Find my mower</div>
+      <div class="lsc-chip" onclick="lscQuick('What are your current deals?')">&#128293; Deals &amp; sales</div>
+      <div class="lsc-chip" onclick="lscQuick('I need help with my order')">&#128230; Order help</div>
+      <div class="lsc-chip" onclick="lscQuick('Warranty question')">&#128737; Warranty</div>
+    </div>
+    <div class="lsc-input-row">
+      <input class="lsc-input" id="lscInput" placeholder="Ask us anything..." onkeydown="if(event.key==='Enter')lscSend()"/>
+      <button class="lsc-send" onclick="lscSend()">&#10148;</button>
+    </div>
+  </div>
+  <button class="lsc-btn" onclick="lscToggle()" id="lscMainBtn" title="Chat with LawnStar">
+    <span id="lscBtnIcon">&#128172;</span>
+    <div class="lsc-notif" id="lscNotif">1</div>
+  </button>
+</div>
+<script>
+(function(){
+var open=false,welcomed=false;
+var RESPONSES={
+  'which mower':'Great question! Can you tell me your lawn size? Under 500m2, 500-1000m2, or over 1000m2? I can find the perfect match &#128269;',
+  'lawn size':'For up to 1,000m2, the Mammotion Yuka 1000 (A$899) is our top pick. For 1,000–3,000m2, the Segway Navimow i108E is brilliant. For larger lawns, Mammotion Luba 2 AWD covers up to 5,000m2! &#127807;',
+  'deal':'Right now we have up to 30% off! Use code <strong>LAWN10</strong> at checkout for an extra 10% off everything. <a href="lawnstar-deals.html" style="color:#76c442;font-weight:700">See all deals &#8594;</a>',
+  'order':'I can help with that! Please email orders@lawnstar.com.au with your order number, or use our <a href="lawnstar-track.html" style="color:#76c442;font-weight:700">order tracker</a>. &#128230;',
+  'warranty':'All our mowers come with at least 3 years warranty (manufacturer + LawnStar top-up). You can <a href="lawnstar-warranty.html" style="color:#76c442;font-weight:700">view full warranty details here</a>. &#128737;',
+  'price':'Our mowers range from A$899 to A$6,900 depending on features. The most popular is the Segway Navimow i108E at A$1,299. Want me to help find one in your budget?',
+  'install':'Great news — we offer professional installation from A$199! Our technicians set up the boundary wire, configure the app, and do a test run. <a href="lawnstar-store-locator.html" style="color:#76c442;font-weight:700">Book via a local store</a>.',
+  'compare':'Our <a href="lawnstar-compare.html" style="color:#76c442;font-weight:700">comparison tool</a> lets you compare up to 4 mowers side by side with animated score charts. Really handy! &#9878;',
+  'bundle':'Yes! We have bundle deals where you save 10% when you add 2+ accessories. Check out the <a href="lawnstar-bundle-builder.html" style="color:#76c442;font-weight:700">Bundle Builder</a> &#127873;',
+  'shipping':'We offer free shipping on all orders over A$500 Australia-wide. Standard delivery is 3–7 business days. Express available. &#128666;',
+  'default':'Thanks for your message! A LawnStar expert will reply within 2 minutes. In the meantime, our <a href="lawnstar-faq.html" style="color:#76c442;font-weight:700">FAQ page</a> might have a quick answer. &#128075;'
+};
+function addMsg(txt,type,delay){
+  delay=delay||0;
+  setTimeout(function(){
+    var msgs=document.getElementById('lscMsgs');
+    if(!msgs)return;
+    // Show typing for bot
+    if(type==='bot'&&delay>0){
+      var typ=document.createElement('div');typ.className='lsc-typing';typ.id='lsc-typing-ind';
+      typ.innerHTML='<span></span><span></span><span></span>';
+      msgs.appendChild(typ);msgs.scrollTop=msgs.scrollHeight;
+      setTimeout(function(){
+        var t=document.getElementById('lsc-typing-ind');if(t)t.remove();
+        var m=document.createElement('div');m.className='lsc-msg '+type;m.innerHTML=txt;
+        msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+      },900);
+    } else {
+      var m=document.createElement('div');m.className='lsc-msg '+(type||'bot');m.innerHTML=txt;
+      msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+    }
+  },delay);
+}
+function getReply(txt){
+  var t=txt.toLowerCase();
+  for(var k in RESPONSES){if(t.indexOf(k)>-1)return RESPONSES[k];}
+  return RESPONSES['default'];
+}
+window.lscToggle=function(){
+  open=!open;
+  var pop=document.getElementById('ls-chat-pop');
+  var notif=document.getElementById('lscNotif');
+  var icon=document.getElementById('lscBtnIcon');
+  if(open){
+    pop.classList.add('on');
+    if(notif)notif.style.display='none';
+    if(icon)icon.textContent='\u2715';
+    if(!welcomed){
+      welcomed=true;
+      addMsg('&#127807; Hey! Welcome to <strong>LawnStar</strong>. I\'m here to help you find the perfect robot mower &#129302;','bot',100);
+      addMsg('What can I help you with today?','bot',1200);
+    }
+  } else {
+    pop.classList.remove('on');
+    if(icon)icon.textContent='\u{1F4AC}';
+  }
+};
+window.lscSend=function(){
+  var inp=document.getElementById('lscInput');
+  var txt=inp.value.trim();
+  if(!txt)return;
+  addMsg(txt,'user');
+  inp.value='';
+  addMsg(getReply(txt),'bot',400);
+};
+window.lscQuick=function(txt){
+  addMsg(txt,'user');
+  addMsg(getReply(txt),'bot',400);
+  document.getElementById('lscChips').style.display='none';
+};
+// Show greeting bubble after 8s
+setTimeout(function(){
+  if(!open){
+    var notif=document.getElementById('lscNotif');
+    if(notif)notif.style.display='flex';
+  }
+},8000);
+})();
+</script>
+</body>
+</html>

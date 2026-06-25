@@ -1,0 +1,1232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lawn Star — All AI Mowers</title>
+<style>
+:root{--g:#2d7a3a;--gd:#1b5e20;--ac:#76c442;--bg:#f4f9f4;--w:#fff;--text:#1a1a2e;--muted:#6b7280;--bd:#e2e8f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+nav{background:linear-gradient(135deg,var(--gd),var(--g));height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.logo{color:#fff;font-size:1.5rem;font-weight:900;display:flex;align-items:center;gap:.4rem}
+.logo span{color:var(--ac)}
+.nav-links{display:flex;align-items:center;gap:.5rem}
+.nbtn{padding:.38rem .85rem;border-radius:20px;font-weight:700;font-size:.82rem;border:2px solid rgba(255,255,255,.3);color:#fff;background:transparent;cursor:pointer;transition:all .2s}
+.nbtn:hover{background:rgba(255,255,255,.15)}
+.nbtn.ac{background:var(--ac);color:var(--gd);border-color:var(--ac)}
+.pill{background:var(--gd);color:#fff;border-radius:50%;width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;margin-left:.2rem;vertical-align:middle}
+.phead{background:linear-gradient(135deg,var(--gd) 0%,var(--g) 60%,var(--ac) 100%);color:#fff;padding:2.8rem 2rem 3.5rem;text-align:center;position:relative;overflow:hidden}
+.phead-inner{position:relative;max-width:680px;margin:0 auto}
+.phead-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:.28rem .9rem;border-radius:20px;font-size:.8rem;margin-bottom:.9rem}
+.phead h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;margin-bottom:.7rem}
+.phead p{font-size:.98rem;opacity:.88;max-width:500px;margin:0 auto}
+.filters{background:#fff;border-bottom:1px solid var(--bd);padding:.85rem 2rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;position:sticky;top:62px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.flabel{font-size:.8rem;font-weight:700;color:var(--muted);white-space:nowrap}
+.fbtn{padding:.32rem .78rem;border-radius:20px;border:2px solid var(--bd);background:#fff;font-size:.78rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
+.fbtn:hover,.fbtn.on{border-color:var(--g);color:var(--g);background:#f0faf0}
+.f-div{width:1px;height:22px;background:var(--bd);flex-shrink:0}
+.sbox{margin-left:auto;padding:.35rem .9rem;border-radius:20px;border:2px solid var(--bd);font-size:.85rem;outline:none;width:200px;transition:border .2s}
+.sbox:focus{border-color:var(--g)}
+.main{max-width:1380px;margin:0 auto;padding:1.6rem 1.8rem}
+.rbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;flex-wrap:wrap;gap:.5rem}
+.rcount{font-size:.85rem;color:var(--muted)}
+.rright{display:flex;align-items:center;gap:.7rem}
+.srt{padding:.32rem .78rem;border-radius:8px;border:2px solid var(--bd);font-size:.8rem;outline:none;cursor:pointer;background:#fff}
+.cmp-wrap{display:none}.cmp-wrap.on{display:flex;align-items:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:1.3rem}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 16px rgba(0,0,0,.08);border:2px solid transparent;transition:all .3s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 32px rgba(45,122,58,.18)}
+.card.cmp-on{border-color:#ffc107;background:#fffdf0}
+.cimg{height:172px;display:flex;align-items:center;justify-content:center;font-size:4.6rem;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);position:relative;cursor:pointer;overflow:hidden}
+.cimg-carousel{width:100%;height:100%;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cimg-slides{display:flex;width:100%;height:calc(100% - 20px);transition:transform .4s ease}
+.cimg-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4.6rem;flex-direction:column;gap:.3rem}
+.cimg-slide-sub{font-size:.7rem;font-weight:700;color:rgba(0,0,0,.4);text-transform:uppercase;margin-top:.2rem}
+.cimg-dots{display:flex;gap:5px;position:absolute;bottom:5px;left:50%;transform:translateX(-50%);z-index:2}
+.cimg-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.2);transition:all .2s;cursor:pointer}
+.cimg-dot.on{background:rgba(0,0,0,.55)}
+.cimg-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.7);border:none;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:.75rem;display:none;align-items:center;justify-content:center;z-index:3;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.cimg:hover .cimg-arrow{display:flex}
+.cimg-arrow.prev{left:6px}.cimg-arrow.next{right:6px}
+.cimg:hover::after{display:none}
+.cimg.blue{background:linear-gradient(135deg,#e3f2fd,#bbdefb)}
+.cimg.orange{background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
+.cimg.pink{background:linear-gradient(135deg,#fce4ec,#f8bbd0)}
+.cimg.purple{background:linear-gradient(135deg,#f3e5f5,#e1bee7)}
+.cimg.teal{background:linear-gradient(135deg,#e0f2f1,#b2dfdb)}
+.bge{position:absolute;top:10px;left:10px;padding:.16rem .6rem;border-radius:20px;font-size:.68rem;font-weight:700;text-transform:uppercase;z-index:1}
+.bge-new{background:#e3f2fd;color:#1565c0}
+.bge-best{background:#fff3e0;color:#e65100}
+.bge-sale{background:#fce4ec;color:#c62828}
+.bge-premium{background:#f3e5f5;color:#6a1b9a}
+.disc{position:absolute;top:10px;right:10px;background:#fce4ec;color:#c62828;padding:.16rem .6rem;border-radius:20px;font-size:.68rem;font-weight:700;z-index:1}
+.cbody{padding:1rem;flex:1;display:flex;flex-direction:column;gap:.48rem}
+.cbrand{font-size:.68rem;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:1px}
+.cname{font-size:.97rem;font-weight:800;line-height:1.3;cursor:pointer}
+.cname:hover{color:var(--g);text-decoration:underline}
+.crat{display:flex;align-items:center;gap:.35rem;font-size:.8rem}
+.stars{color:#f59e0b}
+.rct{color:var(--muted);font-size:.75rem}
+.cdesc{font-size:.77rem;color:var(--muted);line-height:1.43}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:.3rem;margin:.22rem 0}
+.si{background:var(--bg);border-radius:8px;padding:.32rem .5rem;font-size:.72rem}
+.sl{color:var(--muted);display:block;font-size:.65rem}
+.sv{font-weight:700}
+.aitag{font-size:.72rem;color:var(--g);font-weight:600;background:#f0faf0;padding:.3rem .5rem;border-radius:8px}
+.cprice{display:flex;align-items:baseline;gap:.4rem;margin-top:auto;flex-wrap:wrap}
+.price{font-size:1.28rem;font-weight:900;color:var(--gd)}
+.pold{font-size:.83rem;color:var(--muted);text-decoration:line-through}
+.psub{font-size:.7rem;color:var(--muted)}
+.cacts{display:flex;gap:.5rem;padding:.8rem 1rem;border-top:1px solid var(--bd)}
+.bbuy{flex:1;background:var(--g);color:#fff;border:none;padding:.55rem;border-radius:10px;font-weight:700;font-size:.83rem;cursor:pointer;transition:all .2s}
+.bbuy:hover{background:var(--gd)}
+.bbuy.inc{background:#1565c0}
+.bcmp{padding:.55rem .78rem;border-radius:10px;border:2px solid var(--bd);background:#fff;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--muted);transition:all .2s;white-space:nowrap}
+.bcmp:hover,.bcmp.on{border-color:#ffc107;color:#92660a;background:#fff3cd}
+.cpanel{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:3px solid var(--ac);box-shadow:0 -6px 28px rgba(0,0,0,.14);transform:translateY(100%);transition:transform .3s;z-index:200;padding:.8rem 2rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.cpanel.on{transform:translateY(0)}
+.citems{display:flex;gap:.55rem;flex:1;flex-wrap:wrap}
+.ci{background:var(--bg);border:2px solid var(--ac);border-radius:10px;padding:.28rem .65rem;font-size:.78rem;font-weight:700;display:flex;align-items:center;gap:.35rem}
+.ci button{background:none;border:none;cursor:pointer;color:var(--muted)}
+.bgo{background:var(--g);color:#fff;border:none;padding:.48rem 1.2rem;border-radius:10px;font-weight:700;cursor:pointer;font-size:.85rem}
+.bclr{background:none;border:2px solid var(--bd);color:var(--muted);padding:.48rem .78rem;border-radius:10px;font-weight:600;cursor:pointer;font-size:.78rem}
+.nores{text-align:center;padding:4rem;color:var(--muted);display:none}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:1.5rem;overflow-y:auto}
+.ov.on{display:flex}
+.mod{background:#fff;border-radius:20px;width:100%;max-width:1080px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+.mod-sm{max-width:540px}
+.mod-pd{max-width:780px}
+.mhdr{background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
+.mhdr h2{font-size:1.1rem;font-weight:800}
+.mcls{background:rgba(255,255,255,.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.ctbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:.72rem .8rem;text-align:left;border-bottom:1px solid var(--bd);font-size:.84rem}
+th{background:#f8fafc;font-weight:700;color:var(--muted);font-size:.72rem;text-transform:uppercase}
+td:first-child{font-weight:600;color:var(--muted);background:#f8fafc;white-space:nowrap}
+tr:hover td{background:#f0faf0}
+.ce{font-size:1.9rem;display:block;text-align:center;margin-bottom:.22rem}
+.cn{font-weight:800;font-size:.9rem;text-align:center}
+.cb{font-size:.68rem;color:var(--muted);text-align:center}
+.pd-body{padding:0}
+.pd-hero{display:flex;align-items:center;justify-content:center;font-size:7rem;height:220px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);position:relative}
+.pd-hero.blue{background:linear-gradient(135deg,#e3f2fd,#bbdefb)}
+.pd-hero.orange{background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
+.pd-hero.pink{background:linear-gradient(135deg,#fce4ec,#f8bbd0)}
+.pd-hero.purple{background:linear-gradient(135deg,#f3e5f5,#e1bee7)}
+.pd-hero.teal{background:linear-gradient(135deg,#e0f2f1,#b2dfdb)}
+.pd-content{padding:1.5rem}
+.pd-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1.2rem}
+.pd-info .pd-brand{font-size:.75rem;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem}
+.pd-info .pd-name{font-size:1.5rem;font-weight:900;line-height:1.2;margin-bottom:.4rem}
+.pd-info .pd-rat{display:flex;align-items:center;gap:.4rem;font-size:.9rem}
+.pd-price-box{text-align:right}
+.pd-price{font-size:2rem;font-weight:900;color:var(--gd)}
+.pd-pold{font-size:1rem;color:var(--muted);text-decoration:line-through}
+.pd-psub{font-size:.75rem;color:var(--muted)}
+.pd-desc{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:1.3rem;padding-bottom:1.3rem;border-bottom:1px solid var(--bd)}
+.pd-specs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-bottom:1.3rem}
+.pd-spec{background:var(--bg);border-radius:10px;padding:.7rem .9rem}
+.pd-spec-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.2rem}
+.pd-spec-val{font-size:.95rem;font-weight:800}
+.pd-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.3rem}
+.pd-pros,.pd-cons{border-radius:12px;padding:1rem}
+.pd-pros{background:#f0faf0;border:1px solid #c8e6c9}
+.pd-cons{background:#fff5f5;border:1px solid #fecdd3}
+.pd-pros h4{color:var(--g);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.6rem}
+.pd-cons h4{color:#c62828;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.6rem}
+.pd-pros li,.pd-cons li{font-size:.84rem;margin-bottom:.35rem;list-style:none;padding-left:1.1rem;position:relative}
+.pd-pros li::before{content:'✓';position:absolute;left:0;color:var(--g);font-weight:700}
+.pd-cons li::before{content:'✗';position:absolute;left:0;color:#c62828;font-weight:700}
+.pd-aitag{background:#f0faf0;border:1px solid #c8e6c9;border-radius:10px;padding:.7rem 1rem;font-size:.85rem;color:var(--g);font-weight:600;margin-bottom:1.3rem}
+.pd-actions{display:flex;gap:.7rem;flex-wrap:wrap}
+.pd-buy{flex:1;background:var(--g);color:#fff;border:none;padding:.85rem;border-radius:12px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;min-width:160px}
+.pd-buy:hover{background:var(--gd)}
+.pd-buy.inc{background:#1565c0}
+.pd-cmp{padding:.85rem 1.2rem;border-radius:12px;border:2px solid var(--bd);background:#fff;cursor:pointer;font-size:.88rem;font-weight:600;color:var(--muted);transition:all .2s;white-space:nowrap}
+.pd-cmp:hover,.pd-cmp.on{border-color:#ffc107;color:#92660a;background:#fff3cd}
+.cartbody{padding:1.2rem}
+.cempty{text-align:center;padding:2rem;color:var(--muted)}
+.citem{display:flex;align-items:center;gap:.8rem;padding:.75rem 0;border-bottom:1px solid var(--bd)}
+.cie{font-size:2rem;min-width:40px;text-align:center}
+.cii{flex:1}
+.cin{font-weight:700;font-size:.9rem}
+.cib{font-size:.74rem;color:var(--muted)}
+.cip{font-weight:800;color:var(--gd);white-space:nowrap}
+.crm{background:none;border:none;color:#ef4444;cursor:pointer;font-size:1rem}
+.qrow{display:flex;align-items:center;gap:.4rem;margin-top:.25rem}
+.qbtn{background:var(--bg);border:1px solid var(--bd);width:22px;height:22px;border-radius:6px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+.qnum{font-weight:700;min-width:16px;text-align:center;font-size:.85rem}
+.ctrow{padding:.8rem 0;display:flex;justify-content:space-between;align-items:center;font-weight:700;border-top:2px solid var(--bd);margin-top:.3rem}
+.cttp{font-size:1.3rem;color:var(--gd);font-weight:900}
+.bchk{width:100%;background:var(--g);color:#fff;border:none;padding:.82rem;border-radius:12px;font-size:.97rem;font-weight:700;cursor:pointer;margin-top:.8rem}
+.bwish{padding:.55rem .65rem;border-radius:10px;border:2px solid var(--bd);background:#fff;cursor:pointer;font-size:.88rem;transition:all .2s;line-height:1}
+.bwish:hover,.bwish.on{border-color:#e91e63;background:#fce4ec;color:#c62828}
+.wish-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;display:none;align-items:flex-start;justify-content:center;padding:1.5rem;overflow-y:auto}
+.wish-ov.on{display:flex}
+.wish-mod{background:#fff;border-radius:20px;width:100%;max-width:680px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+.wish-hdr{background:linear-gradient(135deg,#880e4f,#e91e63);color:#fff;padding:1.1rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
+.wish-hdr h2{font-size:1.1rem;font-weight:800}
+.wish-body{padding:1.2rem}
+.wish-empty{text-align:center;padding:2.5rem;color:var(--muted)}
+.wish-item{display:flex;align-items:center;gap:.9rem;padding:.75rem 0;border-bottom:1px solid var(--bd)}
+.wish-em{font-size:2rem;min-width:38px;text-align:center}
+.wish-info{flex:1}
+.wish-name{font-weight:700;font-size:.9rem}
+.wish-brand{font-size:.72rem;color:var(--muted)}
+.wish-price{font-weight:800;color:var(--gd);font-size:.95rem;white-space:nowrap}
+.wish-rm{background:none;border:none;color:#ef4444;cursor:pointer;font-size:1rem;padding:.2rem}
+.wish-badge{position:absolute;top:-6px;right:-6px;background:#e91e63;color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800}
+footer{background:var(--gd);color:#fff;text-align:center;padding:1.6rem;margin-top:2rem;font-size:.84rem}
+@media(max-width:600px){
+  .grid{grid-template-columns:1fr}
+  .filters{padding:.7rem}
+  .sbox{width:100%;margin-left:0}
+  .pd-specs-grid{grid-template-columns:1fr 1fr}
+  .pd-pros-cons{grid-template-columns:1fr}
+}
+.qv-btn{background:rgba(255,255,255,.95);color:var(--gd,#1b5e20);border:none;border-radius:8px;padding:.3rem .7rem;font-size:.72rem;font-weight:800;cursor:pointer;position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);opacity:0;transition:all .2s;white-space:nowrap;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.card:hover .qv-btn{opacity:1}
+.qv-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(3px)}
+.qv-overlay.on{display:flex}
+.qv-box{background:#fff;border-radius:22px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.qv-close{position:absolute;top:.9rem;right:.9rem;background:#f4f9f4;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;z-index:10;transition:background .2s}
+.qv-close:hover{background:#e0f0e0}
+.qv-inner{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+.qv-img{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center;font-size:6rem;border-radius:22px 0 0 22px;position:relative;padding:2rem}
+.qv-body{padding:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+.qv-brand{font-size:.7rem;font-weight:800;color:#2d7a3a;text-transform:uppercase;letter-spacing:1px}
+.qv-name{font-size:1.15rem;font-weight:900;line-height:1.3}
+.qv-price{font-size:1.5rem;font-weight:900;color:#1b5e20}
+.qv-was{font-size:.82rem;color:#6b7280;text-decoration:line-through;margin-left:.3rem}
+.qv-rating{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:#6b7280}
+.qv-desc{font-size:.82rem;color:#6b7280;line-height:1.6}
+.qv-specs{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.qv-spec{background:#f4f9f4;border-radius:8px;padding:.4rem .6rem;font-size:.75rem}
+.qv-spec-label{color:#6b7280;font-weight:700}
+.qv-spec-val{font-weight:800;color:#1a1a2e}
+.qv-pros{display:flex;flex-direction:column;gap:.2rem}
+.qv-pro{font-size:.75rem;color:#2d7a3a;display:flex;align-items:center;gap:.3rem}
+.qv-acts{display:flex;gap:.5rem;margin-top:auto}
+.qv-cart-btn{flex:1;padding:.55rem;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;border-radius:11px;font-weight:800;font-size:.85rem;cursor:pointer;transition:all .2s}
+.qv-cart-btn:hover{opacity:.9}
+.qv-detail-btn{padding:.55rem .9rem;border:2px solid #2d7a3a;color:#2d7a3a;background:transparent;border-radius:11px;font-weight:800;font-size:.85rem;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center}
+.qv-detail-btn:hover{background:#f0faf0}
+@media(max-width:600px){.qv-inner{grid-template-columns:1fr}.qv-img{border-radius:22px 22px 0 0;height:160px;font-size:4rem}.qv-body{padding:1.1rem}}</style>
+</head>
+<body>
+<div id="dealsBanner" style="background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.5rem 1rem;font-size:.82rem;font-weight:700;position:relative;z-index:101">
+  &#128293; <strong>FLASH SALE:</strong> Up to 30% off selected models this week &nbsp;&#183;&nbsp; Use code <strong>LAWN10</strong> for extra 10% &nbsp;
+  <a href="lawnstar-deals.html" style="color:#ffd700;text-decoration:underline;font-weight:800">Shop Deals &#8594;</a>
+  <button onclick="this.parentElement.style.display='none'" style="position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;opacity:.7">&#10005;</button>
+</div>
+
+<nav>
+  <a class="logo" href="lawnstar-homepage.html" style="text-decoration:none">🌿 Lawn<span>Star</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="lawnstar-homepage.html" class="nbtn" style="text-decoration:none">🏠 Home</a>
+    <a href="lawnstar-quiz.html" class="nbtn" style="text-decoration:none">🧠 Quiz</a>
+    <a href="lawnstar-brands.html" class="nbtn" style="text-decoration:none">🏷️ Brands</a>
+    <a href="lawnstar-guide.html" class="nbtn" style="text-decoration:none">📖 Guide</a>
+    <a class="nbtn" href="lawnstar-blog.html">&#128221; Blog</a>
+    <a href="lawnstar-deals.html" class="nbtn" style="text-decoration:none;background:rgba(229,57,53,.7);border-color:rgba(229,57,53,.9)">🔥 Deals</a>
+    <a href="lawnstar-compare.html" class="nbtn" style="text-decoration:none">⚖️ Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+    <a     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html" class="nbtn" style="text-decoration:none">⭐ Reviews</a>
+    <a href="lawnstar-faq.html" class="nbtn" style="text-decoration:none">❓ FAQ</a>
+    <a href="lawnstar-contact.html" class="nbtn" style="text-decoration:none">Contact</a>
+    <a href="lawnstar-loyalty.html" class="nbtn" style="text-decoration:none">Rewards</a>
+    <a class="nbtn" href="lawnstar-track.html">&#128230; Track Order</a>
+    <a href="lawnstar-vs-petrol.html" class="nbtn" style="text-decoration:none">Robot vs Petrol</a>
+    <button class="nbtn" id="btnCmpNav" style="display:none">⚖️ Compare <span class="pill" id="cmpCount">0</span></button>
+    <button class="nbtn" id="btnWish" style="border-color:rgba(233,30,99,.5);color:#fce4ec;position:relative">♥ Wishlist <span class="pill" id="wishCount" style="background:#e91e63">0</span></button>
+    <button class="nbtn ac" id="btnCart">🛒 Cart <span class="pill" id="cartCount">0</span></button>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" style="display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:40px;height:40px;background:transparent;border:2px solid rgba(255,255,255,.4);border-radius:8px;cursor:pointer;padding:6px">
+    <span style="display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:all .3s"></span>
+    <span style="display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:all .3s"></span>
+    <span style="display:block;width:20px;height:2px;background:#fff;border-radius:2px;transition:all .3s"></span>
+  </button>
+</nav>
+<style>
+@media(max-width:768px){
+  .hamburger{display:flex!important}
+  .nav-links{display:none;position:absolute;top:62px;left:0;right:0;background:linear-gradient(135deg,var(--gd),var(--g));flex-direction:column;align-items:stretch;padding:.6rem 1rem;gap:.3rem;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:99}
+  .nav-links.open{display:flex}
+  .nav-links .nbtn{text-align:center;border-radius:10px;padding:.6rem 1rem}
+}
+.qv-btn{background:rgba(255,255,255,.95);color:var(--gd,#1b5e20);border:none;border-radius:8px;padding:.3rem .7rem;font-size:.72rem;font-weight:800;cursor:pointer;position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);opacity:0;transition:all .2s;white-space:nowrap;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.card:hover .qv-btn{opacity:1}
+.qv-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(3px)}
+.qv-overlay.on{display:flex}
+.qv-box{background:#fff;border-radius:22px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.qv-close{position:absolute;top:.9rem;right:.9rem;background:#f4f9f4;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;z-index:10;transition:background .2s}
+.qv-close:hover{background:#e0f0e0}
+.qv-inner{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+.qv-img{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center;font-size:6rem;border-radius:22px 0 0 22px;position:relative;padding:2rem}
+.qv-body{padding:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+.qv-brand{font-size:.7rem;font-weight:800;color:#2d7a3a;text-transform:uppercase;letter-spacing:1px}
+.qv-name{font-size:1.15rem;font-weight:900;line-height:1.3}
+.qv-price{font-size:1.5rem;font-weight:900;color:#1b5e20}
+.qv-was{font-size:.82rem;color:#6b7280;text-decoration:line-through;margin-left:.3rem}
+.qv-rating{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:#6b7280}
+.qv-desc{font-size:.82rem;color:#6b7280;line-height:1.6}
+.qv-specs{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.qv-spec{background:#f4f9f4;border-radius:8px;padding:.4rem .6rem;font-size:.75rem}
+.qv-spec-label{color:#6b7280;font-weight:700}
+.qv-spec-val{font-weight:800;color:#1a1a2e}
+.qv-pros{display:flex;flex-direction:column;gap:.2rem}
+.qv-pro{font-size:.75rem;color:#2d7a3a;display:flex;align-items:center;gap:.3rem}
+.qv-acts{display:flex;gap:.5rem;margin-top:auto}
+.qv-cart-btn{flex:1;padding:.55rem;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;border-radius:11px;font-weight:800;font-size:.85rem;cursor:pointer;transition:all .2s}
+.qv-cart-btn:hover{opacity:.9}
+.qv-detail-btn{padding:.55rem .9rem;border:2px solid #2d7a3a;color:#2d7a3a;background:transparent;border-radius:11px;font-weight:800;font-size:.85rem;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center}
+.qv-detail-btn:hover{background:#f0faf0}
+@media(max-width:600px){.qv-inner{grid-template-columns:1fr}.qv-img{border-radius:22px 22px 0 0;height:160px;font-size:4rem}.qv-body{padding:1.1rem}}</style>
+<script>
+(function(){
+  var btn=document.getElementById('hamburger');
+  var links=document.getElementById('navLinks');
+  if(btn&&links){
+    btn.addEventListener('click',function(){
+      links.classList.toggle('open');
+      var spans=btn.querySelectorAll('span');
+      var isOpen=links.classList.contains('open');
+      if(isOpen){
+        spans[0].style.transform='translateY(7px) rotate(45deg)';
+        spans[1].style.opacity='0';
+        spans[2].style.transform='translateY(-7px) rotate(-45deg)';
+      } else {
+        spans[0].style.transform='';
+        spans[1].style.opacity='1';
+        spans[2].style.transform='';
+      }
+    });
+    document.addEventListener('click',function(e){
+      if(!btn.contains(e.target)&&!links.contains(e.target)){
+        links.classList.remove('open');
+        var spans=btn.querySelectorAll('span');
+        spans[0].style.transform='';
+        spans[1].style.opacity='1';
+        spans[2].style.transform='';
+      }
+    });
+  }
+})();
+</script>
+
+<div class="phead">
+  <div class="phead-inner">
+    <div class="phead-badge">🤖 17 AI Mowers · 8 Brands · All AUD Prices</div>
+    <h1>All AI Lawn Mowers</h1>
+    <p>Australia's most complete range of autonomous robot mowers — wire-free, GPS-guided, fully reviewed.</p>
+  </div>
+</div>
+
+<div class="filters">
+  <span class="flabel">Brand:</span>
+  <button class="fbtn on" data-f="all">All (17)</button>
+  <button class="fbtn" data-f="husqvarna">Husqvarna</button>
+  <button class="fbtn" data-f="mammotion">Mammotion</button>
+  <button class="fbtn" data-f="segway">Segway</button>
+  <button class="fbtn" data-f="ecoflow">EcoFlow</button>
+  <button class="fbtn" data-f="worx">Worx</button>
+  <button class="fbtn" data-f="gardena">Gardena</button>
+  <button class="fbtn" data-f="robomow">Robomow</button>
+  <button class="fbtn" data-f="lawnmaster">LawnMaster</button>
+  <div class="f-div"></div>
+  <button class="fbtn" data-f="wirefree">Wire-Free ✅</button>
+  <button class="fbtn" data-f="gps">GPS 🛰️</button>
+  <div class="f-div"></div>
+  <span class="flabel">Best For:</span>
+  <button class="fbtn" data-bf="slopes">🏔️ Slopes</button>
+  <button class="fbtn" data-bf="large">📐 Large Lawns</button>
+  <button class="fbtn" data-bf="quiet">🔇 Quiet</button>
+  <button class="fbtn" data-bf="budget">💰 Budget</button>
+  <div class="f-div"></div>
+  <span class="flabel">Budget:</span>
+  <span style="font-size:.78rem;font-weight:700;color:var(--g);white-space:nowrap" id="priceLabel">Up to A$7,000</span>
+  <input type="range" id="priceSlider" min="449" max="7000" value="7000" step="50"
+    style="width:110px;accent-color:var(--g);cursor:pointer"
+    oninput="priceMax=+this.value;document.getElementById('priceLabel').textContent='Up to A$'+priceMax.toLocaleString();render()"/>
+  <div class="f-div"></div>
+  <span class="flabel">⭐ Min Rating:</span>
+  <button class="fbtn on" data-rt="0" onclick="setRating(0,this)">All</button>
+  <button class="fbtn" data-rt="4" onclick="setRating(4,this)">4.0+</button>
+  <button class="fbtn" data-rt="4.3" onclick="setRating(4.3,this)">4.3+</button>
+  <button class="fbtn" data-rt="4.5" onclick="setRating(4.5,this)">4.5+</button>
+  <button class="fbtn" data-rt="4.7" onclick="setRating(4.7,this)">4.7+</button>
+  <input class="sbox" id="sbox" type="text" placeholder="🔍 Search mowers..."/>
+</div>
+
+<div class="main">
+  <div class="rbar">
+    <span class="rcount" id="rcount"></span>
+    <div class="rright">
+      <div class="cmp-wrap" id="cmpWrap">
+        <button class="nbtn" id="btnCmp" style="border-color:#ffc107;color:#92660a;background:#fff3cd">⚖️ Compare <span class="pill" style="background:#e65100" id="cmpCount2">0</span></button>
+      </div>
+      <select class="srt" id="srt">
+        <option value="def">Sort: Featured</option>
+        <option value="pa">Price: Low → High</option>
+        <option value="pd">Price: High → Low</option>
+        <option value="rat">Highest Rated</option>
+        <option value="area">Coverage Area</option>
+        <option value="rv">Most Reviews</option>
+      </select>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="nores" id="nores">
+    <div style="font-size:3.5rem;margin-bottom:1rem">🌿</div>
+    <h3>No mowers found</h3><p>Try adjusting your search or filters</p>
+  </div>
+</div>
+
+<div class="cpanel" id="cpanel">
+  <span style="font-size:.82rem;color:var(--muted);font-weight:700">⚖️ Comparing:</span>
+  <div class="citems" id="citems"></div>
+  <button class="bgo" id="btnGoCmp">Compare Now</button>
+  <button class="bclr" id="btnClrCmp">Clear All</button>
+</div>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="ov" id="ovPD">
+  <div class="mod mod-pd">
+    <div class="mhdr"><h2 id="pdTitle">Product Details</h2><button class="mcls" id="clsPD">✕</button></div>
+    <div class="pd-body" id="pdBody"></div>
+  </div>
+</div>
+
+<!-- COMPARE MODAL -->
+<div class="ov" id="ovCmp">
+  <div class="mod">
+    <div class="mhdr"><h2>⚖️ Side-by-Side Comparison</h2><button class="mcls" id="clsCmp">✕</button></div>
+    <div class="ctbl" id="ctbl"></div>
+  </div>
+</div>
+
+<!-- WISHLIST MODAL -->
+<div class="wish-ov" id="ovWish">
+  <div class="wish-mod">
+    <div class="wish-hdr"><h2>♥ My Wishlist</h2><button class="mcls" id="clsWish">✕</button></div>
+    <div class="wish-body" id="wishbody"></div>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div class="ov" id="ovCart">
+  <div class="mod mod-sm">
+    <div class="mhdr"><h2>🛒 Your Cart</h2><button class="mcls" id="clsCart">✕</button></div>
+    <div class="cartbody" id="cartbody"></div>
+  </div>
+</div>
+
+<footer style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:3rem 2rem 1.5rem;margin-top:2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem">
+      <div>
+        <div style="font-size:1.4rem;font-weight:900;margin-bottom:.6rem">&#127807; Lawn<span style="color:#76c442">Star</span></div>
+        <div style="font-size:.82rem;opacity:.75;line-height:1.7;max-width:260px">Australia&#39;s most trusted destination for AI robot lawn mowers. Free delivery, 2-year warranty, 30-day returns.</div>
+        <div style="display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap">
+          <a href="lawnstar-loyalty.html" style="background:#76c442;color:#1b5e20;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:800;text-decoration:none">&#127942; Join Rewards</a>
+          <a href="lawnstar-checkout.html" style="background:rgba(255,255,255,.15);color:#fff;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.3)">&#128722; Cart</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Shop</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-all-mowers.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129302; All Mowers</a>
+          <a href="lawnstar-deals.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128293; Current Deals</a>
+          <a href="lawnstar-brands.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127991;&#65039; Brands</a>
+          <a href="lawnstar-compare.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9878;&#65039; Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+          <a href="lawnstar-vs-petrol.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9876;&#65039; Robot vs Petrol</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128722; Checkout</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Learn</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128218; Buying Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+          <a href="lawnstar-quiz.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129504; Find My Mower Quiz</a>
+          <a     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#11088; Customer Reviews</a>
+          <a href="lawnstar-faq.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#10067; FAQ</a>
+          <a href="lawnstar-loyalty.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127942; GreenRewards</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Help</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-contact.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128140; Contact Us</a>
+          <a href="lawnstar-track.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128230; Track My Order</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128521; Returns &amp; Refunds</a>
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128295; Setup Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+        </div>
+        <div style="margin-top:1.2rem;font-size:.78rem;opacity:.65;line-height:1.7">
+          &#128222; 1800 LAWNSTAR<br>
+          &#128231; help@lawnstar.com.au<br>
+          &#128336; Mon&#8211;Fri 8am&#8211;6pm AEST
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.15);padding-top:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+      <div style="font-size:.75rem;opacity:.6">&#127807; <strong>LawnStar</strong> &copy; 2026 &nbsp;&#183;&nbsp; All prices AUD inc. GST &nbsp;&#183;&nbsp; ABN 12 345 678 901 &nbsp;&#183;&nbsp; Free delivery Australia-wide</div>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#128274; SSL Secured</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Afterpay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Zip Pay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Humm</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const R=1.54;
+const toA=u=>Math.round(u*R/10)*10;
+const fA=u=>'A$'+toA(u).toLocaleString();
+const strs=r=>{let s='';for(let i=0;i<5;i++)s+=i<Math.floor(r)?'★':'☆';return s;}
+const IMGCOL={husqvarna:'',mammotion:'blue',segway:'orange',ecoflow:'teal',worx:'pink',gardena:'',robomow:'orange',lawnmaster:'purple'};
+
+const P=[
+  {id:1,br:"Husqvarna",nm:"Automower 430X",em:"🤖",bg:"best",bt:"Best Seller",p:2999,op:3299,rt:4.8,rv:1240,area:"3,200 m²",an:3200,bat:"65 min",ch:"60 min",ns:"58 dB",sl:"45%",wf:false,gps:true,ai:"EPOS GPS",con:"WiFi+BT",wt:"14.4 kg",wr:"2 years",ds:"Premium wire-free mower using EPOS satellite positioning. Perfect for complex large gardens with multiple zones and challenging terrain.",cat:"husqvarna",pros:["No boundary wire needed","EPOS GPS navigation","45% slope capability","Smart scheduling via app","Anti-theft alarm"],cons:["Monthly GPS subscription","Premium price point"]},
+  {id:2,br:"Husqvarna",nm:"Automower 450X EPOS",em:"🚀",bg:"premium",bt:"Premium",p:4499,op:null,rt:4.9,rv:680,area:"5,000 m²",an:5000,bat:"70 min",ch:"55 min",ns:"58 dB",sl:"50%",wf:false,gps:true,ai:"RTK GPS",con:"WiFi+BT+4G",wt:"16.8 kg",wr:"2 years",ds:"Flagship Husqvarna model with RTK GPS centimetre precision. The ultimate choice for the most demanding large gardens.",cat:"husqvarna",pros:["RTK GPS cm precision","5,000m² coverage","4G connectivity","50% slope","Pro anti-theft"],cons:["Very high price","Professional install recommended"]},
+  {id:3,br:"Husqvarna",nm:"Automower 310E",em:"🌱",bg:"new",bt:"New",p:1299,op:null,rt:4.5,rv:420,area:"1,000 m²",an:1000,bat:"45 min",ch:"50 min",ns:"57 dB",sl:"30%",wf:true,gps:false,ai:"Auto Schedule",con:"WiFi+BT",wt:"8.5 kg",wr:"2 years",ds:"Entry-level smart mower ideal for smaller gardens. Quiet, efficient and straightforward to set up with app control.",cat:"husqvarna",pros:["Affordable Husqvarna entry","Very quiet 57dB","Easy app setup","Lightweight"],cons:["Boundary wire required","No GPS tracking"]},
+  {id:4,br:"Mammotion",nm:"Luba AWD 5000",em:"🦾",bg:"new",bt:"New 2026",p:3499,op:3799,rt:4.7,rv:892,area:"5,000 m²",an:5000,bat:"240 min",ch:"120 min",ns:"55 dB",sl:"75%",wf:false,gps:true,ai:"RTK+Vision AI",con:"WiFi+BT+4G",wt:"17.5 kg",wr:"2 years",ds:"All-wheel drive robot mower with RTK GPS and Vision AI obstacle detection. Conquers the steepest slopes completely wire-free.",cat:"mammotion",pros:["All-wheel drive","75% slope handling","Vision AI obstacle avoid","4-hour battery","Wire-free setup"],cons:["Heavy at 17.5kg","App occasional lag"]},
+  {id:5,br:"Mammotion",nm:"Luba AWD 3000",em:"🌾",bg:null,bt:null,p:2699,op:2999,rt:4.6,rv:1105,area:"3,000 m²",an:3000,bat:"180 min",ch:"90 min",ns:"56 dB",sl:"70%",wf:false,gps:true,ai:"RTK+Vision AI",con:"WiFi+BT",wt:"14.2 kg",wr:"2 years",ds:"Mid-size AWD mower with RTK GPS and AI obstacle detection. Handles complex yards and steep slopes with ease.",cat:"mammotion",pros:["AWD on 70% slopes","Wire-free","Multi-zone mapping","Great value AWD"],cons:["GPS drift under dense trees","Long initial setup"]},
+  {id:6,br:"Mammotion",nm:"Yuka 1000",em:"🍃",bg:"sale",bt:"Sale",p:899,op:1199,rt:4.3,rv:340,area:"1,000 m²",an:1000,bat:"90 min",ch:"60 min",ns:"54 dB",sl:"35%",wf:false,gps:true,ai:"RTK GPS",con:"WiFi+BT",wt:"9.0 kg",wr:"1 year",ds:"Budget wire-free mower with RTK GPS positioning. Perfect for small to medium flat or gently sloped lawns.",cat:"mammotion",pros:["Most affordable wire-free GPS","Very quiet 54dB","Lightweight"],cons:["1-year warranty only","Best on flat terrain"]},
+  {id:7,br:"Segway",nm:"Navimow H800E",em:"⚡",bg:"best",bt:"Top Rated",p:2199,op:2499,rt:4.6,rv:765,area:"8,000 m²",an:8000,bat:"120 min",ch:"90 min",ns:"56 dB",sl:"45%",wf:false,gps:true,ai:"EFLS Vision+GPS",con:"WiFi+BT+4G",wt:"15.0 kg",wr:"2 years",ds:"Segway's flagship mower covering up to 8,000m² wire-free using EFLS fusion positioning technology.",cat:"segway",pros:["Massive 8,000m² coverage","Wire-free","4G connectivity","Excellent companion app"],cons:["Bulky design","Higher price tier"]},
+  {id:8,br:"Segway",nm:"Navimow i108E",em:"🔋",bg:null,bt:null,p:1499,op:1699,rt:4.4,rv:530,area:"1,000 m²",an:1000,bat:"100 min",ch:"75 min",ns:"56 dB",sl:"40%",wf:false,gps:true,ai:"EFLS GPS",con:"WiFi+BT",wt:"11.0 kg",wr:"2 years",ds:"Mid-range wire-free mower with Segway EFLS satellite positioning. Ideal for medium-sized gardens up to 1,000m².",cat:"segway",pros:["Wire-free mid-range","Smart scheduling","Compact form factor"],cons:["Limited to 1,000m²","No 4G option"]},
+  {id:9,br:"EcoFlow",nm:"Blade Robotic Mower",em:"🌊",bg:"new",bt:"New",p:1799,op:1999,rt:4.5,rv:610,area:"1,000 m²",an:1000,bat:"180 min",ch:"80 min",ns:"53 dB",sl:"35%",wf:false,gps:true,ai:"AI Vision+RTK",con:"WiFi+BT+4G",wt:"16.3 kg",wr:"2 years",ds:"Innovative mower with AI vision and RTK GPS, compatible with EcoFlow solar charging for fully off-grid lawn care.",cat:"ecoflow",pros:["Solar charging compatible","Quietest at 53dB","AI vision detection","4G connectivity"],cons:["Heavy","Best within EcoFlow ecosystem"]},
+  {id:10,br:"Worx",nm:"Landroid Vision L1000",em:"👁️",bg:"new",bt:"New 2026",p:1699,op:1899,rt:4.4,rv:445,area:"1,000 m²",an:1000,bat:"90 min",ch:"90 min",ns:"57 dB",sl:"35%",wf:false,gps:true,ai:"Vision AI Camera",con:"WiFi+BT",wt:"12.5 kg",wr:"2 years",ds:"Vision-based AI mower using an onboard camera to intelligently detect and avoid obstacles without boundary wires.",cat:"worx",pros:["Camera obstacle detection","Wire-free","AIA cutting system","Good budget AI option"],cons:["Struggles in low light","Smaller coverage area"]},
+  {id:11,br:"Worx",nm:"Landroid M700",em:"🔩",bg:"sale",bt:"Sale",p:699,op:899,rt:4.2,rv:920,area:"700 m²",an:700,bat:"90 min",ch:"120 min",ns:"61 dB",sl:"20%",wf:true,gps:false,ai:"Auto Schedule",con:"WiFi+BT",wt:"7.2 kg",wr:"2 years",ds:"Popular budget mower — reliable, app-controlled and perfect for smaller lawns. Best-selling entry model.",cat:"worx",pros:["Great value","Lightweight 7.2kg","Easy installation","Large user community"],cons:["Wire required","Louder 61dB","No GPS"]},
+  {id:12,br:"Gardena",nm:"Sileno Life 1250",em:"🌸",bg:null,bt:null,p:1299,op:null,rt:4.5,rv:670,area:"1,250 m²",an:1250,bat:"65 min",ch:"45 min",ns:"57 dB",sl:"35%",wf:true,gps:false,ai:"Smart Schedule AI",con:"WiFi+BT",wt:"9.6 kg",wr:"2 years",ds:"German-engineered precision mower with ultra-quiet operation and smart weather adaptation technology.",cat:"gardena",pros:["Ultra-quiet German engineering","Fast 45min charge","Weather adaptation","Excellent build quality"],cons:["Boundary wire required","No GPS tracking"]},
+  {id:13,br:"Gardena",nm:"Sileno City 600",em:"🏙️",bg:null,bt:null,p:849,op:999,rt:4.3,rv:510,area:"600 m²",an:600,bat:"60 min",ch:"50 min",ns:"57 dB",sl:"25%",wf:true,gps:false,ai:"Auto Schedule",con:"BT only",wt:"7.8 kg",wr:"2 years",ds:"Compact quiet mower designed for smaller urban lawns. Simple, reliable and whisper-quiet German quality.",cat:"gardena",pros:["Very affordable","Whisper-quiet","Simple setup","German quality"],cons:["Bluetooth only — no WiFi","Wire required"]},
+  {id:14,br:"Robomow",nm:"RS630",em:"🦖",bg:"best",bt:"Great Value",p:1499,op:1699,rt:4.4,rv:290,area:"3,000 m²",an:3000,bat:"90 min",ch:"90 min",ns:"64 dB",sl:"36%",wf:true,gps:false,ai:"Smart Schedule",con:"WiFi+BT",wt:"16.4 kg",wr:"2 years",ds:"Heavy-duty twin-blade mower built for professional-grade cutting performance on large lawns up to 3,000m².",cat:"robomow",pros:["Twin blade system","3,000m² coverage","Robust build quality","Good for thick grass"],cons:["Wire required","Louder 64dB","No GPS"]},
+  {id:15,br:"Robomow",nm:"RX50U",em:"🦕",bg:null,bt:null,p:899,op:1099,rt:4.2,rv:380,area:"500 m²",an:500,bat:"45 min",ch:"60 min",ns:"60 dB",sl:"20%",wf:true,gps:false,ai:"Auto Schedule",con:"WiFi+BT",wt:"6.8 kg",wr:"2 years",ds:"Israeli-engineered wide single-blade mower. Excellent for navigating tight spaces and tricky garden layouts.",cat:"robomow",pros:["Wide single blade","Great for tight spaces","Lightweight","Simple app"],cons:["Wire required","No GPS","Smaller area"]},
+  {id:16,br:"LawnMaster",nm:"VBRM16 Vision",em:"🌀",bg:"new",bt:"Budget Pick",p:599,op:799,rt:4.0,rv:215,area:"600 m²",an:600,bat:"60 min",ch:"80 min",ns:"58 dB",sl:"25%",wf:false,gps:false,ai:"Vision Boundary",con:"WiFi+BT",wt:"8.2 kg",wr:"1 year",ds:"The most affordable wire-free robot mower available, using vision-based boundary detection instead of GPS or wire.",cat:"lawnmaster",pros:["Cheapest wire-free option","Vision boundary — no wire","App controlled"],cons:["No GPS","Basic AI only","1-year warranty"]},
+  {id:17,br:"LawnMaster",nm:"MBRM16E",em:"💚",bg:"sale",bt:"Sale",p:449,op:599,rt:3.9,rv:180,area:"400 m²",an:400,bat:"45 min",ch:"60 min",ns:"62 dB",sl:"15%",wf:true,gps:false,ai:"Random pattern",con:"None",wt:"5.5 kg",wr:"1 year",ds:"Ultra-budget entry-level mower. Light and effective for tiny flat lawns — no smart features, no app required.",cat:"lawnmaster",pros:["Cheapest option available","Ultra-lightweight 5.5kg","Zero app needed"],cons:["No app or connectivity","Wire required","Random cutting pattern"]}
+];
+
+const WL_KEY='ls_wishlist';
+function loadWL(){try{return JSON.parse(localStorage.getItem(WL_KEY)||'[]');}catch{return[];}}
+function saveWL(){localStorage.setItem(WL_KEY,JSON.stringify(wishList));}
+let cmpList=[],cart=[],filt="all",srch="",srtM="def",priceMax=7000,bestFor=null,minRating=0;
+let wishList=loadWL();
+
+function render(){
+  let list=P.filter(p=>{
+    if(filt==="wirefree")return !p.wf;
+    if(filt==="gps")return p.gps;
+    if(filt!=="all"&&p.cat!==filt)return false;
+    if(srch&&!p.nm.toLowerCase().includes(srch)&&!p.br.toLowerCase().includes(srch)&&!p.ds.toLowerCase().includes(srch))return false;
+    if(Math.round(p.p*1.54/10)*10 > priceMax)return false;
+    if(bestFor==='slopes' && parseInt(p.sl)<45)return false;
+    if(bestFor==='large' && p.an<3000)return false;
+    if(bestFor==='quiet' && parseInt(p.ns)>56)return false;
+    if(bestFor==='budget' && Math.round(p.p*1.54/10)*10>1000)return false;
+    if(minRating>0 && p.rt<minRating)return false;
+    return true;
+  });
+  if(srtM==="pa")list.sort((a,b)=>a.p-b.p);
+  else if(srtM==="pd")list.sort((a,b)=>b.p-a.p);
+  else if(srtM==="rat")list.sort((a,b)=>b.rt-a.rt);
+  else if(srtM==="area")list.sort((a,b)=>b.an-a.an);
+  else if(srtM==="rv")list.sort((a,b)=>b.rv-a.rv);
+  document.getElementById("rcount").textContent=`Showing ${list.length} of ${P.length} mowers`;
+  const g=document.getElementById("grid"),nr=document.getElementById("nores");
+  if(!list.length){g.innerHTML="";nr.style.display="block";return;}
+  nr.style.display="none";
+  g.innerHTML=list.map(p=>{
+    const iC=cmpList.includes(p.id),iCart=!!cart.find(x=>x.id===p.id);
+    const dc=p.op?Math.round((1-p.p/p.op)*100):null;
+    const col=IMGCOL[p.cat]||'';
+    return`<div class="card${iC?' cmp-on':''}" id="c${p.id}">
+      <div class="cimg${col?' '+col:''}" id="ci${p.id}">
+        ${p.bg?`<div class="bge bge-${p.bg}">${p.bt}</div>`:''}
+        ${dc?`<div class="disc">-${dc}%</div>`:''}
+        <div class="cimg-carousel">
+          <div class="cimg-slides" id="cs${p.id}">
+            <div class="cimg-slide" onclick="openPD(${p.id})">${p.em}<span class="cimg-slide-sub">Main View</span></div>
+            <div class="cimg-slide" onclick="openPD(${p.id})">${p.fea||p.em}<span class="cimg-slide-sub">Features</span></div>
+            <div class="cimg-slide" onclick="openPD(${p.id})">${p.lif||p.em}<span class="cimg-slide-sub">In Action</span></div>
+          </div>
+          <div class="cimg-dots" id="cd${p.id}">
+            <div class="cimg-dot on" onclick="goSlide(${p.id},0)"></div>
+            <div class="cimg-dot" onclick="goSlide(${p.id},1)"></div>
+            <div class="cimg-dot" onclick="goSlide(${p.id},2)"></div>
+          </div>
+          <button class="cimg-arrow prev" onclick="event.stopPropagation();slideAdj(${p.id},-1)">&#8249;</button>
+          <button class="cimg-arrow next" onclick="event.stopPropagation();slideAdj(${p.id},1)">&#8250;</button>
+        </div>
+      </div>
+      <div class="cbody">
+        <div class="cbrand">${p.br}</div>
+        <div style="margin-bottom:.2rem">${stockBadge(p.id)}</div>
+        <div class="cname" onclick="openPD(${p.id})">${p.nm}</div>
+        <div class="crat"><span class="stars">${strs(p.rt)}</span><strong>${p.rt}</strong><span class="rct">(${p.rv.toLocaleString()} reviews)</span></div>
+        <div class="cdesc">${p.ds}</div>
+        <div class="specs">
+          <div class="si"><span class="sl">Coverage</span><span class="sv">${p.area}</span></div>
+          <div class="si"><span class="sl">Battery</span><span class="sv">${p.bat}</span></div>
+          <div class="si"><span class="sl">Max Slope</span><span class="sv">${p.sl}</span></div>
+          <div class="si"><span class="sl">Wire-free</span><span class="sv">${!p.wf?'✅ Yes':'❌ No'}</span></div>
+          <div class="si"><span class="sl">GPS</span><span class="sv">${p.gps?'✅ Yes':'❌ No'}</span></div>
+          <div class="si"><span class="sl">Noise</span><span class="sv">${p.ns}</span></div>
+        </div>
+        <div class="aitag">🤖 AI: ${p.ai}</div>
+        <div class="cprice">
+          <span class="price">${fA(p.p)}</span>
+          ${p.op?`<span class="pold">${fA(p.op)}</span>`:''}
+          <span class="psub">AUD inc. GST</span>
+        </div>
+      </div>
+      <div class="cacts">
+        <button class="bbuy${iCart?' inc':''}" onclick="addCart(${p.id})">${iCart?'✓ In Cart':'🛒 Add to Cart'}</button>
+        <button class="bcmp${iC?' on':''}" onclick="togCmp(${p.id})">${iC?'✓ Added':'⚖️ Compare'}</button>
+        <button class="bwish${wishList.includes(p.id)?' on':''}" onclick="togWish(${p.id})" title="Save to Wishlist">${wishList.includes(p.id)?'♥':'♡'}</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function openPD(id){
+  const p=P.find(x=>x.id===id);
+  const iCart=!!cart.find(x=>x.id===id),iC=cmpList.includes(id);
+  const col=IMGCOL[p.cat]||'';
+  const dc=p.op?Math.round((1-p.p/p.op)*100):null;
+  document.getElementById("pdTitle").textContent=`${p.br} ${p.nm}`;
+  document.getElementById("pdBody").innerHTML=`
+    <div class="pd-hero${col?' '+col:''}">
+      ${p.bg?`<div class="bge bge-${p.bg}" style="top:14px;left:14px">${p.bt}</div>`:''}
+      ${p.em}
+      ${dc?`<div class="disc" style="top:14px;right:14px">-${dc}% OFF</div>`:''}
+    </div>
+    <div class="pd-content">
+      <div class="pd-top">
+        <div class="pd-info">
+          <div class="pd-brand">${p.br}</div>
+          <div class="pd-name">${p.nm}</div>
+          <div class="pd-rat"><span style="color:#f59e0b">${strs(p.rt)}</span><strong>${p.rt}</strong><span style="color:var(--muted);font-size:.82rem">(${p.rv.toLocaleString()} reviews)</span></div>
+        </div>
+        <div class="pd-price-box">
+          <div class="pd-price">${fA(p.p)}</div>
+          ${p.op?`<div class="pd-pold">${fA(p.op)}</div>`:''}
+          <div class="pd-psub">AUD inc. GST · Free delivery</div>
+        </div>
+      </div>
+      <div class="pd-desc">${p.ds}</div>
+      <div class="pd-specs-grid">
+        <div class="pd-spec"><div class="pd-spec-label">📐 Coverage</div><div class="pd-spec-val">${p.area}</div></div>
+        <div class="pd-spec"><div class="pd-spec-label">🔋 Battery</div><div class="pd-spec-val">${p.bat}</div></div>
+        <div class="pd-spec"><div class="pd-spec-label">⚡ Charge</div><div class="pd-spec-val">${p.ch}</div></div>
+        <div class="pd-spec"><div class="pd-spec-label">🏔️ Max Slope</div><div class="pd-spec-val">${p.sl}</div></div>
+        <div class="pd-spec"><div class="pd-spec-label">🔇 Noise</div><div class="pd-spec-val">${p.ns}</div></div>
+        <div class="pd-spec"><div class="pd-spec-label">⚖️ Weight</div><div class="pd-spec-val">${p.wt}</div></div>
+        <div class="pd-spec"><div class="pd-spec-label">📡 Wire-free</div><div class="pd-spec-val">${!p.wf?'✅ Yes':'❌ No'}</div></div>
+        <div class="pd-spec"><div class="pd-spec-label">🛰️ GPS</div><div class="pd-spec-val">${p.gps?'✅ Yes':'❌ No'}</div></div>
+        <div class="pd-spec"><div class="pd-spec-label">📶 Connectivity</div><div class="pd-spec-val">${p.con}</div></div>
+        <div class="pd-spec"><div class="pd-spec-label">🛡️ Warranty</div><div class="pd-spec-val">${p.wr}</div></div>
+      </div>
+      <div class="pd-aitag">🤖 AI Technology: <strong>${p.ai}</strong></div>
+      <div class="pd-pros-cons">
+        <div class="pd-pros"><h4>✅ Pros</h4><ul>${p.pros.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div class="pd-cons"><h4>❌ Cons</h4><ul>${p.cons.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      </div>
+      <div class="pd-actions">
+        <button class="pd-buy${iCart?' inc':''}" id="pdBuyBtn" onclick="addCartFromPD(${id})">${iCart?'✓ In Cart':'🛒 Add to Cart'}</button>
+        <button class="pd-cmp${iC?' on':''}" id="pdCmpBtn" onclick="togCmpFromPD(${id})">${iC?'✓ In Compare':'⚖️ Add to Compare'}</button>
+      </div>
+    </div>`;
+  document.getElementById("ovPD").classList.add("on");
+}
+function addCartFromPD(id){
+  addCart(id);
+  document.getElementById("pdBuyBtn").textContent='✓ In Cart';
+  document.getElementById("pdBuyBtn").classList.add('inc');
+}
+function togCmpFromPD(id){
+  togCmp(id);
+  const iC=cmpList.includes(id);
+  document.getElementById("pdCmpBtn").textContent=iC?'✓ In Compare':'⚖️ Add to Compare';
+  document.getElementById("pdCmpBtn").classList.toggle('on',iC);
+}
+function saveCartAndGo(){localStorage.setItem("ls_cart",JSON.stringify(cart));window.location="lawnstar-checkout.html";}
+// Stock levels
+const STOCK={1:3,2:7,3:2,4:12,5:1,6:5,7:8,8:4,9:2,10:15,11:6,12:3};
+function stockBadge(id){
+  var s=STOCK[id];if(!s||s>10)return '';
+  if(s<=2)return '<div style="background:#e53935;color:#fff;font-size:.68rem;font-weight:800;padding:.18rem .6rem;border-radius:20px;display:inline-block;margin-top:.2rem">&#128308; Only '+s+' left!</div>';
+  if(s<=5)return '<div style="background:#f59e0b;color:#fff;font-size:.68rem;font-weight:800;padding:.18rem .6rem;border-radius:20px;display:inline-block;margin-top:.2rem">&#128992; '+s+' in stock</div>';
+  return '<div style="background:#e8f5e9;color:#2d7a3a;font-size:.68rem;font-weight:800;padding:.18rem .6rem;border-radius:20px;display:inline-block;margin-top:.2rem">&#128994; '+s+' available</div>';
+}
+function addCart(id){
+  const p=P.find(x=>x.id===id),ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;else cart.push({...p,qty:1});
+  updCartBadge();render();
+}
+function rmCart(id){cart=cart.filter(x=>x.id!==id);updCartBadge();rendCart();render();}
+function chQty(id,d){const it=cart.find(x=>x.id===id);if(!it)return;it.qty+=d;if(it.qty<=0){rmCart(id);return;}updCartBadge();rendCart();}
+function updCartBadge(){document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);}
+function rendCart(){
+  const b=document.getElementById("cartbody");
+  if(!cart.length){b.innerHTML='<div class="cempty">🛒<br><br>Your cart is empty</div>';return;}
+  const tot=cart.reduce((s,x)=>s+toA(x.p)*x.qty,0),totQ=cart.reduce((s,x)=>s+x.qty,0);
+  b.innerHTML=cart.map(it=>`<div class="citem">
+    <div class="cie">${it.em}</div>
+    <div class="cii"><div class="cin">${it.nm}</div><div class="cib">${it.br}</div>
+      <div class="qrow"><button class="qbtn" onclick="chQty(${it.id},-1)">−</button><span class="qnum">${it.qty}</span><button class="qbtn" onclick="chQty(${it.id},1)">+</button></div>
+    </div>
+    <div class="cip">A$${(toA(it.p)*it.qty).toLocaleString()}</div>
+    <button class="crm" onclick="rmCart(${it.id})">🗑️</button>
+  </div>`).join("")
+  +`<div class="ctrow"><span>Total (${totQ} item${totQ!==1?'s':''})</span><span class="cttp">A$${tot.toLocaleString()}</span></div>
+  <div style="font-size:.74rem;color:var(--muted);text-align:right;margin-top:.18rem">Incl. GST · Free delivery 🚚</div>
+  <button class="bchk" onclick="saveCartAndGo()">Proceed to Checkout &#x1F6D2;</button>`;
+}
+function togCmp(id){
+  if(cmpList.includes(id))cmpList=cmpList.filter(x=>x!==id);
+  else{if(cmpList.length>=4){alert("Max 4 mowers!");return;}cmpList.push(id);}
+  updCmpPanel();render();
+}
+function updCmpPanel(){
+  const n=cmpList.length;
+  document.getElementById("cmpCount").textContent=n;
+  document.getElementById("cmpCount2").textContent=n;
+  document.getElementById("cmpWrap").classList.toggle("on",n>0);
+  document.getElementById("btnCmpNav").style.display=n>0?'':'none';
+  document.getElementById("cpanel").classList.toggle("on",n>0);
+  document.getElementById("citems").innerHTML=cmpList.map(id=>{const p=P.find(x=>x.id===id);return`<div class="ci">${p.em} ${p.br} ${p.nm}<button onclick="togCmp(${id})">✕</button></div>`;}).join("");
+}
+function openCmpModal(){
+  if(cmpList.length<2){alert("Select at least 2 mowers!");return;}
+  const items=cmpList.map(id=>P.find(p=>p.id===id));
+  const rows=[
+    ["",...items.map(p=>`<span class="ce">${p.em}</span><div class="cn">${p.nm}</div><div class="cb">${p.br}</div>`)],
+    ["💰 Price",...items.map(p=>`<strong>${fA(p.p)}</strong>${p.op?` <small style="color:var(--muted);text-decoration:line-through">${fA(p.op)}</small>`:''}`)],
+    ["⭐ Rating",...items.map(p=>`<strong>${p.rt}</strong> (${p.rv.toLocaleString()})`)],
+    ["📐 Coverage",...items.map(p=>p.area)],
+    ["🔋 Battery",...items.map(p=>p.bat)],
+    ["⚡ Charge",...items.map(p=>p.ch)],
+    ["🏔️ Slope",...items.map(p=>p.sl)],
+    ["📡 Wire-free",...items.map(p=>!p.wf?'✅ Yes':'❌ No')],
+    ["🛰️ GPS",...items.map(p=>p.gps?'✅ Yes':'❌ No')],
+    ["🤖 AI Tech",...items.map(p=>p.ai)],
+    ["📶 Connectivity",...items.map(p=>p.con)],
+    ["🔇 Noise",...items.map(p=>p.ns)],
+    ["⚖️ Weight",...items.map(p=>p.wt)],
+    ["🛡️ Warranty",...items.map(p=>p.wr)],
+  ];
+  const cw=Math.floor(80/items.length);
+  document.getElementById("ctbl").innerHTML=`<table><colgroup><col style="width:20%">${items.map(()=>`<col style="width:${cw}%">`).join("")}</colgroup><tbody>${rows.map(r=>`<tr>${r.map((c,j)=>j===0?`<th>${c}</th>`:`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  document.getElementById("ovCmp").classList.add("on");
+}
+function setRating(v,el){
+  minRating=v;
+  document.querySelectorAll('[data-rt]').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  render();
+}
+document.querySelectorAll(".fbtn").forEach(b=>b.addEventListener("click",()=>{
+  if(b.dataset.bf!==undefined){
+    // Best For toggle
+    const isOn=b.classList.contains("on");
+    document.querySelectorAll(".fbtn[data-bf]").forEach(x=>x.classList.remove("on"));
+    bestFor=isOn?null:b.dataset.bf;
+    if(!isOn)b.classList.add("on");
+  } else {
+    // Brand/feature filter
+    document.querySelectorAll(".fbtn[data-f]").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");filt=b.dataset.f;
+  }
+  render();
+}));
+document.getElementById("sbox").addEventListener("input",e=>{srch=e.target.value.toLowerCase();render();});
+document.getElementById("srt").addEventListener("change",e=>{srtM=e.target.value;render();});
+document.getElementById("btnCmp").addEventListener("click",openCmpModal);
+document.getElementById("btnCmpNav").addEventListener("click",openCmpModal);
+document.getElementById("btnGoCmp").addEventListener("click",openCmpModal);
+document.getElementById("clsCmp").addEventListener("click",()=>document.getElementById("ovCmp").classList.remove("on"));
+document.getElementById("btnClrCmp").addEventListener("click",()=>{cmpList=[];updCmpPanel();render();});
+document.getElementById("btnCart").addEventListener("click",()=>{rendCart();document.getElementById("ovCart").classList.add("on");});
+// Wishlist
+function togWish(id){
+  if(wishList.includes(id))wishList=wishList.filter(x=>x!==id);
+  else wishList.push(id);
+  saveWL();updWishBadge();render();
+}
+function updWishBadge(){document.getElementById('wishCount').textContent=wishList.length;}
+function rendWish(){
+  const b=document.getElementById('wishbody');
+  if(!wishList.length){b.innerHTML='<div class="wish-empty">♡<br><br>Your wishlist is empty<br><small style="font-size:.8rem">Click ♡ on any mower to save it here</small></div>';return;}
+  const items=wishList.map(id=>P.find(p=>p.id===id)).filter(Boolean);
+  b.innerHTML=items.map(p=>`<div class="wish-item">
+    <div class="wish-em">${p.em}<button class="qv-btn" onclick="event.stopPropagation();openQV(0)">&#128269; Quick View</button></div>
+    <div class="wish-info"><div class="wish-name">${p.nm}</div><div class="wish-brand">${p.br} · ★${p.rt}</div></div>
+    <div class="wish-price">${fA(p.p)}</div>
+    <button class="wish-rm" onclick="addCartFromWish(${p.id})" title="Add to cart" style="background:#f0faf0;border:1px solid #c8e6c9;border-radius:8px;padding:.3rem .6rem;font-size:.75rem;color:#2d7a3a;font-weight:700;cursor:pointer;margin-right:.3rem">🛒 Add</button>
+    <button class="wish-rm" onclick="rmWish(${p.id})">🗑️</button>
+  </div>`).join('')
+  +`<div style="margin-top:1rem;padding-top:.8rem;border-top:2px solid var(--bd);display:flex;justify-content:space-between;align-items:center">
+    <span style="font-size:.8rem;color:var(--muted)">${items.length} saved item${items.length!==1?'s':''}</span>
+    <button onclick="items.forEach(p=>addCart(p.id));rendWish();" style="background:#2d7a3a;color:#fff;border:none;padding:.5rem 1rem;border-radius:10px;font-weight:700;font-size:.82rem;cursor:pointer">🛒 Add All to Cart</button>
+  </div>`;
+}
+function rmWish(id){wishList=wishList.filter(x=>x!==id);saveWL();updWishBadge();rendWish();render();}
+function addCartFromWish(id){addCart(id);rendWish();}
+document.getElementById('btnWish').addEventListener('click',()=>{rendWish();document.getElementById('ovWish').classList.add('on');});
+document.getElementById('clsWish').addEventListener('click',()=>document.getElementById('ovWish').classList.remove('on'));
+document.getElementById('ovWish').addEventListener('click',e=>{if(e.target===document.getElementById('ovWish'))document.getElementById('ovWish').classList.remove('on');});
+updWishBadge();
+document.getElementById("clsCart").addEventListener("click",()=>document.getElementById("ovCart").classList.remove("on"));
+document.getElementById("clsPD").addEventListener("click",()=>document.getElementById("ovPD").classList.remove("on"));
+["ovCmp","ovCart","ovPD"].forEach(id=>{const el=document.getElementById(id);el.addEventListener("click",e=>{if(e.target===el)el.classList.remove("on");});});
+// Recently Viewed tracker
+window.addEventListener('DOMContentLoaded',()=>{
+  const RV_KEY='ls_recently_viewed';
+  function getRV(){try{return JSON.parse(localStorage.getItem(RV_KEY)||'[]');}catch{return[];}}
+  function saveRV(arr){localStorage.setItem(RV_KEY,JSON.stringify(arr));}
+  // Hook into openPD to track views
+  const _origOpenPD=window.openPD;
+  window.openPD=function(id){
+    _origOpenPD&&_origOpenPD(id);
+    let rv=getRV().filter(x=>x!==id);
+    rv.unshift(id);rv=rv.slice(0,6);
+    saveRV(rv);
+    renderRV();
+  };
+  function renderRV(){
+    const rv=getRV();
+    const sec=document.getElementById('rv-section');
+    if(!rv.length){sec.style.display='none';return;}
+    sec.style.display='block';
+    const items=rv.map(id=>P.find(p=>p.id===id)).filter(Boolean);
+    document.getElementById('rv-grid').innerHTML=items.map(p=>{
+      const col=IMGCOL[p.cat]||'';
+      return`<div class="rv-card" onclick="openPD(${p.id})">
+        <div class="rv-img${col?' '+col:''} cimg" style="height:90px;font-size:2.5rem">${p.em}<button class="qv-btn" onclick="event.stopPropagation();openQV(0)">&#128269; Quick View</button></div>
+        <div style="padding:.5rem .7rem">
+          <div style="font-size:.65rem;font-weight:700;color:#2d7a3a;text-transform:uppercase">${p.br}</div>
+          <div style="font-size:.78rem;font-weight:800;line-height:1.3;margin:.15rem 0">${p.nm}</div>
+          <div style="font-size:.88rem;font-weight:900;color:#1b5e20">A$${p.p.toLocaleString()}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  renderRV();
+});
+render();
+</script>
+
+<!-- Recently Viewed Section -->
+<div id="rv-section" style="display:none;max-width:1380px;margin:0 auto;padding:1.5rem 1.8rem 0">
+  <div style="font-size:.78rem;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:.9rem">👁 Recently Viewed</div>
+  <div id="rv-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem"></div>
+</div>
+<style>.rv-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.07);cursor:pointer;border:2px solid transparent;transition:all .2s}.rv-card:hover{border-color:#76c442;transform:translateY(-2px)}.qv-btn{background:rgba(255,255,255,.95);color:var(--gd,#1b5e20);border:none;border-radius:8px;padding:.3rem .7rem;font-size:.72rem;font-weight:800;cursor:pointer;position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);opacity:0;transition:all .2s;white-space:nowrap;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.card:hover .qv-btn{opacity:1}
+.qv-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(3px)}
+.qv-overlay.on{display:flex}
+.qv-box{background:#fff;border-radius:22px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.qv-close{position:absolute;top:.9rem;right:.9rem;background:#f4f9f4;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;z-index:10;transition:background .2s}
+.qv-close:hover{background:#e0f0e0}
+.qv-inner{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+.qv-img{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center;font-size:6rem;border-radius:22px 0 0 22px;position:relative;padding:2rem}
+.qv-body{padding:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+.qv-brand{font-size:.7rem;font-weight:800;color:#2d7a3a;text-transform:uppercase;letter-spacing:1px}
+.qv-name{font-size:1.15rem;font-weight:900;line-height:1.3}
+.qv-price{font-size:1.5rem;font-weight:900;color:#1b5e20}
+.qv-was{font-size:.82rem;color:#6b7280;text-decoration:line-through;margin-left:.3rem}
+.qv-rating{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:#6b7280}
+.qv-desc{font-size:.82rem;color:#6b7280;line-height:1.6}
+.qv-specs{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.qv-spec{background:#f4f9f4;border-radius:8px;padding:.4rem .6rem;font-size:.75rem}
+.qv-spec-label{color:#6b7280;font-weight:700}
+.qv-spec-val{font-weight:800;color:#1a1a2e}
+.qv-pros{display:flex;flex-direction:column;gap:.2rem}
+.qv-pro{font-size:.75rem;color:#2d7a3a;display:flex;align-items:center;gap:.3rem}
+.qv-acts{display:flex;gap:.5rem;margin-top:auto}
+.qv-cart-btn{flex:1;padding:.55rem;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;border-radius:11px;font-weight:800;font-size:.85rem;cursor:pointer;transition:all .2s}
+.qv-cart-btn:hover{opacity:.9}
+.qv-detail-btn{padding:.55rem .9rem;border:2px solid #2d7a3a;color:#2d7a3a;background:transparent;border-radius:11px;font-weight:800;font-size:.85rem;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center}
+.qv-detail-btn:hover{background:#f0faf0}
+@media(max-width:600px){.qv-inner{grid-template-columns:1fr}.qv-img{border-radius:22px 22px 0 0;height:160px;font-size:4rem}.qv-body{padding:1.1rem}}</style>
+
+<footer style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:3rem 2rem 1.5rem;margin-top:2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem">
+      <div>
+        <div style="font-size:1.4rem;font-weight:900;margin-bottom:.6rem">&#127807; Lawn<span style="color:#76c442">Star</span></div>
+        <div style="font-size:.82rem;opacity:.75;line-height:1.7;max-width:260px">Australia&#39;s most trusted destination for AI robot lawn mowers. Free delivery, 2-year warranty, 30-day returns.</div>
+        <div style="display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap">
+          <a href="lawnstar-loyalty.html" style="background:#76c442;color:#1b5e20;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:800;text-decoration:none">&#127942; Join Rewards</a>
+          <a href="lawnstar-checkout.html" style="background:rgba(255,255,255,.15);color:#fff;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.3)">&#128722; Cart</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Shop</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-all-mowers.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129302; All Mowers</a>
+          <a href="lawnstar-deals.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128293; Current Deals</a>
+          <a href="lawnstar-brands.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127991;&#65039; Brands</a>
+          <a href="lawnstar-compare.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9878;&#65039; Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+          <a href="lawnstar-vs-petrol.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9876;&#65039; Robot vs Petrol</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128722; Checkout</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Learn</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128218; Buying Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+          <a href="lawnstar-quiz.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129504; Find My Mower Quiz</a>
+          <a     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#11088; Customer Reviews</a>
+          <a href="lawnstar-faq.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#10067; FAQ</a>
+          <a href="lawnstar-loyalty.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127942; GreenRewards</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Help</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-contact.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128140; Contact Us</a>
+          <a href="lawnstar-track.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128230; Track My Order</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128521; Returns &amp; Refunds</a>
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128295; Setup Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+        </div>
+        <div style="margin-top:1.2rem;font-size:.78rem;opacity:.65;line-height:1.7">
+          &#128222; 1800 LAWNSTAR<br>
+          &#128231; help@lawnstar.com.au<br>
+          &#128336; Mon&#8211;Fri 8am&#8211;6pm AEST
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.15);padding-top:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+      <div style="font-size:.75rem;opacity:.6">&#127807; <strong>LawnStar</strong> &copy; 2026 &nbsp;&#183;&nbsp; All prices AUD inc. GST &nbsp;&#183;&nbsp; ABN 12 345 678 901 &nbsp;&#183;&nbsp; Free delivery Australia-wide</div>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#128274; SSL Secured</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Afterpay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Zip Pay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Humm</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:#2d7a3a;color:#fff;border:none;font-size:1.3rem;font-weight:900;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);opacity:0;transform:translateY(10px);transition:all .3s;z-index:999">↑</button>
+<script>window.addEventListener('scroll',()=>{const b=document.getElementById('btt');if(b){if(window.scrollY>400){b.style.opacity='1';b.style.transform='translateY(0)';}else{b.style.opacity='0';b.style.transform='translateY(10px)';}}})</script>
+<!-- EXIT INTENT POPUP -->
+<div id="exitPop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center;animation:epfi .3s ease">
+  <div style="background:#fff;border-radius:24px;max-width:460px;width:90%;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+    <div style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:2rem;text-align:center;color:#fff">
+      <div style="font-size:3rem;margin-bottom:.5rem">&#128293;</div>
+      <div style="font-size:1.3rem;font-weight:900;margin-bottom:.3rem">Wait! Don&#39;t Go Yet</div>
+      <div style="font-size:.88rem;opacity:.85">Grab an extra 10% off before you leave</div>
+    </div>
+    <div style="padding:1.8rem;text-align:center">
+      <div style="background:#f0faf0;border:2px dashed #76c442;border-radius:12px;padding:.8rem 1.2rem;margin-bottom:1rem">
+        <div style="font-size:.75rem;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px">Your exclusive code</div>
+        <div style="font-size:1.6rem;font-weight:900;color:#1b5e20;letter-spacing:2px">STAY10</div>
+        <div style="font-size:.75rem;color:#6b7280;margin-top:.2rem">10% off Â· Valid 24 hours only</div>
+      </div>
+      <a href="lawnstar-all-mowers.html" style="display:block;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:.75rem;border-radius:12px;font-weight:800;font-size:.95rem;text-decoration:none;margin-bottom:.7rem" onclick="document.getElementById('exitPop').style.display='none'">&#129302; Shop Now &amp; Save 10%</a>
+      <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="background:none;border:none;color:#6b7280;font-size:.8rem;cursor:pointer;text-decoration:underline">No thanks, I&#39;ll pay full price</button>
+    </div>
+    <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="position:absolute;top:.8rem;right:.8rem;background:rgba(255,255,255,.2);border:none;border-radius:50%;width:30px;height:30px;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">&#10005;</button>
+  </div>
+</div>
+<style>@keyframes epfi{from{opacity:0}to{opacity:1}}.qv-btn{background:rgba(255,255,255,.95);color:var(--gd,#1b5e20);border:none;border-radius:8px;padding:.3rem .7rem;font-size:.72rem;font-weight:800;cursor:pointer;position:absolute;bottom:.6rem;left:50%;transform:translateX(-50%);opacity:0;transition:all .2s;white-space:nowrap;z-index:5;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.card:hover .qv-btn{opacity:1}
+.qv-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(3px)}
+.qv-overlay.on{display:flex}
+.qv-box{background:#fff;border-radius:22px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.qv-close{position:absolute;top:.9rem;right:.9rem;background:#f4f9f4;border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;z-index:10;transition:background .2s}
+.qv-close:hover{background:#e0f0e0}
+.qv-inner{display:grid;grid-template-columns:1fr 1fr;min-height:380px}
+.qv-img{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);display:flex;align-items:center;justify-content:center;font-size:6rem;border-radius:22px 0 0 22px;position:relative;padding:2rem}
+.qv-body{padding:1.5rem;display:flex;flex-direction:column;gap:.7rem}
+.qv-brand{font-size:.7rem;font-weight:800;color:#2d7a3a;text-transform:uppercase;letter-spacing:1px}
+.qv-name{font-size:1.15rem;font-weight:900;line-height:1.3}
+.qv-price{font-size:1.5rem;font-weight:900;color:#1b5e20}
+.qv-was{font-size:.82rem;color:#6b7280;text-decoration:line-through;margin-left:.3rem}
+.qv-rating{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:#6b7280}
+.qv-desc{font-size:.82rem;color:#6b7280;line-height:1.6}
+.qv-specs{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.qv-spec{background:#f4f9f4;border-radius:8px;padding:.4rem .6rem;font-size:.75rem}
+.qv-spec-label{color:#6b7280;font-weight:700}
+.qv-spec-val{font-weight:800;color:#1a1a2e}
+.qv-pros{display:flex;flex-direction:column;gap:.2rem}
+.qv-pro{font-size:.75rem;color:#2d7a3a;display:flex;align-items:center;gap:.3rem}
+.qv-acts{display:flex;gap:.5rem;margin-top:auto}
+.qv-cart-btn{flex:1;padding:.55rem;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;border-radius:11px;font-weight:800;font-size:.85rem;cursor:pointer;transition:all .2s}
+.qv-cart-btn:hover{opacity:.9}
+.qv-detail-btn{padding:.55rem .9rem;border:2px solid #2d7a3a;color:#2d7a3a;background:transparent;border-radius:11px;font-weight:800;font-size:.85rem;cursor:pointer;transition:all .2s;text-decoration:none;display:flex;align-items:center}
+.qv-detail-btn:hover{background:#f0faf0}
+@media(max-width:600px){.qv-inner{grid-template-columns:1fr}.qv-img{border-radius:22px 22px 0 0;height:160px;font-size:4rem}.qv-body{padding:1.1rem}}</style>
+<script>
+(function(){
+  if(localStorage.getItem('ls_exit_seen')) return;
+  var shown=false;
+  document.addEventListener('mouseleave',function(e){
+    if(e.clientY<=0&&!shown){
+      shown=true;
+      var pop=document.getElementById('exitPop');
+      if(pop){pop.style.display='flex';}
+    }
+  });
+  setTimeout(function(){
+    if(!shown){shown=true;var pop=document.getElementById('exitPop');if(pop)pop.style.display='flex';}
+  },45000);
+})();
+</script>
+<!-- NOTIFY ME MODAL -->
+<div id="notifyModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:20px;max-width:400px;width:90%;padding:1.8rem;position:relative;box-shadow:0 12px 40px rgba(0,0,0,.2)">
+    <button onclick="document.getElementById('notifyModal').style.display='none'" style="position:absolute;top:.8rem;right:.8rem;background:#f4f9f4;border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem">&#10005;</button>
+    <div style="font-size:2rem;margin-bottom:.5rem">&#128276;</div>
+    <div style="font-size:1rem;font-weight:900;margin-bottom:.3rem" id="notifyProductName">Notify Me</div>
+    <div style="font-size:.82rem;color:#6b7280;margin-bottom:1rem;line-height:1.5">Enter your email and we'll alert you the moment stock is replenished â€” usually within 3â€“5 business days.</div>
+    <input id="notifyEmail" type="email" placeholder="your@email.com.au" style="width:100%;padding:.6rem .9rem;border:2px solid #e2e8f0;border-radius:10px;font-size:.9rem;outline:none;margin-bottom:.7rem;font-family:inherit"/>
+    <button onclick="submitNotify()" style="width:100%;padding:.65rem;background:#2d7a3a;color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer;font-size:.9rem">&#128276; Notify Me When Available</button>
+    <div id="notifyOk" style="display:none;color:#2d7a3a;font-weight:700;font-size:.85rem;text-align:center;margin-top:.6rem">&#9989; You're on the list! We'll email you when it's back.</div>
+  </div>
+</div>
+<script>
+function openNotify(nm){document.getElementById('notifyProductName').textContent=nm;document.getElementById('notifyEmail').value='';document.getElementById('notifyOk').style.display='none';document.getElementById('notifyModal').style.display='flex';}
+function submitNotify(){var v=document.getElementById('notifyEmail').value.trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){document.getElementById('notifyEmail').style.borderColor='#e53935';return;}document.getElementById('notifyOk').style.display='block';document.getElementById('notifyEmail').style.display='none';document.querySelector('#notifyModal button:nth-of-type(2)').style.display='none';}
+</script>
+<!-- QUICK VIEW MODAL -->
+<div class="qv-overlay" id="qvModal" onclick="if(event.target===this)closeQV()">
+  <div class="qv-box">
+    <button class="qv-close" onclick="closeQV()">&#10005;</button>
+    <div class="qv-inner">
+      <div class="qv-img" id="qvImg"><span id="qvEm" style="font-size:6rem">&#129302;</span></div>
+      <div class="qv-body">
+        <div class="qv-brand" id="qvBrand"></div>
+        <div class="qv-name" id="qvName"></div>
+        <div><span class="qv-price" id="qvPrice"></span><span class="qv-was" id="qvWas"></span></div>
+        <div class="qv-rating"><span id="qvStars"></span><span id="qvReviews"></span></div>
+        <div class="qv-desc" id="qvDesc"></div>
+        <div class="qv-specs" id="qvSpecs"></div>
+        <div class="qv-pros" id="qvPros"></div>
+        <div class="qv-acts">
+          <button class="qv-cart-btn" id="qvCartBtn" onclick="qvAddCart()">&#128722; Add to Cart</button>
+          <a class="qv-detail-btn" id="qvDetailLink" href="lawnstar-product.html">Full Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><script>
+var _qvProd=null;
+function openQV(id){
+  var p=P.find(function(x){return x.id===id;});
+  if(!p)return;
+  _qvProd=p;
+  var R2=typeof R!=='undefined'?R:1.54;
+  var toA2=function(u){return Math.round(u*R2/10)*10;};
+  document.getElementById('qvEm').textContent=p.em||'&#129302;';
+  document.getElementById('qvBrand').textContent=p.br;
+  document.getElementById('qvName').textContent=p.nm;
+  document.getElementById('qvPrice').textContent='A
+</html>
++toA2(p.p).toLocaleString();
+  document.getElementById('qvWas').textContent=p.op?'A
+</html>
++toA2(p.op).toLocaleString():'';
+  var stars='';for(var i=0;i<5;i++)stars+=i<Math.floor(p.rt)?'&#9733;':'&#9734;';
+  document.getElementById('qvStars').innerHTML='<span style="color:#ffc107">'+stars+'</span>';
+  document.getElementById('qvReviews').textContent=p.rt+' ('+p.rv.toLocaleString()+' reviews)';
+  document.getElementById('qvDesc').textContent=p.ds;
+  var specs=[{l:'Area',v:p.area},{l:'Slope',v:p.sl},{l:'Battery',v:p.bat},{l:'Noise',v:p.ns},{l:'Nav',v:p.ai},{l:'Weight',v:p.wt}];
+  document.getElementById('qvSpecs').innerHTML=specs.map(function(s){return '<div class="qv-spec"><div class="qv-spec-label">'+s.l+'</div><div class="qv-spec-val">'+s.v+'</div></div>';}).join('');
+  var pros=(p.pros||[]).slice(0,3);
+  document.getElementById('qvPros').innerHTML=pros.map(function(pr){return '<div class="qv-pro">&#9989; '+pr+'</div>';}).join('');
+  document.getElementById('qvModal').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeQV(){document.getElementById('qvModal').classList.remove('on');document.body.style.overflow='';}
+function qvAddCart(){if(_qvProd){addCart(_qvProd.id);closeQV();}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeQV();});
+</script><script>
+/* QV DELEGATE */
+document.addEventListener('click',function(e){
+  if(e.target&&e.target.classList.contains('qvdb')){
+    e.stopPropagation();
+    var id=parseInt(e.target.getAttribute('data-pid'));
+    if(!isNaN(id))openQV(id);
+  }
+});
+function injectQVBtns(){
+  document.querySelectorAll('.cimg').forEach(function(el){
+    if(el.querySelector('.qvdb'))return;
+    var cid=el.id?el.id.replace('ci',''):'';
+    if(!cid)return;
+    var b=document.createElement('button');
+    b.className='qv-btn qvdb';
+    b.setAttribute('data-pid',cid);
+    b.innerHTML='&#128269; Quick View';
+    el.style.position='relative';
+    el.appendChild(b);
+  });
+}
+var _rl=window.render;
+if(typeof _rl==='function'){window.render=function(){_rl.apply(this,arguments);setTimeout(injectQVBtns,80);};}
+document.addEventListener('DOMContentLoaded',function(){setTimeout(injectQVBtns,300);});
+setTimeout(injectQVBtns,600);
+setTimeout(injectQVBtns,1800);
+</script>$chatWidget = @'
+
+<!-- LAWNSTAR LIVE CHAT WIDGET -->
+<style>
+#ls-chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:8000;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;font-family:'Segoe UI',system-ui,sans-serif}
+#ls-chat-pop{background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;display:none;animation:chatIn .25s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+#ls-chat-pop.on{display:block}
+.lsc-header{background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.lsc-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.lsc-hinfo{flex:1}
+.lsc-name{color:#fff;font-size:.88rem;font-weight:800}
+.lsc-status{color:rgba(255,255,255,.75);font-size:.72rem;display:flex;align-items:center;gap:.3rem}
+.lsc-dot{width:7px;height:7px;border-radius:50%;background:#76c442;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.lsc-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.1rem;cursor:pointer;padding:.2rem;line-height:1}
+.lsc-msgs{height:220px;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.7rem;background:#f8fbf8}
+.lsc-msg{max-width:82%;padding:.6rem .85rem;border-radius:14px;font-size:.8rem;line-height:1.5;animation:msgIn .2s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lsc-msg.bot{background:#fff;border:1px solid #e2e8f0;align-self:flex-start;border-radius:4px 14px 14px 14px;color:#1a1a2e}
+.lsc-msg.user{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
+.lsc-chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .9rem .7rem;background:#f8fbf8}
+.lsc-chip{background:#e8f5e9;color:#2d7a3a;border:1px solid #c8e6c9;border-radius:20px;padding:.25rem .75rem;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lsc-chip:hover{background:#2d7a3a;color:#fff}
+.lsc-input-row{display:flex;gap:0;border-top:1px solid #e2e8f0;background:#fff}
+.lsc-input{flex:1;border:none;outline:none;padding:.75rem .9rem;font-size:.85rem;font-family:inherit;background:transparent}
+.lsc-send{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;padding:.5rem .85rem;cursor:pointer;font-size:1rem;transition:opacity .2s}
+.lsc-send:hover{opacity:.85}
+.lsc-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1b5e20,#2d7a3a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(45,122,58,.4);transition:all .25s;position:relative}
+.lsc-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(45,122,58,.55)}
+.lsc-notif{position:absolute;top:-2px;right:-2px;background:#e53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.lsc-typing{display:flex;gap:4px;align-items:center;padding:.6rem .85rem;background:#fff;border:1px solid #e2e8f0;border-radius:4px 14px 14px 14px;align-self:flex-start;width:52px}
+.lsc-typing span{width:7px;height:7px;border-radius:50%;background:#76c442;animation:typ .9s infinite}
+.lsc-typing span:nth-child(2){animation-delay:.15s}
+.lsc-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typ{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+<div id="ls-chat-bubble">
+  <div id="ls-chat-pop">
+    <div class="lsc-header">
+      <div class="lsc-avatar">&#127807;</div>
+      <div class="lsc-hinfo">
+        <div class="lsc-name">LawnStar Support</div>
+        <div class="lsc-status"><span class="lsc-dot"></span> Online now &bull; Avg reply &lt; 2 min</div>
+      </div>
+      <button class="lsc-close" onclick="lscToggle()">&#10005;</button>
+    </div>
+    <div class="lsc-msgs" id="lscMsgs"></div>
+    <div class="lsc-chips" id="lscChips">
+      <div class="lsc-chip" onclick="lscQuick('Which mower suits my lawn?')">&#129302; Find my mower</div>
+      <div class="lsc-chip" onclick="lscQuick('What are your current deals?')">&#128293; Deals &amp; sales</div>
+      <div class="lsc-chip" onclick="lscQuick('I need help with my order')">&#128230; Order help</div>
+      <div class="lsc-chip" onclick="lscQuick('Warranty question')">&#128737; Warranty</div>
+    </div>
+    <div class="lsc-input-row">
+      <input class="lsc-input" id="lscInput" placeholder="Ask us anything..." onkeydown="if(event.key==='Enter')lscSend()"/>
+      <button class="lsc-send" onclick="lscSend()">&#10148;</button>
+    </div>
+  </div>
+  <button class="lsc-btn" onclick="lscToggle()" id="lscMainBtn" title="Chat with LawnStar">
+    <span id="lscBtnIcon">&#128172;</span>
+    <div class="lsc-notif" id="lscNotif">1</div>
+  </button>
+</div>
+<script>
+(function(){
+var open=false,welcomed=false;
+var RESPONSES={
+  'which mower':'Great question! Can you tell me your lawn size? Under 500m2, 500-1000m2, or over 1000m2? I can find the perfect match &#128269;',
+  'lawn size':'For up to 1,000m2, the Mammotion Yuka 1000 (A$899) is our top pick. For 1,000–3,000m2, the Segway Navimow i108E is brilliant. For larger lawns, Mammotion Luba 2 AWD covers up to 5,000m2! &#127807;',
+  'deal':'Right now we have up to 30% off! Use code <strong>LAWN10</strong> at checkout for an extra 10% off everything. <a href="lawnstar-deals.html" style="color:#76c442;font-weight:700">See all deals &#8594;</a>',
+  'order':'I can help with that! Please email orders@lawnstar.com.au with your order number, or use our <a href="lawnstar-track.html" style="color:#76c442;font-weight:700">order tracker</a>. &#128230;',
+  'warranty':'All our mowers come with at least 3 years warranty (manufacturer + LawnStar top-up). You can <a href="lawnstar-warranty.html" style="color:#76c442;font-weight:700">view full warranty details here</a>. &#128737;',
+  'price':'Our mowers range from A$899 to A$6,900 depending on features. The most popular is the Segway Navimow i108E at A$1,299. Want me to help find one in your budget?',
+  'install':'Great news — we offer professional installation from A$199! Our technicians set up the boundary wire, configure the app, and do a test run. <a href="lawnstar-store-locator.html" style="color:#76c442;font-weight:700">Book via a local store</a>.',
+  'compare':'Our <a href="lawnstar-compare.html" style="color:#76c442;font-weight:700">comparison tool</a> lets you compare up to 4 mowers side by side with animated score charts. Really handy! &#9878;',
+  'bundle':'Yes! We have bundle deals where you save 10% when you add 2+ accessories. Check out the <a href="lawnstar-bundle-builder.html" style="color:#76c442;font-weight:700">Bundle Builder</a> &#127873;',
+  'shipping':'We offer free shipping on all orders over A$500 Australia-wide. Standard delivery is 3–7 business days. Express available. &#128666;',
+  'default':'Thanks for your message! A LawnStar expert will reply within 2 minutes. In the meantime, our <a href="lawnstar-faq.html" style="color:#76c442;font-weight:700">FAQ page</a> might have a quick answer. &#128075;'
+};
+function addMsg(txt,type,delay){
+  delay=delay||0;
+  setTimeout(function(){
+    var msgs=document.getElementById('lscMsgs');
+    if(!msgs)return;
+    // Show typing for bot
+    if(type==='bot'&&delay>0){
+      var typ=document.createElement('div');typ.className='lsc-typing';typ.id='lsc-typing-ind';
+      typ.innerHTML='<span></span><span></span><span></span>';
+      msgs.appendChild(typ);msgs.scrollTop=msgs.scrollHeight;
+      setTimeout(function(){
+        var t=document.getElementById('lsc-typing-ind');if(t)t.remove();
+        var m=document.createElement('div');m.className='lsc-msg '+type;m.innerHTML=txt;
+        msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+      },900);
+    } else {
+      var m=document.createElement('div');m.className='lsc-msg '+(type||'bot');m.innerHTML=txt;
+      msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+    }
+  },delay);
+}
+function getReply(txt){
+  var t=txt.toLowerCase();
+  for(var k in RESPONSES){if(t.indexOf(k)>-1)return RESPONSES[k];}
+  return RESPONSES['default'];
+}
+window.lscToggle=function(){
+  open=!open;
+  var pop=document.getElementById('ls-chat-pop');
+  var notif=document.getElementById('lscNotif');
+  var icon=document.getElementById('lscBtnIcon');
+  if(open){
+    pop.classList.add('on');
+    if(notif)notif.style.display='none';
+    if(icon)icon.textContent='\u2715';
+    if(!welcomed){
+      welcomed=true;
+      addMsg('&#127807; Hey! Welcome to <strong>LawnStar</strong>. I\'m here to help you find the perfect robot mower &#129302;','bot',100);
+      addMsg('What can I help you with today?','bot',1200);
+    }
+  } else {
+    pop.classList.remove('on');
+    if(icon)icon.textContent='\u{1F4AC}';
+  }
+};
+window.lscSend=function(){
+  var inp=document.getElementById('lscInput');
+  var txt=inp.value.trim();
+  if(!txt)return;
+  addMsg(txt,'user');
+  inp.value='';
+  addMsg(getReply(txt),'bot',400);
+};
+window.lscQuick=function(txt){
+  addMsg(txt,'user');
+  addMsg(getReply(txt),'bot',400);
+  document.getElementById('lscChips').style.display='none';
+};
+// Show greeting bubble after 8s
+setTimeout(function(){
+  if(!open){
+    var notif=document.getElementById('lscNotif');
+    if(notif)notif.style.display='flex';
+  }
+},8000);
+})();
+</script>
+</body>
+</html>

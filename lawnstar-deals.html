@@ -1,0 +1,629 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lawn Star — Best Deals on AI Mowers</title>
+<style>
+:root{--g:#2d7a3a;--gd:#1b5e20;--ac:#76c442;--bg:#f4f9f4;--text:#1a1a2e;--muted:#6b7280;--bd:#e2e8f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+nav{background:linear-gradient(135deg,var(--gd),var(--g));height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.logo{color:#fff;font-size:1.5rem;font-weight:900;display:flex;align-items:center;gap:.4rem;text-decoration:none}
+.logo span{color:var(--ac)}
+.nav-links{display:flex;align-items:center;gap:.5rem}
+.nbtn{padding:.38rem .85rem;border-radius:20px;font-weight:700;font-size:.82rem;border:2px solid rgba(255,255,255,.3);color:#fff;background:transparent;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-block}
+.nbtn:hover{background:rgba(255,255,255,.15)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.hbg span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:var(--gd);padding:.8rem 1.5rem;gap:.5rem;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.mob-menu.on{display:flex}
+.mob-menu a{color:#fff;font-weight:700;font-size:.9rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none}
+.hero{background:linear-gradient(135deg,#b71c1c,#c62828,#e53935);text-align:center;padding:3rem 2rem;color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.03) 20px,rgba(255,255,255,.03) 40px)}
+.hero-inner{position:relative}
+.sale-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:.3rem 1rem;border-radius:20px;font-size:.82rem;margin-bottom:1rem}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:.6rem}
+.hero p{font-size:.95rem;opacity:.88;max-width:500px;margin:0 auto 1.5rem}
+.countdown{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cd-block{background:rgba(0,0,0,.25);border-radius:12px;padding:.6rem 1rem;min-width:64px;text-align:center}
+.cd-num{font-size:1.6rem;font-weight:900;color:#fff;line-height:1}
+.cd-label{font-size:.65rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem}
+.deal-tabs{background:#fff;border-bottom:2px solid var(--bd);display:flex;gap:0;padding:0 2rem;overflow-x:auto;position:sticky;top:62px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.dtab{padding:.85rem 1.2rem;font-size:.85rem;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
+.dtab:hover{color:var(--g)}
+.dtab.on{color:var(--g);border-bottom-color:var(--g)}
+.main{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.section-lbl{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.section-lbl::after{content:'';flex:1;height:1px;background:var(--bd)}
+.deals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;margin-bottom:2.5rem}
+.deal-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 3px 16px rgba(0,0,0,.08);border:2px solid transparent;transition:all .3s;position:relative}
+.deal-card:hover{transform:translateY(-4px);box-shadow:0 10px 32px rgba(45,122,58,.18);border-color:var(--ac)}
+.deal-card.hot{border-color:#e53935}
+.hot-ribbon{position:absolute;top:0;right:0;background:#e53935;color:#fff;font-size:.68rem;font-weight:700;padding:.25rem .7rem;border-radius:0 0 0 12px;z-index:2}
+.deal-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative}
+.deal-img.green{background:linear-gradient(135deg,#e8f5e9,#c8e6c9)}
+.deal-img.blue{background:linear-gradient(135deg,#e3f2fd,#bbdefb)}
+.deal-img.orange{background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
+.deal-img.pink{background:linear-gradient(135deg,#fce4ec,#f8bbd0)}
+.deal-img.teal{background:linear-gradient(135deg,#e0f2f1,#b2dfdb)}
+.deal-img.purple{background:linear-gradient(135deg,#f3e5f5,#e1bee7)}
+.save-chip{position:absolute;top:10px;left:10px;background:#e53935;color:#fff;padding:.2rem .65rem;border-radius:20px;font-size:.72rem;font-weight:700}
+.deal-body{padding:1rem}
+.deal-brand{font-size:.68rem;font-weight:700;color:var(--g);text-transform:uppercase;letter-spacing:1px}
+.deal-name{font-size:.97rem;font-weight:800;line-height:1.3;margin:.2rem 0 .4rem}
+.deal-desc{font-size:.78rem;color:var(--muted);line-height:1.45;margin-bottom:.8rem}
+.price-row{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.8rem}
+.deal-price{font-size:1.35rem;font-weight:900;color:var(--gd)}
+.deal-was{font-size:.85rem;color:var(--muted);text-decoration:line-through}
+.deal-save{font-size:.78rem;font-weight:700;color:#c62828;background:#fce4ec;padding:.15rem .5rem;border-radius:8px}
+.deal-btn{width:100%;background:var(--g);color:#fff;border:none;padding:.65rem;border-radius:10px;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .2s}
+.deal-btn:hover{background:var(--gd)}
+.deal-btn.hot-btn{background:#e53935}
+.deal-btn.hot-btn:hover{background:#b71c1c}
+.bundle-card{background:#fff;border-radius:16px;padding:1.5rem;box-shadow:0 3px 16px rgba(0,0,0,.08);border:2px solid #ffc107;margin-bottom:1.2rem}
+.bundle-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1rem}
+.bundle-title{font-size:1.05rem;font-weight:800}
+.bundle-sub{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+.bundle-items{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.bundle-item{background:var(--bg);border-radius:10px;padding:.5rem .8rem;font-size:.8rem;font-weight:600;display:flex;align-items:center;gap:.4rem}
+.bundle-price-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.bundle-total{font-size:.85rem;color:var(--muted)}
+.bundle-price{font-size:1.4rem;font-weight:900;color:var(--gd)}
+.bundle-save-chip{background:#fce4ec;color:#c62828;font-size:.78rem;font-weight:700;padding:.25rem .7rem;border-radius:20px}
+.bundle-btn{background:#ffc107;color:#5d4037;border:none;padding:.6rem 1.5rem;border-radius:22px;font-weight:800;cursor:pointer;font-size:.88rem;transition:all .2s;margin-left:auto}
+.bundle-btn:hover{background:#ffb300}
+.tip-strip{background:linear-gradient(135deg,var(--gd),var(--g));border-radius:14px;padding:1.2rem 1.5rem;color:#fff;display:flex;align-items:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.tip-strip-icon{font-size:2rem;flex-shrink:0}
+.tip-strip-text{font-size:.87rem;line-height:1.55;flex:1}
+.tip-strip-text strong{display:block;font-size:.95rem;margin-bottom:.2rem}
+footer{background:var(--gd);color:#fff;text-align:center;padding:1.4rem;font-size:.82rem}
+.deal-timer{background:linear-gradient(135deg,#7f0000,#c62828);padding:.45rem .8rem;display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.72rem;color:#fff;font-weight:700;border-top:1px solid rgba(255,255,255,.15);flex-wrap:wrap}.dtb{background:rgba(0,0,0,.3);border-radius:5px;padding:.18rem .4rem;text-align:center;min-width:28px;display:inline-block;margin:0 1px}.dtbn{font-size:.8rem;font-weight:900;line-height:1.1;display:block}.dtbl{font-size:.5rem;opacity:.8;text-transform:uppercase;display:block}@media(max-width:640px){.nav-links{display:none}.hbg{display:flex}}
+</style>
+</head>
+<body>
+<div id="dealsBanner" style="background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.5rem 1rem;font-size:.82rem;font-weight:700;position:relative;z-index:101">
+  &#128293; <strong>FLASH SALE:</strong> Up to 30% off selected models this week &nbsp;&#183;&nbsp; Use code <strong>LAWN10</strong> for extra 10% &nbsp;
+  <a href="lawnstar-deals.html" style="color:#ffd700;text-decoration:underline;font-weight:800">Shop Deals &#8594;</a>
+  <button onclick="this.parentElement.style.display='none'" style="position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;opacity:.7">&#10005;</button>
+</div>
+<nav>
+  <a class="logo" href="lawnstar-homepage.html">🌿 Lawn<span>Star</span></a>
+  <div class="nav-links" id="navLinks">
+    <a class="nbtn" href="lawnstar-homepage.html">🏠 Home</a>
+    <a class="nbtn" href="lawnstar-all-mowers.html">🤖 All Mowers</a>
+    <a class="nbtn" href="lawnstar-quiz.html">🧠 Quiz</a>
+    <a class="nbtn" href="lawnstar-brands.html">🏷️ Brands</a>
+    <a class="nbtn" href="lawnstar-guide.html">📖 Guide</a>
+    <a class="nbtn" href="lawnstar-blog.html">&#128221; Blog</a>
+    <a class="nbtn" href="lawnstar-compare.html">⚖️ Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+    <a class="nbtn"     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html">⭐ Reviews</a>
+    <a class="nbtn" href="lawnstar-faq.html">❓ FAQ</a>
+    <a class="nbtn" href="lawnstar-contact.html">📬 Contact</a>
+    <a class="nbtn" href="lawnstar-loyalty.html">Rewards</a>
+    <a class="nbtn" href="lawnstar-track.html">&#128230; Track Order</a>
+    <a class="nbtn" href="lawnstar-vs-petrol.html">Robot vs Petrol</a>
+    <a class="nbtn" href="lawnstar-checkout.html" style="background:rgba(118,196,66,.25);border-color:#76c442">Cart</a>
+  </div>
+  <div class="hbg" id="hbg" onclick="document.getElementById('mobMenu').classList.toggle('on')"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="lawnstar-homepage.html">🏠 Home</a>
+  <a href="lawnstar-all-mowers.html">🤖 All Mowers</a>
+  <a href="lawnstar-quiz.html">🧠 Quiz</a>
+  <a href="lawnstar-brands.html">🏷️ Brands</a>
+  <a href="lawnstar-guide.html">📖 Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+  <a href="lawnstar-deals.html" style="color:#ff6b6b">🔥 Deals</a>
+  <a href="lawnstar-compare.html">⚖️ Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+  <a     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html">⭐ Reviews</a>
+  <a href="lawnstar-faq.html">❓ FAQ</a>
+  <a href="lawnstar-contact.html">📬 Contact</a>
+  <a href="lawnstar-loyalty.html">Rewards</a>
+  <a href="lawnstar-track.html">&#128230; Track Order</a>
+  <a href="lawnstar-vs-petrol.html">Robot vs Petrol</a>
+  <a href="lawnstar-checkout.html">Cart</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="sale-badge">🔥 Mid-Year Sale — Ends Sunday</div>
+    <h1>💸 Best AI Mower Deals</h1>
+    <p>Handpicked savings on Australia's top robot mowers. Updated weekly.</p>
+    <div class="countdown" id="countdown">
+      <div class="cd-block"><div class="cd-num" id="cd-d">03</div><div class="cd-label">Days</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-h">12</div><div class="cd-label">Hours</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-m">45</div><div class="cd-label">Mins</div></div>
+      <div class="cd-block"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Secs</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="deal-tabs">
+  <button class="dtab on" onclick="filterDeals('all',this)">🔥 All Deals</button>
+  <button class="dtab" onclick="filterDeals('hot',this">❤️ Hot Picks</button>
+  <button class="dtab" onclick="filterDeals('budget',this)">💰 Under A$1,500</button>
+  <button class="dtab" onclick="filterDeals('mid',this)">⚡ Mid-Range</button>
+  <button class="dtab" onclick="filterDeals('premium',this)">👑 Premium</button>
+  <button class="dtab" onclick="filterDeals('bundle',this)">📦 Bundles</button>
+</div>
+
+<div class="main">
+
+  <div class="tip-strip">
+    <div class="tip-strip-icon">💡</div>
+    <div class="tip-strip-text"><strong>Buying Tip</strong>Robot mowers go on sale most often in May–July (end of mowing season) and November (Black Friday). The deals below are our best current picks — prices update weekly.</div>
+  </div>
+
+  <!-- HOT DEALS -->
+  <div class="section-lbl" id="sec-hot">🔥 Hot Deals — Limited Time</div>
+  <div class="deals-grid" id="grid-hot">
+
+    <div class="deal-card hot" data-cat="hot budget">
+      <div class="hot-ribbon">🔥 HOT</div>
+      <div class="deal-img green"><div class="save-chip">Save A$310</div>🤖</div>
+      <div class="deal-body">
+        <div class="deal-brand">Mammotion</div>
+        <div class="deal-name">Yuka 1000 Wire-Free</div>
+        <div class="deal-desc">GPS wire-free, 1,000m2, app control. Perfect entry into no-boundary mowing.</div>
+        <div class="price-row"><span class="deal-price">A$1,079</span><span class="deal-was">A$1,389</span><span class="deal-save">-22%</span></div>
+        <button class="deal-btn hot-btn">🛍️ Add to Cart</button>
+      <div class="deal-timer" id="dt0">&#9200; Loading...</div>
+      </div>
+    </div>
+
+    <div class="deal-card hot" data-cat="hot mid">
+      <div class="hot-ribbon">🔥 HOT</div>
+      <div class="deal-img blue"><div class="save-chip">Save A$540</div>🤖</div>
+      <div class="deal-body">
+        <div class="deal-brand">Segway</div>
+        <div class="deal-name">Navimow i108E</div>
+        <div class="deal-desc">EFLS satellite nav, 1,000m2, no subscription, 60min runtime.</div>
+        <div class="price-row"><span class="deal-price">A$1,769</span><span class="deal-was">A$2,309</span><span class="deal-save">-23%</span></div>
+        <button class="deal-btn hot-btn">🛍️ Add to Cart</button>
+      <div class="deal-timer" id="dt1">&#9200; Loading...</div>
+      </div>
+    </div>
+
+    <div class="deal-card hot" data-cat="hot premium">
+      <div class="hot-ribbon">🔥 HOT</div>
+      <div class="deal-img teal"><div class="save-chip">Save A$800</div>🌿</div>
+      <div class="deal-body">
+        <div class="deal-brand">Husqvarna</div>
+        <div class="deal-name">Automower 430X</div>
+        <div class="deal-desc">GPS assist, 3,200m2, 45% slope, rain sensor, cellular connectivity.</div>
+        <div class="price-row"><span class="deal-price">A$3,199</span><span class="deal-was">A$3,999</span><span class="deal-save">-20%</span></div>
+        <button class="deal-btn hot-btn">🛍️ Add to Cart</button>
+      <div class="deal-timer" id="dt2">&#9200; Loading...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MID-RANGE DEALS -->
+  <div class="section-lbl" id="sec-mid">⚡ Mid-Range Value Picks</div>
+  <div class="deals-grid" id="grid-mid">
+
+    <div class="deal-card" data-cat="mid">
+      <div class="deal-img orange"><div class="save-chip">Save A$230</div>🤖</div>
+      <div class="deal-body">
+        <div class="deal-brand">EcoFlow</div>
+        <div class="deal-name">Blade Solar</div>
+        <div class="deal-desc">RTK GPS + solar charging, 1,600m2, obstacle avoidance, 53dB ultra quiet.</div>
+        <div class="price-row"><span class="deal-price">A$2,239</span><span class="deal-was">A$2,469</span><span class="deal-save">-9%</span></div>
+        <button class="deal-btn">🛍️ Add to Cart</button>
+      <div class="deal-timer" id="dt3">&#9200; Loading...</div>
+      </div>
+    </div>
+
+    <div class="deal-card" data-cat="mid">
+      <div class="deal-img purple"><div class="save-chip">Save A$310</div>🤖</div>
+      <div class="deal-body">
+        <div class="deal-brand">Worx</div>
+        <div class="deal-name">Vision L1000</div>
+        <div class="deal-desc">Vision AI camera, 1,000m2 wire-free, obstacle detection, no boundary wire.</div>
+        <div class="price-row"><span class="deal-price">A$2,149</span><span class="deal-was">A$2,459</span><span class="deal-save">-13%</span></div>
+        <button class="deal-btn">🛍️ Add to Cart</button>
+      <div class="deal-timer" id="dt4">&#9200; Loading...</div>
+      </div>
+    </div>
+
+    <div class="deal-card" data-cat="mid">
+      <div class="deal-img pink"><div class="save-chip">Save A$200</div>🤖</div>
+      <div class="deal-body">
+        <div class="deal-brand">Gardena</div>
+        <div class="deal-name">Sileno Life 1250</div>
+        <div class="deal-desc">German precision, 1,250m2, ultra-quiet 58dB, Bluetooth + app, 40% slope.</div>
+        <div class="price-row"><span class="deal-price">A$1,649</span><span class="deal-was">A$1,849</span><span class="deal-save">-11%</span></div>
+        <button class="deal-btn">🛍️ Add to Cart</button>
+      <div class="deal-timer" id="dt5">&#9200; Loading...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BUDGET DEALS -->
+  <div class="section-lbl" id="sec-budget">💰 Budget Picks — Under A$1,500</div>
+  <div class="deals-grid" id="grid-budget">
+
+    <div class="deal-card" data-cat="budget">
+      <div class="deal-img green"><div class="save-chip">Save A$150</div>🤖</div>
+      <div class="deal-body">
+        <div class="deal-brand">Worx</div>
+        <div class="deal-name">Landroid M700</div>
+        <div class="deal-desc">700m2, boundary wire, AI path optimisation, easy app setup.</div>
+        <div class="price-row"><span class="deal-price">A$929</span><span class="deal-was">A$1,079</span><span class="deal-save">-14%</span></div>
+        <button class="deal-btn">🛍️ Add to Cart</button>
+      <div class="deal-timer" id="dt6">&#9200; Loading...</div>
+      </div>
+    </div>
+
+    <div class="deal-card" data-cat="budget">
+      <div class="deal-img teal"><div class="save-chip">Save A$120</div>🤖</div>
+      <div class="deal-body">
+        <div class="deal-brand">LawnMaster</div>
+        <div class="deal-name">MBRM16E</div>
+        <div class="deal-desc">600m2, boundary wire, quiet operation, rain sensor, budget-friendly starter.</div>
+        <div class="price-row"><span class="deal-price">A$449</span><span class="deal-was">A$569</span><span class="deal-save">-21%</span></div>
+        <button class="deal-btn">🛍️ Add to Cart</button>
+      <div class="deal-timer" id="dt7">&#9200; Loading...</div>
+      </div>
+    </div>
+
+    <div class="deal-card" data-cat="budget">
+      <div class="deal-img blue"><div class="save-chip">Save A$180</div>🤖</div>
+      <div class="deal-body">
+        <div class="deal-brand">Robomow</div>
+        <div class="deal-name">RX50U</div>
+        <div class="deal-desc">500m2 compact, wire boundary, wide 28cm cut, Bluetooth app control.</div>
+        <div class="price-row"><span class="deal-price">A$769</span><span class="deal-was">A$949</span><span class="deal-save">-19%</span></div>
+        <button class="deal-btn">🛍️ Add to Cart</button>
+      <div class="deal-timer" id="dt8">&#9200; Loading...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BUNDLES -->
+  <div class="section-lbl" id="sec-bundle">📦 Bundle Deals — Mower + Accessories</div>
+
+  <div class="bundle-card" data-cat="bundle">
+    <div class="bundle-header">
+      <div><div class="bundle-title">🤖 Starter Bundle — Mammotion Yuka 1000 + Extras</div><div class="bundle-sub">Everything you need to get started wire-free</div></div>
+    </div>
+    <div class="bundle-items">
+      <div class="bundle-item">🤖 Mammotion Yuka 1000</div>
+      <div class="bundle-item">🛡️ 2-Year Extended Warranty</div>
+      <div class="bundle-item">🔧 Spare Blade Set (x6)</div>
+      <div class="bundle-item">📱 Premium App Setup Guide</div>
+    </div>
+    <div class="bundle-price-row">
+      <div><div class="bundle-total">Individual total: <s>A$1,589</s></div><div class="bundle-price">A$1,299 <span class="bundle-save-chip">Save A$290</span></div></div>
+      <button class="bundle-btn">🛍️ Get Bundle</button>
+    </div>
+  </div>
+
+  <div class="bundle-card" data-cat="bundle">
+    <div class="bundle-header">
+      <div><div class="bundle-title">🌟 Pro Bundle — Husqvarna 430X + Install Service</div><div class="bundle-sub">Premium mower with professional setup included</div></div>
+    </div>
+    <div class="bundle-items">
+      <div class="bundle-item">🌿 Husqvarna 430X</div>
+      <div class="bundle-item">👨🔧 Pro Installation</div>
+      <div class="bundle-item">🛡️ 3-Year Warranty</div>
+      <div class="bundle-item">🧼 Seasonal Blade Kit</div>
+    </div>
+    <div class="bundle-price-row">
+      <div><div class="bundle-total">Individual total: <s>A$4,498</s></div><div class="bundle-price">A$3,799 <span class="bundle-save-chip">Save A$699</span></div></div>
+      <button class="bundle-btn">🛍️ Get Bundle</button>
+    </div>
+  </div>
+
+</div>
+
+<footer style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:3rem 2rem 1.5rem;margin-top:2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem">
+      <div>
+        <div style="font-size:1.4rem;font-weight:900;margin-bottom:.6rem">&#127807; Lawn<span style="color:#76c442">Star</span></div>
+        <div style="font-size:.82rem;opacity:.75;line-height:1.7;max-width:260px">Australia&#39;s most trusted destination for AI robot lawn mowers. Free delivery, 2-year warranty, 30-day returns.</div>
+        <div style="display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap">
+          <a href="lawnstar-loyalty.html" style="background:#76c442;color:#1b5e20;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:800;text-decoration:none">&#127942; Join Rewards</a>
+          <a href="lawnstar-checkout.html" style="background:rgba(255,255,255,.15);color:#fff;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.3)">&#128722; Cart</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Shop</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-all-mowers.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129302; All Mowers</a>
+          <a href="lawnstar-deals.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128293; Current Deals</a>
+          <a href="lawnstar-brands.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127991;&#65039; Brands</a>
+          <a href="lawnstar-compare.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9878;&#65039; Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+          <a href="lawnstar-vs-petrol.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9876;&#65039; Robot vs Petrol</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128722; Checkout</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Learn</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128218; Buying Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+          <a href="lawnstar-quiz.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129504; Find My Mower Quiz</a>
+          <a     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#11088; Customer Reviews</a>
+          <a href="lawnstar-faq.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#10067; FAQ</a>
+          <a href="lawnstar-loyalty.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127942; GreenRewards</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Help</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-contact.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128140; Contact Us</a>
+          <a href="lawnstar-track.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128230; Track My Order</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128521; Returns &amp; Refunds</a>
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128295; Setup Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+        </div>
+        <div style="margin-top:1.2rem;font-size:.78rem;opacity:.65;line-height:1.7">
+          &#128222; 1800 LAWNSTAR<br>
+          &#128231; help@lawnstar.com.au<br>
+          &#128336; Mon&#8211;Fri 8am&#8211;6pm AEST
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.15);padding-top:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+      <div style="font-size:.75rem;opacity:.6">&#127807; <strong>LawnStar</strong> &copy; 2026 &nbsp;&#183;&nbsp; All prices AUD inc. GST &nbsp;&#183;&nbsp; ABN 12 345 678 901 &nbsp;&#183;&nbsp; Free delivery Australia-wide</div>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#128274; SSL Secured</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Afterpay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Zip Pay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Humm</span>
+      </div>
+    </div>
+  </div>
+</footer>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:#2d7a3a;color:#fff;border:none;font-size:1.3rem;font-weight:900;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);opacity:0;transform:translateY(10px);transition:all .3s;z-index:999">↑</button>
+<script>
+// Countdown timer — counts to next Sunday midnight
+(function(){
+  function nextSunday(){const now=new Date();const d=new Date(now);d.setDate(d.getDate()+(7-d.getDay())%7||7);d.setHours(23,59,59,0);return d;}
+  const end=nextSunday();
+  function tick(){
+    const diff=end-new Date();
+    if(diff<=0){document.getElementById('countdown').innerHTML='<div style="color:#fff;font-weight:700">Sale Ended</div>';return;}
+    const days=Math.floor(diff/86400000);
+    const hrs=Math.floor((diff%86400000)/3600000);
+    const mins=Math.floor((diff%3600000)/60000);
+    const secs=Math.floor((diff%60000)/1000);
+    document.getElementById('cd-d').textContent=String(days).padStart(2,'0');
+    document.getElementById('cd-h').textContent=String(hrs).padStart(2,'0');
+    document.getElementById('cd-m').textContent=String(mins).padStart(2,'0');
+    document.getElementById('cd-s').textContent=String(secs).padStart(2,'0');
+  }
+  tick();setInterval(tick,1000);
+})();
+
+// Tab filter
+function filterDeals(cat,btn){
+  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.deal-card,.bundle-card').forEach(c=>{
+    if(cat==='all'){c.style.display='';return;}
+    c.style.display=c.dataset.cat&&c.dataset.cat.includes(cat)?'':'none';
+  });
+}
+
+// Back to Top
+window.addEventListener('scroll',()=>{const b=document.getElementById('btt');if(b){if(window.scrollY>400){b.style.opacity='1';b.style.transform='translateY(0)';}else{b.style.opacity='0';b.style.transform='translateY(10px)';}}})
+
+// Hamburger
+window.addEventListener('resize',()=>{if(window.innerWidth>640){document.getElementById('mobMenu').classList.remove('on');document.getElementById('hbg').style.display='none';document.getElementById('navLinks').style.display='flex';}else{document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}});
+if(window.innerWidth<=640){document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}
+</script>
+<!-- EXIT INTENT POPUP -->
+<div id="exitPop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center;animation:epfi .3s ease">
+  <div style="background:#fff;border-radius:24px;max-width:460px;width:90%;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+    <div style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:2rem;text-align:center;color:#fff">
+      <div style="font-size:3rem;margin-bottom:.5rem">&#128293;</div>
+      <div style="font-size:1.3rem;font-weight:900;margin-bottom:.3rem">Wait! Don&#39;t Go Yet</div>
+      <div style="font-size:.88rem;opacity:.85">Grab an extra 10% off before you leave</div>
+    </div>
+    <div style="padding:1.8rem;text-align:center">
+      <div style="background:#f0faf0;border:2px dashed #76c442;border-radius:12px;padding:.8rem 1.2rem;margin-bottom:1rem">
+        <div style="font-size:.75rem;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px">Your exclusive code</div>
+        <div style="font-size:1.6rem;font-weight:900;color:#1b5e20;letter-spacing:2px">STAY10</div>
+        <div style="font-size:.75rem;color:#6b7280;margin-top:.2rem">10% off Â· Valid 24 hours only</div>
+      </div>
+      <a href="lawnstar-all-mowers.html" style="display:block;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:.75rem;border-radius:12px;font-weight:800;font-size:.95rem;text-decoration:none;margin-bottom:.7rem" onclick="document.getElementById('exitPop').style.display='none'">&#129302; Shop Now &amp; Save 10%</a>
+      <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="background:none;border:none;color:#6b7280;font-size:.8rem;cursor:pointer;text-decoration:underline">No thanks, I&#39;ll pay full price</button>
+    </div>
+    <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="position:absolute;top:.8rem;right:.8rem;background:rgba(255,255,255,.2);border:none;border-radius:50%;width:30px;height:30px;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">&#10005;</button>
+  </div>
+</div>
+<style>@keyframes epfi{from{opacity:0}to{opacity:1}}</style>
+<script>
+(function(){
+  if(localStorage.getItem('ls_exit_seen')) return;
+  var shown=false;
+  document.addEventListener('mouseleave',function(e){
+    if(e.clientY<=0&&!shown){
+      shown=true;
+      var pop=document.getElementById('exitPop');
+      if(pop){pop.style.display='flex';}
+    }
+  });
+  setTimeout(function(){
+    if(!shown){shown=true;var pop=document.getElementById('exitPop');if(pop)pop.style.display='flex';}
+  },45000);
+})();
+</script>
+<script>
+/* LS_DEAL_TIMERS */
+(function(){
+  var D=[{id:'dt0',s:19320},{id:'dt1',s:41220},{id:'dt2',s:9900},{id:'dt3',s:32100},{id:'dt4',s:64980},{id:'dt5',s:12060},{id:'dt6',s:85620},{id:'dt7',s:4080}];
+  D.forEach(function(d){
+    var end=Date.now()+d.s*1000;
+    function tick(){
+      var el=document.getElementById(d.id);if(!el)return;
+      var diff=end-Date.now();
+      if(diff<=0){el.innerHTML='<span>SOLD OUT</span>';return;}
+      var h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+      el.innerHTML='&#9200; Ends in: <span class=dtb><span class=dtbn>'+String(h).padStart(2,'0')+'</span><span class=dtbl>hrs</span></span><span class=dtb><span class=dtbn>'+String(m).padStart(2,'0')+'</span><span class=dtbl>min</span></span><span class=dtb><span class=dtbn>'+String(s).padStart(2,'0')+'</span><span class=dtbl>sec</span></span>';
+    }
+    tick();setInterval(tick,1000);
+  });
+})();
+</script>$chatWidget = @'
+
+<!-- LAWNSTAR LIVE CHAT WIDGET -->
+<style>
+#ls-chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:8000;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;font-family:'Segoe UI',system-ui,sans-serif}
+#ls-chat-pop{background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;display:none;animation:chatIn .25s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+#ls-chat-pop.on{display:block}
+.lsc-header{background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.lsc-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.lsc-hinfo{flex:1}
+.lsc-name{color:#fff;font-size:.88rem;font-weight:800}
+.lsc-status{color:rgba(255,255,255,.75);font-size:.72rem;display:flex;align-items:center;gap:.3rem}
+.lsc-dot{width:7px;height:7px;border-radius:50%;background:#76c442;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.lsc-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.1rem;cursor:pointer;padding:.2rem;line-height:1}
+.lsc-msgs{height:220px;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.7rem;background:#f8fbf8}
+.lsc-msg{max-width:82%;padding:.6rem .85rem;border-radius:14px;font-size:.8rem;line-height:1.5;animation:msgIn .2s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lsc-msg.bot{background:#fff;border:1px solid #e2e8f0;align-self:flex-start;border-radius:4px 14px 14px 14px;color:#1a1a2e}
+.lsc-msg.user{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
+.lsc-chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .9rem .7rem;background:#f8fbf8}
+.lsc-chip{background:#e8f5e9;color:#2d7a3a;border:1px solid #c8e6c9;border-radius:20px;padding:.25rem .75rem;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lsc-chip:hover{background:#2d7a3a;color:#fff}
+.lsc-input-row{display:flex;gap:0;border-top:1px solid #e2e8f0;background:#fff}
+.lsc-input{flex:1;border:none;outline:none;padding:.75rem .9rem;font-size:.85rem;font-family:inherit;background:transparent}
+.lsc-send{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;padding:.5rem .85rem;cursor:pointer;font-size:1rem;transition:opacity .2s}
+.lsc-send:hover{opacity:.85}
+.lsc-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1b5e20,#2d7a3a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(45,122,58,.4);transition:all .25s;position:relative}
+.lsc-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(45,122,58,.55)}
+.lsc-notif{position:absolute;top:-2px;right:-2px;background:#e53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.lsc-typing{display:flex;gap:4px;align-items:center;padding:.6rem .85rem;background:#fff;border:1px solid #e2e8f0;border-radius:4px 14px 14px 14px;align-self:flex-start;width:52px}
+.lsc-typing span{width:7px;height:7px;border-radius:50%;background:#76c442;animation:typ .9s infinite}
+.lsc-typing span:nth-child(2){animation-delay:.15s}
+.lsc-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typ{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+<div id="ls-chat-bubble">
+  <div id="ls-chat-pop">
+    <div class="lsc-header">
+      <div class="lsc-avatar">&#127807;</div>
+      <div class="lsc-hinfo">
+        <div class="lsc-name">LawnStar Support</div>
+        <div class="lsc-status"><span class="lsc-dot"></span> Online now &bull; Avg reply &lt; 2 min</div>
+      </div>
+      <button class="lsc-close" onclick="lscToggle()">&#10005;</button>
+    </div>
+    <div class="lsc-msgs" id="lscMsgs"></div>
+    <div class="lsc-chips" id="lscChips">
+      <div class="lsc-chip" onclick="lscQuick('Which mower suits my lawn?')">&#129302; Find my mower</div>
+      <div class="lsc-chip" onclick="lscQuick('What are your current deals?')">&#128293; Deals &amp; sales</div>
+      <div class="lsc-chip" onclick="lscQuick('I need help with my order')">&#128230; Order help</div>
+      <div class="lsc-chip" onclick="lscQuick('Warranty question')">&#128737; Warranty</div>
+    </div>
+    <div class="lsc-input-row">
+      <input class="lsc-input" id="lscInput" placeholder="Ask us anything..." onkeydown="if(event.key==='Enter')lscSend()"/>
+      <button class="lsc-send" onclick="lscSend()">&#10148;</button>
+    </div>
+  </div>
+  <button class="lsc-btn" onclick="lscToggle()" id="lscMainBtn" title="Chat with LawnStar">
+    <span id="lscBtnIcon">&#128172;</span>
+    <div class="lsc-notif" id="lscNotif">1</div>
+  </button>
+</div>
+<script>
+(function(){
+var open=false,welcomed=false;
+var RESPONSES={
+  'which mower':'Great question! Can you tell me your lawn size? Under 500m2, 500-1000m2, or over 1000m2? I can find the perfect match &#128269;',
+  'lawn size':'For up to 1,000m2, the Mammotion Yuka 1000 (A$899) is our top pick. For 1,000–3,000m2, the Segway Navimow i108E is brilliant. For larger lawns, Mammotion Luba 2 AWD covers up to 5,000m2! &#127807;',
+  'deal':'Right now we have up to 30% off! Use code <strong>LAWN10</strong> at checkout for an extra 10% off everything. <a href="lawnstar-deals.html" style="color:#76c442;font-weight:700">See all deals &#8594;</a>',
+  'order':'I can help with that! Please email orders@lawnstar.com.au with your order number, or use our <a href="lawnstar-track.html" style="color:#76c442;font-weight:700">order tracker</a>. &#128230;',
+  'warranty':'All our mowers come with at least 3 years warranty (manufacturer + LawnStar top-up). You can <a href="lawnstar-warranty.html" style="color:#76c442;font-weight:700">view full warranty details here</a>. &#128737;',
+  'price':'Our mowers range from A$899 to A$6,900 depending on features. The most popular is the Segway Navimow i108E at A$1,299. Want me to help find one in your budget?',
+  'install':'Great news — we offer professional installation from A$199! Our technicians set up the boundary wire, configure the app, and do a test run. <a href="lawnstar-store-locator.html" style="color:#76c442;font-weight:700">Book via a local store</a>.',
+  'compare':'Our <a href="lawnstar-compare.html" style="color:#76c442;font-weight:700">comparison tool</a> lets you compare up to 4 mowers side by side with animated score charts. Really handy! &#9878;',
+  'bundle':'Yes! We have bundle deals where you save 10% when you add 2+ accessories. Check out the <a href="lawnstar-bundle-builder.html" style="color:#76c442;font-weight:700">Bundle Builder</a> &#127873;',
+  'shipping':'We offer free shipping on all orders over A$500 Australia-wide. Standard delivery is 3–7 business days. Express available. &#128666;',
+  'default':'Thanks for your message! A LawnStar expert will reply within 2 minutes. In the meantime, our <a href="lawnstar-faq.html" style="color:#76c442;font-weight:700">FAQ page</a> might have a quick answer. &#128075;'
+};
+function addMsg(txt,type,delay){
+  delay=delay||0;
+  setTimeout(function(){
+    var msgs=document.getElementById('lscMsgs');
+    if(!msgs)return;
+    // Show typing for bot
+    if(type==='bot'&&delay>0){
+      var typ=document.createElement('div');typ.className='lsc-typing';typ.id='lsc-typing-ind';
+      typ.innerHTML='<span></span><span></span><span></span>';
+      msgs.appendChild(typ);msgs.scrollTop=msgs.scrollHeight;
+      setTimeout(function(){
+        var t=document.getElementById('lsc-typing-ind');if(t)t.remove();
+        var m=document.createElement('div');m.className='lsc-msg '+type;m.innerHTML=txt;
+        msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+      },900);
+    } else {
+      var m=document.createElement('div');m.className='lsc-msg '+(type||'bot');m.innerHTML=txt;
+      msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+    }
+  },delay);
+}
+function getReply(txt){
+  var t=txt.toLowerCase();
+  for(var k in RESPONSES){if(t.indexOf(k)>-1)return RESPONSES[k];}
+  return RESPONSES['default'];
+}
+window.lscToggle=function(){
+  open=!open;
+  var pop=document.getElementById('ls-chat-pop');
+  var notif=document.getElementById('lscNotif');
+  var icon=document.getElementById('lscBtnIcon');
+  if(open){
+    pop.classList.add('on');
+    if(notif)notif.style.display='none';
+    if(icon)icon.textContent='\u2715';
+    if(!welcomed){
+      welcomed=true;
+      addMsg('&#127807; Hey! Welcome to <strong>LawnStar</strong>. I\'m here to help you find the perfect robot mower &#129302;','bot',100);
+      addMsg('What can I help you with today?','bot',1200);
+    }
+  } else {
+    pop.classList.remove('on');
+    if(icon)icon.textContent='\u{1F4AC}';
+  }
+};
+window.lscSend=function(){
+  var inp=document.getElementById('lscInput');
+  var txt=inp.value.trim();
+  if(!txt)return;
+  addMsg(txt,'user');
+  inp.value='';
+  addMsg(getReply(txt),'bot',400);
+};
+window.lscQuick=function(txt){
+  addMsg(txt,'user');
+  addMsg(getReply(txt),'bot',400);
+  document.getElementById('lscChips').style.display='none';
+};
+// Show greeting bubble after 8s
+setTimeout(function(){
+  if(!open){
+    var notif=document.getElementById('lscNotif');
+    if(notif)notif.style.display='flex';
+  }
+},8000);
+})();
+</script>
+</body>
+</html>

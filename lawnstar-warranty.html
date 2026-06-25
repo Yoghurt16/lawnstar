@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Warranty & Returns – LawnStar Australia</title>
+<style>
+:root{--g:#2d7a3a;--gd:#1b5e20;--ac:#76c442;--bg:#f4f9f4;--text:#1a1a2e;--muted:#6b7280;--bd:#e2e8f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+nav{background:linear-gradient(135deg,var(--gd),var(--g));height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.logo{color:#fff;font-size:1.5rem;font-weight:900;text-decoration:none}.logo span{color:var(--ac)}
+.nav-links{display:flex;align-items:center;gap:.4rem}
+.nbtn{padding:.32rem .75rem;border-radius:20px;font-weight:700;font-size:.78rem;border:2px solid rgba(255,255,255,.3);color:#fff;background:transparent;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap}
+.nbtn:hover{background:rgba(255,255,255,.15)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.hbg span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:var(--gd);padding:.8rem 1.5rem;gap:.4rem;z-index:199;max-height:80vh;overflow-y:auto}
+.mob-menu.on{display:flex}
+.mob-menu a{color:#fff;font-weight:700;font-size:.88rem;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none}
+#dealsBanner{background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.45rem 1rem;font-size:.8rem;font-weight:700;position:relative}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--gd),var(--g));padding:3rem 2rem;text-align:center;color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%,rgba(118,196,66,.15),transparent 60%)}
+.hero-inner{position:relative;max-width:640px;margin:0 auto}
+.hero h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:900;margin-bottom:.5rem}
+.hero p{font-size:.9rem;opacity:.85}
+/* TRUST STRIP */
+.trust-strip{background:#fff;border-bottom:1px solid var(--bd);padding:.9rem 2rem}
+.trust-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:700}
+/* TABS */
+.tabs-bar{background:#fff;border-bottom:2px solid var(--bd);display:flex;gap:0;padding:0 2rem;position:sticky;top:62px;z-index:90;overflow-x:auto;scrollbar-width:none}
+.tabs-bar::-webkit-scrollbar{display:none}
+.tab{padding:.85rem 1.2rem;font-size:.85rem;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--g)}
+.tab.on{color:var(--g);border-bottom-color:var(--g)}
+/* CONTENT */
+.content-wrap{max-width:900px;margin:2rem auto;padding:0 1.5rem}
+.tab-panel{display:none}
+.tab-panel.on{display:block}
+/* CARDS */
+.policy-card{background:#fff;border-radius:18px;border:2px solid var(--bd);padding:1.8rem;margin-bottom:1.5rem}
+.card-title{font-size:1rem;font-weight:900;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.highlight-box{background:#f0faf0;border-left:4px solid var(--g);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:1rem 0;font-size:.85rem;line-height:1.7}
+.timeline{display:flex;flex-direction:column;gap:0;position:relative}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--ac),var(--g))}
+.tl-item{display:flex;gap:1rem;padding:.8rem 0;position:relative}
+.tl-dot{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gd),var(--g));display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;z-index:1;box-shadow:0 2px 8px rgba(45,122,58,.3)}
+.tl-content{flex:1;padding-top:.2rem}
+.tl-title{font-size:.88rem;font-weight:800;margin-bottom:.2rem}
+.tl-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+/* COVERAGE TABLE */
+.cov-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.82rem}
+.cov-table th{background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;padding:.7rem .9rem;text-align:left;font-weight:800;font-size:.75rem;text-transform:uppercase;letter-spacing:.5px}
+.cov-table td{padding:.65rem .9rem;border-bottom:1px solid var(--bd);vertical-align:top}
+.cov-table tr:nth-child(even) td{background:#fafcfa}
+.cov-table .yes{color:#2e7d32;font-weight:700}
+.cov-table .no{color:#c62828;font-weight:700}
+.cov-table .partial{color:#e65100;font-weight:700}
+/* WARRANTY CARDS */
+.warranty-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.2rem 0}
+.wcard{background:var(--bg);border:2px solid var(--bd);border-radius:14px;padding:1.2rem;text-align:center;transition:all .2s}
+.wcard:hover{border-color:var(--ac)}
+.wcard-icon{font-size:2.2rem;margin-bottom:.5rem}
+.wcard-brand{font-size:.7rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.wcard-years{font-size:1.6rem;font-weight:900;color:var(--gd);margin:.2rem 0}
+.wcard-label{font-size:.72rem;color:var(--muted)}
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:.9rem;margin:1rem 0}
+.step-row{display:flex;align-items:flex-start;gap:.9rem;background:var(--bg);border-radius:12px;padding:1rem}
+.step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.85rem;flex-shrink:0}
+.step-body .step-title{font-size:.88rem;font-weight:800;margin-bottom:.2rem}
+.step-body .step-desc{font-size:.8rem;color:var(--muted);line-height:1.5}
+/* ACCORDION FAQ */
+.faq-item{border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:.6rem}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.1rem;cursor:pointer;font-size:.88rem;font-weight:700;background:#fff;user-select:none}
+.faq-q:hover{background:#f0faf0}
+.faq-q .arr{transition:transform .3s;font-size:.8rem;color:var(--muted)}
+.faq-item.open .faq-q .arr{transform:rotate(180deg)}
+.faq-a{display:none;padding:.8rem 1.1rem 1rem;font-size:.82rem;color:var(--muted);line-height:1.7;border-top:1px solid var(--bd);background:#fafcfa}
+.faq-item.open .faq-a{display:block}
+/* CLAIM FORM */
+.claim-form{background:var(--bg);border-radius:14px;padding:1.5rem;margin-top:1rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.fg{display:flex;flex-direction:column;gap:.25rem}
+.fg label{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.fg input,.fg select,.fg textarea{padding:.55rem .8rem;border:2px solid var(--bd);border-radius:10px;font-size:.88rem;font-family:inherit;outline:none;transition:border .2s;background:#fff}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g)}
+.full-width{grid-column:1/-1}
+.btn-submit{background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;border:none;border-radius:12px;padding:.7rem 2rem;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .2s;margin-top:.3rem}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(45,122,58,.3)}
+/* FOOTER */
+footer{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:2.5rem 2rem 1.5rem;margin-top:2rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
+.fc-title{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.6rem}
+.footer-grid a{display:block;color:rgba(255,255,255,.8);font-size:.8rem;text-decoration:none;margin-bottom:.35rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.15);padding-top:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;font-size:.73rem;opacity:.6}
+@media(max-width:800px){.warranty-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.nav-links{display:none}.hbg{display:flex}.trust-inner{gap:1.2rem}.warranty-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="dealsBanner" style="background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.45rem 1rem;font-size:.8rem;font-weight:700;position:relative">
+  &#128293; <strong>FLASH SALE:</strong> Up to 30% off &nbsp;&#183;&nbsp; Code <strong>LAWN10</strong>
+  <a href="lawnstar-deals.html" style="color:#ffd700;text-decoration:underline;font-weight:800;margin-left:.4rem">Shop &#8594;</a>
+  <button onclick="this.parentElement.style.display='none'" style="position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;opacity:.7">&#10005;</button>
+</div>
+<nav>
+  <a class="logo" href="lawnstar-homepage.html">&#127807; Lawn<span>Star</span></a>
+  <div class="nav-links" id="navLinks">
+    <a class="nbtn" href="lawnstar-homepage.html">&#127968; Home</a>
+    <a class="nbtn" href="lawnstar-all-mowers.html">&#129302; Mowers</a>
+    <a class="nbtn" href="lawnstar-quiz.html">&#129504; Quiz</a>
+    <a class="nbtn" href="lawnstar-deals.html" style="background:rgba(229,57,53,.7);border-color:rgba(229,57,53,.9)">&#128293; Deals</a>
+    <a class="nbtn" href="lawnstar-compare.html">&#9878;&#65039; Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+    <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    <a class="nbtn" href="lawnstar-reviews.html">&#11088; Reviews</a>
+    <a class="nbtn" href="lawnstar-loyalty.html">&#127942; Rewards</a>
+    <a class="nbtn" href="lawnstar-warranty.html" style="background:rgba(118,196,66,.25);border-color:#76c442">&#128737;&#65039; Warranty</a>
+    <a class="nbtn" href="lawnstar-checkout.html">&#128722; Cart</a>
+  </div>
+  <div class="hbg" id="hbg" onclick="document.getElementById('mobMenu').classList.toggle('on')"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="lawnstar-homepage.html">&#127968; Home</a><a href="lawnstar-all-mowers.html">&#129302; Mowers</a>
+  <a href="lawnstar-deals.html">&#128293; Deals</a><a href="lawnstar-warranty.html">&#128737; Warranty</a>
+  <a href="lawnstar-contact.html">&#128140; Contact</a><a href="lawnstar-checkout.html">&#128722; Cart</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div style="display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:.25rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;margin-bottom:.8rem">🛡️ Australia's Most Comprehensive Coverage</div>
+    <h1>🛡️ Warranty &amp; Returns</h1>
+    <p>We stand behind every mower we sell — backed by manufacturer warranties up to 5 years and our own LawnStar Promise.</p>
+  </div>
+</div>
+
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item"><span style="font-size:1.3rem">🔄</span> 30-Day Returns</div>
+    <div class="trust-item"><span style="font-size:1.3rem">🛡️</span> Up to 5yr Warranty</div>
+    <div class="trust-item"><span style="font-size:1.3rem">🚚</span> Free Return Shipping</div>
+    <div class="trust-item"><span style="font-size:1.3rem">⚡</span> 48hr Claim Response</div>
+    <div class="trust-item"><span style="font-size:1.3rem">🇦🇺</span> Australian Consumer Law</div>
+  </div>
+</div>
+
+<div class="tabs-bar" id="tabsBar">
+  <button class="tab on" onclick="switchTab('warranty',this)">🛡️ Warranty</button>
+  <button class="tab" onclick="switchTab('returns',this)">🔄 Returns</button>
+  <button class="tab" onclick="switchTab('coverage',this)">📋 Coverage Details</button>
+  <button class="tab" onclick="switchTab('claim',this)">📝 Lodge a Claim</button>
+  <button class="tab" onclick="switchTab('faq',this)">❓ FAQ</button>
+</div>
+
+<div class="content-wrap">
+
+  <!-- WARRANTY TAB -->
+  <div class="tab-panel on" id="tab-warranty">
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">🛡️</span> The LawnStar Warranty Promise</div>
+      <div class="highlight-box">
+        <strong>Every robot mower sold by LawnStar</strong> is covered by the manufacturer's warranty <strong>plus</strong> our LawnStar Extended Service Promise. If your mower has a defect in materials or workmanship, we will repair, replace, or refund — your choice.
+      </div>
+      <div class="warranty-grid">
+        <div class="wcard"><div class="wcard-icon">🤖</div><div class="wcard-brand">Husqvarna</div><div class="wcard-years">2–5<span style="font-size:.9rem">yr</span></div><div class="wcard-label">Manufacturer Warranty</div></div>
+        <div class="wcard"><div class="wcard-icon">🍃</div><div class="wcard-brand">Mammotion</div><div class="wcard-years">2<span style="font-size:.9rem">yr</span></div><div class="wcard-label">Manufacturer Warranty</div></div>
+        <div class="wcard"><div class="wcard-icon">🌀</div><div class="wcard-brand">Segway</div><div class="wcard-years">2<span style="font-size:.9rem">yr</span></div><div class="wcard-label">Manufacturer Warranty</div></div>
+        <div class="wcard"><div class="wcard-icon">⚡</div><div class="wcard-brand">EcoFlow</div><div class="wcard-years">2<span style="font-size:.9rem">yr</span></div><div class="wcard-label">Manufacturer Warranty</div></div>
+        <div class="wcard"><div class="wcard-icon">🌿</div><div class="wcard-brand">Gardena</div><div class="wcard-years">2<span style="font-size:.9rem">yr</span></div><div class="wcard-label">Manufacturer Warranty</div></div>
+        <div class="wcard" style="border-color:var(--ac);background:#f0faf0"><div class="wcard-icon">⭐</div><div class="wcard-brand">LawnStar</div><div class="wcard-years">+1<span style="font-size:.9rem">yr</span></div><div class="wcard-label">Extended Top-Up</div></div>
+      </div>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:.5rem">* Husqvarna 430X/450X include 5-year warranty when registered within 60 days of purchase. All others standard 2yr + 1yr LawnStar top-up = <strong>3 years total</strong>.</p>
+    </div>
+
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">✅</span> What's Covered</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot">⚙️</div><div class="tl-content"><div class="tl-title">Manufacturing Defects</div><div class="tl-desc">Faulty components, circuit boards, motors, charging stations, and all parts that fail under normal operating conditions.</div></div></div>
+        <div class="tl-item"><div class="tl-dot">🔋</div><div class="tl-content"><div class="tl-title">Battery Degradation</div><div class="tl-desc">If battery capacity falls below 70% within the first 2 years of normal use, we'll replace it free of charge.</div></div></div>
+        <div class="tl-item"><div class="tl-dot">📡</div><div class="tl-content"><div class="tl-title">Software &amp; Connectivity</div><div class="tl-desc">GPS module failures, app connectivity issues caused by hardware faults, and firmware update bricks.</div></div></div>
+        <div class="tl-item"><div class="tl-dot">🌧️</div><div class="tl-content"><div class="tl-title">Weather Resistance (IPX5)</div><div class="tl-desc">Water ingress failures under normal Australian weather conditions — rain, morning dew, sprinkler systems.</div></div></div>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">❌</span> What's Not Covered</div>
+      <table class="cov-table">
+        <thead><tr><th>Item</th><th>Covered?</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Normal blade wear</td><td class="no">❌ No</td><td>Blades are consumables — replace every 2–3 months</td></tr>
+          <tr><td>Physical damage / drops</td><td class="no">❌ No</td><td>Accidental damage is not covered</td></tr>
+          <tr><td>Theft or loss</td><td class="no">❌ No</td><td>Recommend home &amp; contents insurance</td></tr>
+          <tr><td>Modifications</td><td class="no">❌ No</td><td>Voided if mower has been modified</td></tr>
+          <tr><td>Commercial use damage</td><td class="partial">⚠️ Partial</td><td>Consumer warranty only — contact us for commercial plans</td></tr>
+          <tr><td>Cosmetic scratches</td><td class="no">❌ No</td><td>Normal wear and tear</td></tr>
+          <tr><td>Pest/animal damage</td><td class="no">❌ No</td><td>Not covered unless sealed component fails</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RETURNS TAB -->
+  <div class="tab-panel" id="tab-returns">
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">🔄</span> 30-Day Change of Mind Returns</div>
+      <div class="highlight-box">
+        Not happy? Return your mower within <strong>30 days</strong> of delivery — no questions asked. We'll cover the return shipping and process your full refund within <strong>3–5 business days</strong>.
+      </div>
+      <div class="steps">
+        <div class="step-row"><div class="step-num">1</div><div class="step-body"><div class="step-title">Initiate Return Online</div><div class="step-desc">Click "Lodge a Claim" above or email returns@lawnstar.com.au with your order number. We'll respond within 24 hours with a return authorisation.</div></div></div>
+        <div class="step-row"><div class="step-num">2</div><div class="step-body"><div class="step-title">Pack &amp; Ship</div><div class="step-desc">Use original packaging where possible. We'll email you a prepaid Australia Post label — just drop it off at your nearest post office.</div></div></div>
+        <div class="step-row"><div class="step-num">3</div><div class="step-body"><div class="step-title">Inspection</div><div class="step-desc">Our team inspects the returned mower within 2 business days of receipt. We'll notify you by email with the outcome.</div></div></div>
+        <div class="step-row"><div class="step-num">4</div><div class="step-body"><div class="step-title">Refund Processed</div><div class="step-desc">Full refund to your original payment method within 3–5 business days of approval. Afterpay/Zip refunds may take up to 7 days.</div></div></div>
+      </div>
+    </div>
+
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">📋</span> Return Conditions</div>
+      <table class="cov-table">
+        <thead><tr><th>Condition</th><th>Eligible?</th></tr></thead>
+        <tbody>
+          <tr><td>Unopened, original packaging</td><td class="yes">✅ Full refund</td></tr>
+          <tr><td>Opened, unused, all parts present</td><td class="yes">✅ Full refund</td></tr>
+          <tr><td>Used less than 5 times, good condition</td><td class="yes">✅ Full refund</td></tr>
+          <tr><td>Used but in resaleable condition</td><td class="partial">⚠️ 15% restocking fee may apply</td></tr>
+          <tr><td>Missing accessories or cables</td><td class="partial">⚠️ Deduction for missing items</td></tr>
+          <tr><td>Damaged by customer</td><td class="no">❌ Not eligible</td></tr>
+          <tr><td>After 30 days (change of mind)</td><td class="no">❌ Not eligible</td></tr>
+          <tr><td>After 30 days (faulty)</td><td class="yes">✅ Warranty claim applies</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">🇦🇺</span> Australian Consumer Law (ACL) Rights</div>
+      <div class="highlight-box">
+        Our returns policy is <strong>in addition to</strong> your rights under the Australian Consumer Law. If a product has a major fault, you are entitled to a refund, replacement, or repair — regardless of the time since purchase. <strong>These rights cannot be excluded, restricted, or modified.</strong>
+      </div>
+      <p style="font-size:.82rem;color:var(--muted);line-height:1.7;">Under ACL, a product has a <strong>major failure</strong> if it is substantially unfit for purpose, unsafe, or significantly different from the description. For minor failures, we will repair the product within a reasonable time or offer a replacement.</p>
+    </div>
+  </div>
+
+  <!-- COVERAGE TAB -->
+  <div class="tab-panel" id="tab-coverage">
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">📋</span> Full Coverage Comparison by Brand</div>
+      <table class="cov-table">
+        <thead><tr><th>Brand / Model</th><th>Standard Warranty</th><th>LawnStar Top-Up</th><th>Total Coverage</th><th>Battery Cover</th></tr></thead>
+        <tbody>
+          <tr><td>Husqvarna 430X / 450X</td><td>5 years (registered)</td><td>N/A</td><td class="yes">5 years</td><td class="yes">✅ 2 years</td></tr>
+          <tr><td>Husqvarna 315X</td><td>2 years</td><td>+1 year</td><td class="yes">3 years</td><td class="yes">✅ 2 years</td></tr>
+          <tr><td>Mammotion Luba 2 AWD</td><td>2 years</td><td>+1 year</td><td class="yes">3 years</td><td class="yes">✅ 2 years</td></tr>
+          <tr><td>Mammotion Yuka 1000</td><td>2 years</td><td>+1 year</td><td class="yes">3 years</td><td class="partial">⚠️ 1 year</td></tr>
+          <tr><td>Segway Navimow i108E</td><td>2 years</td><td>+1 year</td><td class="yes">3 years</td><td class="yes">✅ 2 years</td></tr>
+          <tr><td>EcoFlow Blade</td><td>2 years</td><td>+1 year</td><td class="yes">3 years</td><td class="yes">✅ 2 years</td></tr>
+          <tr><td>Gardena SILENO City</td><td>2 years</td><td>+1 year</td><td class="yes">3 years</td><td class="partial">⚠️ 1 year</td></tr>
+          <tr><td>Worx Landroid M700</td><td>2 years</td><td>+1 year</td><td class="yes">3 years</td><td class="partial">⚠️ 1 year</td></tr>
+          <tr><td>All Accessories</td><td>1 year</td><td>N/A</td><td>1 year</td><td>N/A</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:.8rem">* Husqvarna 5-year warranty requires product registration at husqvarna.com.au within 60 days of purchase. LawnStar top-up activates automatically at registration — no separate action needed.</p>
+    </div>
+
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">🔧</span> Repair vs Replace Policy</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.5rem">
+        <div style="background:#e8f5e9;border-radius:12px;padding:1.1rem">
+          <div style="font-size:.85rem;font-weight:800;color:var(--gd);margin-bottom:.5rem">⚡ Minor Faults</div>
+          <ul style="font-size:.8rem;color:var(--muted);line-height:1.9;list-style:none;padding:0">
+            <li>✅ Free repair at authorised service centre</li>
+            <li>✅ Loan unit provided if repair &gt;10 days</li>
+            <li>✅ Parts &amp; labour included</li>
+            <li>✅ Return shipping covered</li>
+          </ul>
+        </div>
+        <div style="background:#fce4ec;border-radius:12px;padding:1.1rem">
+          <div style="font-size:.85rem;font-weight:800;color:#c62828;margin-bottom:.5rem">🔴 Major Faults</div>
+          <ul style="font-size:.8rem;color:var(--muted);line-height:1.9;list-style:none;padding:0">
+            <li>✅ Full replacement OR refund — your choice</li>
+            <li>✅ Response within 48 hours</li>
+            <li>✅ No need to return until we dispatch</li>
+            <li>✅ Replacement dispatched same day (stock permitting)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLAIM TAB -->
+  <div class="tab-panel" id="tab-claim">
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">📝</span> Lodge a Warranty or Return Claim</div>
+      <div class="highlight-box">Average response time: <strong>under 4 hours</strong> on business days (Mon–Fri, 8am–6pm AEST). We'll confirm your claim by email and SMS.</div>
+      <div class="claim-form" id="claimFormWrap">
+        <div class="form-grid">
+          <div class="fg"><label>First Name</label><input type="text" id="cf_first" placeholder="Jane"/></div>
+          <div class="fg"><label>Last Name</label><input type="text" id="cf_last" placeholder="Smith"/></div>
+          <div class="fg"><label>Email</label><input type="email" id="cf_email" placeholder="jane@example.com"/></div>
+          <div class="fg"><label>Phone</label><input type="tel" id="cf_phone" placeholder="04XX XXX XXX"/></div>
+          <div class="fg"><label>Order Number</label><input type="text" id="cf_order" placeholder="LS-XXXXXX"/></div>
+          <div class="fg"><label>Purchase Date</label><input type="date" id="cf_date"/></div>
+          <div class="fg"><label>Mower Model</label>
+            <select id="cf_model">
+              <option value="">Select mower...</option>
+              <option>Husqvarna Automower 430X</option><option>Husqvarna Automower 315X</option>
+              <option>Mammotion Luba 2 AWD</option><option>Mammotion Yuka 1000</option>
+              <option>Segway Navimow i108E</option><option>EcoFlow Blade</option>
+              <option>Gardena SILENO City</option><option>Worx Landroid M700</option><option>Other / Accessory</option>
+            </select>
+          </div>
+          <div class="fg"><label>Claim Type</label>
+            <select id="cf_type">
+              <option>Warranty Repair</option><option>Warranty Replacement</option>
+              <option>30-Day Return (Change of Mind)</option><option>Faulty on Arrival</option><option>ACL Claim</option>
+            </select>
+          </div>
+          <div class="fg full-width"><label>Describe the Issue</label><textarea id="cf_desc" rows="4" placeholder="Please describe what happened, when it started, and any error messages or symptoms..."></textarea></div>
+          <div class="fg full-width"><label>Upload Photo / Video (optional)</label><input type="file" id="cf_file" accept="image/*,video/*" style="padding:.4rem .6rem"/></div>
+        </div>
+        <button class="btn-submit" onclick="submitClaim()">📨 Submit Claim</button>
+      </div>
+      <div id="claimSuccess" style="display:none;text-align:center;padding:2rem">
+        <div style="font-size:3.5rem;margin-bottom:.7rem">🎉</div>
+        <div style="font-size:1.1rem;font-weight:900;margin-bottom:.4rem">Claim Received!</div>
+        <div style="font-size:.85rem;color:var(--muted);line-height:1.7">We'll review your claim and respond to your email within <strong>4 business hours</strong>.<br/>Your reference number: <strong id="claimRef"></strong></div>
+        <button onclick="switchTab('faq',document.querySelector('.tab:last-of-type'))" style="margin-top:1.2rem;padding:.5rem 1.5rem;background:var(--g);color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer">View FAQ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ TAB -->
+  <div class="tab-panel" id="tab-faq">
+    <div class="policy-card">
+      <div class="card-title"><span style="font-size:1.5rem">❓</span> Frequently Asked Questions</div>
+      <div id="faqList"></div>
+    </div>
+  </div>
+
+</div><!-- /content-wrap -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div style="font-size:1.3rem;font-weight:900;margin-bottom:.4rem">&#127807; Lawn<span style="color:#76c442">Star</span></div><div style="font-size:.78rem;opacity:.7;line-height:1.7;max-width:240px">Australia's most trusted robot mower destination.</div></div>
+      <div><div class="fc-title">Shop</div><a href="lawnstar-all-mowers.html">All Mowers</a><a href="lawnstar-deals.html">Deals</a><a href="lawnstar-brands.html">Brands</a><a href="lawnstar-bundle-builder.html">Bundles</a></div>
+      <div><div class="fc-title">Learn</div><a href="lawnstar-blog.html">Blog</a><a href="lawnstar-guide.html">Buying Guide</a><a href="lawnstar-quiz.html">Find My Mower</a><a href="lawnstar-faq.html">FAQ</a></div>
+      <div><div class="fc-title">Help</div><a href="lawnstar-contact.html">Contact</a><a href="lawnstar-warranty.html">Warranty</a><a href="lawnstar-store-locator.html">Find a Store</a><a href="lawnstar-loyalty.html">Rewards</a></div>
+    </div>
+    <div class="footer-bottom"><span>&#127807; LawnStar &copy; 2026 · ABN 12 345 678 901</span><div style="font-size:.72rem;opacity:.6">All prices in AUD incl. GST. Warranty subject to ACL.</div></div>
+  </div>
+</footer>
+
+<script>
+function switchTab(id,el){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  if(el)el.classList.add('on');
+}
+// FAQ data
+const FAQS=[
+  {q:'How do I register my warranty?',a:'Warranty registration is automatic when you purchase from LawnStar. You\'ll receive a confirmation email with your warranty details. For Husqvarna 5-year coverage, you must additionally register at husqvarna.com.au within 60 days.'},
+  {q:'My mower was damaged in transit — what do I do?',a:'Contact us within 48 hours of delivery with photos. We\'ll arrange a same-day replacement dispatch or immediate refund — no need to return the damaged unit.'},
+  {q:'Can I get a loan mower while mine is being repaired?',a:'Yes! If your repair is expected to take more than 10 business days, we\'ll provide a loan unit at no charge from your nearest LawnStar showroom or by courier.'},
+  {q:'What if I lose my proof of purchase?',a:'No problem — we maintain digital records of all LawnStar purchases. Your email address or order number is all we need to verify your warranty.'},
+  {q:'Does the warranty transfer if I sell the mower?',a:'Manufacturer warranties are non-transferable under standard terms. However, remaining LawnStar top-up warranty transfers automatically to the new owner — a great selling point!'},
+  {q:'How long do repairs take?',a:'Most repairs are completed within 5–10 business days at our Sydney or Melbourne service centres. We\'ll give you a firm timeline when we receive your mower.'},
+  {q:'Can I return if I bought during a sale or with a discount code?',a:'Yes — our 30-day returns policy applies regardless of purchase price. Refund will be for the amount you paid.'},
+  {q:'What\'s the return policy on accessories?',a:'Accessories can be returned within 30 days if unused and in original packaging. Blades, once used, are not returnable for hygiene reasons.'},
+  {q:'Is water damage covered?',a:'Water damage from normal outdoor use (rain, sprinklers) is covered under the IPX5 weather resistance warranty. Submersion or flooding is not covered.'},
+  {q:'Do you offer extended warranty plans beyond the standard period?',a:'Yes — our LawnStar Care plans extend coverage to 5 years total for $299 (3yr mowers). Ask in-store or at lawnstar.com.au/care.'},
+];
+document.getElementById('faqList').innerHTML=FAQS.map((f,i)=>`
+  <div class="faq-item" id="faq${i}">
+    <div class="faq-q" onclick="toggleFaq(${i})">
+      <span>${f.q}</span><span class="arr">▼</span>
+    </div>
+    <div class="faq-a">${f.a}</div>
+  </div>`).join('');
+function toggleFaq(i){document.getElementById('faq'+i).classList.toggle('open');}
+
+function submitClaim(){
+  const f=document.getElementById('cf_first').value.trim();
+  const e=document.getElementById('cf_email').value.trim();
+  if(!f||!e){alert('Please fill in your name and email.');return;}
+  const ref='LS-CLM-'+Math.floor(10000+Math.random()*90000);
+  document.getElementById('claimRef').textContent=ref;
+  document.getElementById('claimFormWrap').style.display='none';
+  document.getElementById('claimSuccess').style.display='block';
+}
+if(window.innerWidth<=620){document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}
+</script>
+$chatWidget = @'
+
+<!-- LAWNSTAR LIVE CHAT WIDGET -->
+<style>
+#ls-chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:8000;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;font-family:'Segoe UI',system-ui,sans-serif}
+#ls-chat-pop{background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;display:none;animation:chatIn .25s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+#ls-chat-pop.on{display:block}
+.lsc-header{background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.lsc-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.lsc-hinfo{flex:1}
+.lsc-name{color:#fff;font-size:.88rem;font-weight:800}
+.lsc-status{color:rgba(255,255,255,.75);font-size:.72rem;display:flex;align-items:center;gap:.3rem}
+.lsc-dot{width:7px;height:7px;border-radius:50%;background:#76c442;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.lsc-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.1rem;cursor:pointer;padding:.2rem;line-height:1}
+.lsc-msgs{height:220px;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.7rem;background:#f8fbf8}
+.lsc-msg{max-width:82%;padding:.6rem .85rem;border-radius:14px;font-size:.8rem;line-height:1.5;animation:msgIn .2s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lsc-msg.bot{background:#fff;border:1px solid #e2e8f0;align-self:flex-start;border-radius:4px 14px 14px 14px;color:#1a1a2e}
+.lsc-msg.user{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
+.lsc-chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .9rem .7rem;background:#f8fbf8}
+.lsc-chip{background:#e8f5e9;color:#2d7a3a;border:1px solid #c8e6c9;border-radius:20px;padding:.25rem .75rem;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lsc-chip:hover{background:#2d7a3a;color:#fff}
+.lsc-input-row{display:flex;gap:0;border-top:1px solid #e2e8f0;background:#fff}
+.lsc-input{flex:1;border:none;outline:none;padding:.75rem .9rem;font-size:.85rem;font-family:inherit;background:transparent}
+.lsc-send{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;padding:.5rem .85rem;cursor:pointer;font-size:1rem;transition:opacity .2s}
+.lsc-send:hover{opacity:.85}
+.lsc-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1b5e20,#2d7a3a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(45,122,58,.4);transition:all .25s;position:relative}
+.lsc-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(45,122,58,.55)}
+.lsc-notif{position:absolute;top:-2px;right:-2px;background:#e53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.lsc-typing{display:flex;gap:4px;align-items:center;padding:.6rem .85rem;background:#fff;border:1px solid #e2e8f0;border-radius:4px 14px 14px 14px;align-self:flex-start;width:52px}
+.lsc-typing span{width:7px;height:7px;border-radius:50%;background:#76c442;animation:typ .9s infinite}
+.lsc-typing span:nth-child(2){animation-delay:.15s}
+.lsc-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typ{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+<div id="ls-chat-bubble">
+  <div id="ls-chat-pop">
+    <div class="lsc-header">
+      <div class="lsc-avatar">&#127807;</div>
+      <div class="lsc-hinfo">
+        <div class="lsc-name">LawnStar Support</div>
+        <div class="lsc-status"><span class="lsc-dot"></span> Online now &bull; Avg reply &lt; 2 min</div>
+      </div>
+      <button class="lsc-close" onclick="lscToggle()">&#10005;</button>
+    </div>
+    <div class="lsc-msgs" id="lscMsgs"></div>
+    <div class="lsc-chips" id="lscChips">
+      <div class="lsc-chip" onclick="lscQuick('Which mower suits my lawn?')">&#129302; Find my mower</div>
+      <div class="lsc-chip" onclick="lscQuick('What are your current deals?')">&#128293; Deals &amp; sales</div>
+      <div class="lsc-chip" onclick="lscQuick('I need help with my order')">&#128230; Order help</div>
+      <div class="lsc-chip" onclick="lscQuick('Warranty question')">&#128737; Warranty</div>
+    </div>
+    <div class="lsc-input-row">
+      <input class="lsc-input" id="lscInput" placeholder="Ask us anything..." onkeydown="if(event.key==='Enter')lscSend()"/>
+      <button class="lsc-send" onclick="lscSend()">&#10148;</button>
+    </div>
+  </div>
+  <button class="lsc-btn" onclick="lscToggle()" id="lscMainBtn" title="Chat with LawnStar">
+    <span id="lscBtnIcon">&#128172;</span>
+    <div class="lsc-notif" id="lscNotif">1</div>
+  </button>
+</div>
+<script>
+(function(){
+var open=false,welcomed=false;
+var RESPONSES={
+  'which mower':'Great question! Can you tell me your lawn size? Under 500m2, 500-1000m2, or over 1000m2? I can find the perfect match &#128269;',
+  'lawn size':'For up to 1,000m2, the Mammotion Yuka 1000 (A$899) is our top pick. For 1,000–3,000m2, the Segway Navimow i108E is brilliant. For larger lawns, Mammotion Luba 2 AWD covers up to 5,000m2! &#127807;',
+  'deal':'Right now we have up to 30% off! Use code <strong>LAWN10</strong> at checkout for an extra 10% off everything. <a href="lawnstar-deals.html" style="color:#76c442;font-weight:700">See all deals &#8594;</a>',
+  'order':'I can help with that! Please email orders@lawnstar.com.au with your order number, or use our <a href="lawnstar-track.html" style="color:#76c442;font-weight:700">order tracker</a>. &#128230;',
+  'warranty':'All our mowers come with at least 3 years warranty (manufacturer + LawnStar top-up). You can <a href="lawnstar-warranty.html" style="color:#76c442;font-weight:700">view full warranty details here</a>. &#128737;',
+  'price':'Our mowers range from A$899 to A$6,900 depending on features. The most popular is the Segway Navimow i108E at A$1,299. Want me to help find one in your budget?',
+  'install':'Great news — we offer professional installation from A$199! Our technicians set up the boundary wire, configure the app, and do a test run. <a href="lawnstar-store-locator.html" style="color:#76c442;font-weight:700">Book via a local store</a>.',
+  'compare':'Our <a href="lawnstar-compare.html" style="color:#76c442;font-weight:700">comparison tool</a> lets you compare up to 4 mowers side by side with animated score charts. Really handy! &#9878;',
+  'bundle':'Yes! We have bundle deals where you save 10% when you add 2+ accessories. Check out the <a href="lawnstar-bundle-builder.html" style="color:#76c442;font-weight:700">Bundle Builder</a> &#127873;',
+  'shipping':'We offer free shipping on all orders over A$500 Australia-wide. Standard delivery is 3–7 business days. Express available. &#128666;',
+  'default':'Thanks for your message! A LawnStar expert will reply within 2 minutes. In the meantime, our <a href="lawnstar-faq.html" style="color:#76c442;font-weight:700">FAQ page</a> might have a quick answer. &#128075;'
+};
+function addMsg(txt,type,delay){
+  delay=delay||0;
+  setTimeout(function(){
+    var msgs=document.getElementById('lscMsgs');
+    if(!msgs)return;
+    // Show typing for bot
+    if(type==='bot'&&delay>0){
+      var typ=document.createElement('div');typ.className='lsc-typing';typ.id='lsc-typing-ind';
+      typ.innerHTML='<span></span><span></span><span></span>';
+      msgs.appendChild(typ);msgs.scrollTop=msgs.scrollHeight;
+      setTimeout(function(){
+        var t=document.getElementById('lsc-typing-ind');if(t)t.remove();
+        var m=document.createElement('div');m.className='lsc-msg '+type;m.innerHTML=txt;
+        msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+      },900);
+    } else {
+      var m=document.createElement('div');m.className='lsc-msg '+(type||'bot');m.innerHTML=txt;
+      msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+    }
+  },delay);
+}
+function getReply(txt){
+  var t=txt.toLowerCase();
+  for(var k in RESPONSES){if(t.indexOf(k)>-1)return RESPONSES[k];}
+  return RESPONSES['default'];
+}
+window.lscToggle=function(){
+  open=!open;
+  var pop=document.getElementById('ls-chat-pop');
+  var notif=document.getElementById('lscNotif');
+  var icon=document.getElementById('lscBtnIcon');
+  if(open){
+    pop.classList.add('on');
+    if(notif)notif.style.display='none';
+    if(icon)icon.textContent='\u2715';
+    if(!welcomed){
+      welcomed=true;
+      addMsg('&#127807; Hey! Welcome to <strong>LawnStar</strong>. I\'m here to help you find the perfect robot mower &#129302;','bot',100);
+      addMsg('What can I help you with today?','bot',1200);
+    }
+  } else {
+    pop.classList.remove('on');
+    if(icon)icon.textContent='\u{1F4AC}';
+  }
+};
+window.lscSend=function(){
+  var inp=document.getElementById('lscInput');
+  var txt=inp.value.trim();
+  if(!txt)return;
+  addMsg(txt,'user');
+  inp.value='';
+  addMsg(getReply(txt),'bot',400);
+};
+window.lscQuick=function(txt){
+  addMsg(txt,'user');
+  addMsg(getReply(txt),'bot',400);
+  document.getElementById('lscChips').style.display='none';
+};
+// Show greeting bubble after 8s
+setTimeout(function(){
+  if(!open){
+    var notif=document.getElementById('lscNotif');
+    if(notif)notif.style.display='flex';
+  }
+},8000);
+})();
+</script>
+</body>
+</html>

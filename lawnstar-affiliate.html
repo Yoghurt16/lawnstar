@@ -1,0 +1,515 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Affiliate & Partner Program – LawnStar Australia</title>
+<style>
+:root{--g:#2d7a3a;--gd:#1b5e20;--ac:#76c442;--bg:#f4f9f4;--text:#1a1a2e;--muted:#6b7280;--bd:#e2e8f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+nav{background:linear-gradient(135deg,var(--gd),var(--g));height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.logo{color:#fff;font-size:1.5rem;font-weight:900;text-decoration:none}.logo span{color:var(--ac)}
+.nav-links{display:flex;align-items:center;gap:.4rem}
+.nbtn{padding:.32rem .75rem;border-radius:20px;font-weight:700;font-size:.78rem;border:2px solid rgba(255,255,255,.3);color:#fff;background:transparent;cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap}
+.nbtn:hover{background:rgba(255,255,255,.15)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.hbg span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:var(--gd);padding:.8rem 1.5rem;gap:.4rem;z-index:199}
+.mob-menu.on{display:flex}
+.mob-menu a{color:#fff;font-weight:700;font-size:.88rem;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none}
+/* HERO */
+.hero{background:linear-gradient(135deg,#0d47a1,#1565c0,#1976d2,var(--gd));padding:4rem 2rem;text-align:center;color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(118,196,66,.2),transparent 50%)}
+.hero-inner{position:relative;max-width:680px;margin:0 auto}
+.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;margin-bottom:.6rem;line-height:1.15}
+.hero p{font-size:.95rem;opacity:.88;margin-bottom:2rem;line-height:1.7}
+.hero-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.hbtn-primary{background:var(--ac);color:var(--gd);border:none;border-radius:25px;padding:.8rem 2rem;font-weight:900;font-size:.95rem;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
+.hbtn-primary:hover{transform:scale(1.04);box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.hbtn-sec{background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4);border-radius:25px;padding:.8rem 2rem;font-weight:800;font-size:.95rem;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
+.hbtn-sec:hover{background:rgba(255,255,255,.25)}
+/* STATS STRIP */
+.stats-strip{background:#fff;border-bottom:1px solid var(--bd);padding:1.2rem 2rem}
+.stats-inner{max-width:900px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:1rem}
+.stat-item{text-align:center}
+.stat-num{font-size:1.8rem;font-weight:900;color:var(--gd)}
+.stat-label{font-size:.75rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+/* HOW IT WORKS */
+.section{max-width:1000px;margin:3rem auto;padding:0 1.5rem}
+.section-title{font-size:1.3rem;font-weight:900;text-align:center;margin-bottom:.4rem}
+.section-sub{font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:2rem}
+.steps-horiz{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;position:relative}
+.steps-horiz::before{content:'';position:absolute;top:28px;left:14%;right:14%;height:2px;background:linear-gradient(90deg,var(--ac),var(--g));z-index:0}
+.step-h{text-align:center;position:relative;z-index:1}
+.step-h-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;font-size:1.3rem;display:flex;align-items:center;justify-content:center;margin:0 auto .7rem;box-shadow:0 4px 14px rgba(45,122,58,.3);border:3px solid #fff}
+.step-h-title{font-size:.85rem;font-weight:800;margin-bottom:.3rem}
+.step-h-desc{font-size:.75rem;color:var(--muted);line-height:1.5}
+/* COMMISSION TIERS */
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.5rem}
+.tier-card{background:#fff;border-radius:18px;border:2px solid var(--bd);overflow:hidden;transition:all .25s;text-align:center}
+.tier-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(45,122,58,.15)}
+.tier-card.featured{border-color:var(--ac);box-shadow:0 4px 20px rgba(118,196,66,.25)}
+.tier-header{padding:1.5rem;background:linear-gradient(135deg,var(--gd),var(--g));color:#fff}
+.tier-header.blue{background:linear-gradient(135deg,#1565c0,#1976d2)}
+.tier-header.gold{background:linear-gradient(135deg,#e65100,#f57c00)}
+.tier-badge{font-size:.7rem;font-weight:800;background:rgba(255,255,255,.2);padding:.2rem .7rem;border-radius:20px;margin-bottom:.6rem;display:inline-block}
+.tier-name{font-size:1.1rem;font-weight:900;margin-bottom:.2rem}
+.tier-comm{font-size:2.2rem;font-weight:900;color:var(--ac)}
+.tier-comm.c2{color:#90caf9}
+.tier-comm.c3{color:#ffd54f}
+.tier-per{font-size:.75rem;opacity:.8;margin-top:-.2rem}
+.tier-body{padding:1.2rem}
+.tier-feat{font-size:.78rem;color:var(--muted);padding:.3rem 0;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.4rem}
+.tier-feat:last-child{border-bottom:none}
+.tier-req{font-size:.75rem;font-weight:700;color:var(--muted);margin-top:.8rem;background:var(--bg);border-radius:8px;padding:.4rem .6rem}
+.tier-btn{display:block;margin:1rem;background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;border:none;border-radius:12px;padding:.6rem;font-weight:800;cursor:pointer;font-size:.85rem;text-decoration:none;transition:all .2s}
+.tier-btn:hover{opacity:.9}
+/* PARTNER TYPES */
+.partner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
+.pcard{background:#fff;border-radius:14px;border:2px solid var(--bd);padding:1.3rem;transition:all .2s}
+.pcard:hover{border-color:var(--ac);transform:translateY(-2px)}
+.pcard-icon{font-size:2.5rem;margin-bottom:.6rem}
+.pcard-title{font-size:.9rem;font-weight:900;margin-bottom:.4rem}
+.pcard-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+.pcard-comm{font-size:.78rem;font-weight:700;color:var(--g);margin-top:.6rem;background:#f0faf0;padding:.3rem .6rem;border-radius:8px;display:inline-block}
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem}
+.tool-card{background:#fff;border-radius:12px;border:2px solid var(--bd);padding:1.1rem;text-align:center}
+.tool-icon{font-size:2rem;margin-bottom:.4rem}
+.tool-title{font-size:.8rem;font-weight:800;margin-bottom:.2rem}
+.tool-desc{font-size:.72rem;color:var(--muted)}
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.5rem}
+.test-card{background:#fff;border-radius:14px;border:2px solid var(--bd);padding:1.3rem}
+.test-stars{color:#ffc107;font-size:.9rem;margin-bottom:.5rem}
+.test-quote{font-size:.82rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:.8rem}
+.test-author{display:flex;align-items:center;gap:.6rem}
+.test-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.test-name{font-size:.8rem;font-weight:800}
+.test-role{font-size:.72rem;color:var(--muted)}
+/* SIGNUP FORM */
+.signup-section{background:linear-gradient(135deg,var(--gd),var(--g));padding:3rem 2rem;text-align:center;color:#fff;margin:2rem 0}
+.signup-inner{max-width:600px;margin:0 auto}
+.signup-form{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:18px;padding:2rem;margin-top:1.5rem;text-align:left}
+.sf-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.sf-group{display:flex;flex-direction:column;gap:.2rem}
+.sf-label{font-size:.72rem;font-weight:700;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.5px}
+.sf-inp{padding:.5rem .8rem;border:1px solid rgba(255,255,255,.25);border-radius:8px;background:rgba(255,255,255,.12);color:#fff;font-size:.88rem;font-family:inherit;outline:none;transition:border .2s}
+.sf-inp::placeholder{color:rgba(255,255,255,.5)}
+.sf-inp:focus{border-color:var(--ac)}
+.sf-inp option{background:var(--gd);color:#fff}
+.sf-full{grid-column:1/-1}
+.sf-submit{width:100%;padding:.7rem;background:var(--ac);color:var(--gd);border:none;border-radius:12px;font-weight:900;font-size:.95rem;cursor:pointer;transition:all .2s;margin-top:.3rem}
+.sf-submit:hover{background:#8ed452}
+/* FOOTER */
+footer{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:2.5rem 2rem 1.5rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
+.fc-title{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.6rem}
+.footer-grid a{display:block;color:rgba(255,255,255,.8);font-size:.8rem;text-decoration:none;margin-bottom:.35rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.15);padding-top:1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;font-size:.73rem;opacity:.6}
+@media(max-width:900px){.tiers-grid{grid-template-columns:1fr}.partner-grid{grid-template-columns:1fr 1fr}.tools-grid{grid-template-columns:1fr 1fr}.test-grid{grid-template-columns:1fr}.steps-horiz{grid-template-columns:1fr 1fr}.steps-horiz::before{display:none}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.nav-links{display:none}.hbg{display:flex}.sf-grid{grid-template-columns:1fr}.partner-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="dealsBanner" style="background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.45rem 1rem;font-size:.8rem;font-weight:700;position:relative">
+  &#128293; <strong>FLASH SALE:</strong> Up to 30% off &nbsp;&#183;&nbsp; Code <strong>LAWN10</strong>
+  <a href="lawnstar-deals.html" style="color:#ffd700;text-decoration:underline;font-weight:800;margin-left:.4rem">Shop &#8594;</a>
+  <button onclick="this.parentElement.style.display='none'" style="position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;opacity:.7">&#10005;</button>
+</div>
+<nav>
+  <a class="logo" href="lawnstar-homepage.html">&#127807; Lawn<span>Star</span></a>
+  <div class="nav-links" id="navLinks">
+    <a class="nbtn" href="lawnstar-homepage.html">&#127968; Home</a>
+    <a class="nbtn" href="lawnstar-all-mowers.html">&#129302; Mowers</a>
+    <a class="nbtn" href="lawnstar-deals.html" style="background:rgba(229,57,53,.7);border-color:rgba(229,57,53,.9)">&#128293; Deals</a>
+    <a class="nbtn" href="lawnstar-compare.html">&#9878;&#65039; Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+    <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    <a class="nbtn" href="lawnstar-reviews.html">&#11088; Reviews</a>
+    <a class="nbtn" href="lawnstar-loyalty.html">&#127942; Rewards</a>
+    <a class="nbtn" href="lawnstar-affiliate.html" style="background:rgba(118,196,66,.25);border-color:#76c442">&#129309; Partners</a>
+    <a class="nbtn" href="lawnstar-warranty.html">&#128737;&#65039; Warranty</a>
+    <a class="nbtn" href="lawnstar-checkout.html">&#128722; Cart</a>
+  </div>
+  <div class="hbg" id="hbg" onclick="document.getElementById('mobMenu').classList.toggle('on')"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="lawnstar-homepage.html">&#127968; Home</a><a href="lawnstar-all-mowers.html">&#129302; Mowers</a>
+  <a href="lawnstar-affiliate.html">&#129309; Partners</a><a href="lawnstar-loyalty.html">&#127942; Rewards</a>
+  <a href="lawnstar-contact.html">&#128140; Contact</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div style="display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:.25rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;margin-bottom:.9rem">🤝 Join 1,200+ Active Australian Partners</div>
+    <h1>Earn Up to 8% Commission on Every Sale</h1>
+    <p>Australia's highest-paying robot mower affiliate program. Share LawnStar, earn money — it's that simple. Real-time tracking, monthly payouts, and a dedicated partner manager.</p>
+    <div class="hero-btns">
+      <a href="#signup" class="hbtn-primary">🚀 Apply Now — It's Free</a>
+      <a href="#how-it-works" class="hbtn-sec">📖 How It Works</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">8%</div><div class="stat-label">Max Commission</div></div>
+    <div class="stat-item"><div class="stat-num">1,200+</div><div class="stat-label">Active Partners</div></div>
+    <div class="stat-item"><div class="stat-num">A$890</div><div class="stat-label">Avg Order Value</div></div>
+    <div class="stat-item"><div class="stat-num">90 Days</div><div class="stat-label">Cookie Duration</div></div>
+    <div class="stat-item"><div class="stat-num">$50</div><div class="stat-label">Min Payout</div></div>
+    <div class="stat-item"><div class="stat-num">24hr</div><div class="stat-label">Approval Time</div></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="section" id="how-it-works">
+  <div class="section-title">⚙️ How It Works</div>
+  <div class="section-sub">Four simple steps from sign-up to payout</div>
+  <div class="steps-horiz">
+    <div class="step-h"><div class="step-h-circle">📝</div><div class="step-h-title">1. Apply</div><div class="step-h-desc">Fill out the form below. We approve within 24 hours and send your unique referral link.</div></div>
+    <div class="step-h"><div class="step-h-circle">🔗</div><div class="step-h-title">2. Share</div><div class="step-h-desc">Post your link — blog, YouTube, social, email, or website. We provide banners and copy.</div></div>
+    <div class="step-h"><div class="step-h-circle">💰</div><div class="step-h-title">3. Earn</div><div class="step-h-desc">Earn commission on every sale within 90 days of a click. Track in real time.</div></div>
+    <div class="step-h"><div class="step-h-circle">🏦</div><div class="step-h-title">4. Get Paid</div><div class="step-h-desc">Monthly bank transfer when you hit the $50 minimum. No caps on earnings.</div></div>
+  </div>
+</div>
+
+<!-- COMMISSION TIERS -->
+<div class="section">
+  <div class="section-title">💎 Commission Tiers</div>
+  <div class="section-sub">The more you sell, the more you earn — tier up automatically</div>
+  <div class="tiers-grid">
+    <div class="tier-card">
+      <div class="tier-header blue">
+        <div class="tier-badge">Starter</div>
+        <div class="tier-name">Seedling</div>
+        <div class="tier-comm c2">5%</div>
+        <div class="tier-per">commission per sale</div>
+      </div>
+      <div class="tier-body">
+        <div class="tier-feat">✅ Unique referral link</div>
+        <div class="tier-feat">✅ Real-time dashboard</div>
+        <div class="tier-feat">✅ 90-day cookie window</div>
+        <div class="tier-feat">✅ Monthly bank payouts</div>
+        <div class="tier-feat">✅ Standard banner kit</div>
+        <div class="tier-req">Requirements: 0–10 sales/month</div>
+      </div>
+      <a href="#signup" class="tier-btn">Start Earning →</a>
+    </div>
+    <div class="tier-card featured">
+      <div style="background:var(--ac);color:var(--gd);text-align:center;font-size:.7rem;font-weight:900;padding:.3rem;letter-spacing:1px;text-transform:uppercase">⭐ Most Popular</div>
+      <div class="tier-header">
+        <div class="tier-badge">Growth</div>
+        <div class="tier-name">Grower</div>
+        <div class="tier-comm">6.5%</div>
+        <div class="tier-per">commission per sale</div>
+      </div>
+      <div class="tier-body">
+        <div class="tier-feat">✅ Everything in Seedling</div>
+        <div class="tier-feat">✅ Priority support</div>
+        <div class="tier-feat">✅ Exclusive promotions access</div>
+        <div class="tier-feat">✅ Product sample access</div>
+        <div class="tier-feat">✅ Co-branded landing pages</div>
+        <div class="tier-feat">✅ Custom coupon codes</div>
+        <div class="tier-req">Requirements: 11–50 sales/month</div>
+      </div>
+      <a href="#signup" class="tier-btn">Apply Now →</a>
+    </div>
+    <div class="tier-card">
+      <div class="tier-header gold">
+        <div class="tier-badge">Elite</div>
+        <div class="tier-name">LawnStar Pro</div>
+        <div class="tier-comm c3">8%</div>
+        <div class="tier-per">commission per sale</div>
+      </div>
+      <div class="tier-body">
+        <div class="tier-feat">✅ Everything in Grower</div>
+        <div class="tier-feat">✅ Dedicated partner manager</div>
+        <div class="tier-feat">✅ Free mower for review</div>
+        <div class="tier-feat">✅ Fortnightly payouts</div>
+        <div class="tier-feat">✅ First access to new products</div>
+        <div class="tier-feat">✅ Performance bonuses</div>
+        <div class="tier-req">Requirements: 51+ sales/month</div>
+      </div>
+      <a href="#signup" class="tier-btn">Apply Now →</a>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNER TYPES -->
+<div class="section">
+  <div class="section-title">🤝 Who Can Partner With Us?</div>
+  <div class="section-sub">We welcome all types of content creators, trades, and businesses</div>
+  <div class="partner-grid">
+    <div class="pcard"><div class="pcard-icon">📱</div><div class="pcard-title">Content Creators</div><div class="pcard-desc">YouTubers, Instagram gardeners, TikTok lawn influencers. Share your honest review and earn every time a follower buys.</div><div class="pcard-comm">5–8% commission</div></div>
+    <div class="pcard"><div class="pcard-icon">✍️</div><div class="pcard-title">Bloggers &amp; Reviewers</div><div class="pcard-desc">Lawn care blogs, home improvement sites, comparison review sites. High-intent readers = high conversion rates.</div><div class="pcard-comm">5–8% commission</div></div>
+    <div class="pcard"><div class="pcard-icon">🏡</div><div class="pcard-title">Landscapers &amp; Gardeners</div><div class="pcard-desc">Recommend LawnStar mowers to your clients. Get paid every time they buy — a natural fit with your existing business.</div><div class="pcard-comm">6% + trade pricing</div></div>
+    <div class="pcard"><div class="pcard-icon">🏪</div><div class="pcard-title">Retail Partners</div><div class="pcard-desc">Garden centres, hardware shops, and home improvement retailers. Stock or refer — we tailor a commercial arrangement.</div><div class="pcard-comm">Negotiable wholesale</div></div>
+    <div class="pcard"><div class="pcard-icon">🏢</div><div class="pcard-title">Property Managers</div><div class="pcard-desc">Strata managers, real estate agents, and facilities managers. Bulk referral bonuses available.</div><div class="pcard-comm">5% + volume bonus</div></div>
+    <div class="pcard"><div class="pcard-icon">💻</div><div class="pcard-title">Tech &amp; Smart Home Reviewers</div><div class="pcard-desc">Smart home tech sites, IoT reviewers, AI gadget channels. Robot mowers are a natural fit with your audience.</div><div class="pcard-comm">5–8% commission</div></div>
+  </div>
+</div>
+
+<!-- PARTNER TOOLS -->
+<div class="section">
+  <div class="section-title">🧰 Everything You Need to Succeed</div>
+  <div class="section-sub">Professional-grade tools and support for all partners</div>
+  <div class="tools-grid">
+    <div class="tool-card"><div class="tool-icon">📊</div><div class="tool-title">Live Dashboard</div><div class="tool-desc">Real-time clicks, conversions, and earnings in one place.</div></div>
+    <div class="tool-card"><div class="tool-icon">🎨</div><div class="tool-title">Banner Kit</div><div class="tool-desc">50+ sizes and formats — static, animated, and social.</div></div>
+    <div class="tool-card"><div class="tool-icon">📝</div><div class="tool-title">Copy Library</div><div class="tool-desc">Pre-written captions, product descriptions, email templates.</div></div>
+    <div class="tool-card"><div class="tool-icon">🔗</div><div class="tool-title">Deep Links</div><div class="tool-desc">Link to any product, deal, or page with your tracking tag built in.</div></div>
+    <div class="tool-card"><div class="tool-icon">📧</div><div class="tool-title">Newsletter Drops</div><div class="tool-desc">Monthly deals briefing so you always have fresh content to share.</div></div>
+    <div class="tool-card"><div class="tool-icon">📞</div><div class="tool-title">Partner Support</div><div class="tool-desc">Dedicated chat &amp; email — avg response under 2 hours.</div></div>
+    <div class="tool-card"><div class="tool-icon">🎥</div><div class="tool-title">Product Assets</div><div class="tool-desc">Hi-res photos, video B-roll, and spec sheets for all mowers.</div></div>
+    <div class="tool-card"><div class="tool-icon">📦</div><div class="tool-title">Sample Program</div><div class="tool-desc">Top Grower+ partners can apply for a free review unit.</div></div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="section">
+  <div class="section-title">💬 What Our Partners Say</div>
+  <div class="test-grid">
+    <div class="test-card"><div class="test-stars">★★★★★</div><div class="test-quote">"I made $3,400 in commission last month just from one YouTube video. The 90-day cookie is a game changer — viewers buy weeks after watching."</div><div class="test-author"><div class="test-avatar" style="background:#e8f5e9">🎥</div><div><div class="test-name">Jake M.</div><div class="test-role">YouTube — 82K subscribers</div></div></div></div>
+    <div class="test-card"><div class="test-stars">★★★★★</div><div class="test-quote">"As a landscaper I recommend LawnStar to every client who asks about robot mowers. Easy extra income from referrals I was making anyway."</div><div class="test-author"><div class="test-avatar" style="background:#e3f2fd">🏡</div><div><div class="test-name">Sarah T.</div><div class="test-role">Landscaper, Brisbane</div></div></div></div>
+    <div class="test-card"><div class="test-stars">★★★★★</div><div class="test-quote">"The dashboard is excellent — I can see in real time what's converting. Support team responds within the hour. Best affiliate program I'm in."</div><div class="test-author"><div class="test-avatar" style="background:#f3e5f5">📝</div><div><div class="test-name">Priya K.</div><div class="test-role">Lawn &amp; Garden Blog</div></div></div></div>
+  </div>
+</div>
+
+<!-- EARNINGS CALC -->
+<div class="section">
+  <div style="background:#fff;border-radius:18px;border:2px solid var(--bd);padding:1.8rem">
+    <div style="font-size:1.05rem;font-weight:900;margin-bottom:1.2rem;text-align:center">💰 Earnings Estimator</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem;margin-bottom:1.5rem">
+      <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.5px">Monthly Visitors</label><input type="range" id="visitors" min="500" max="100000" step="500" value="10000" oninput="calcEarnings()" style="width:100%"/><div style="font-size:.85rem;font-weight:800;color:var(--gd);text-align:center" id="visVal">10,000</div></div>
+      <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.5px">Conversion Rate</label><input type="range" id="conv" min="0.5" max="5" step="0.5" value="1.5" oninput="calcEarnings()" style="width:100%"/><div style="font-size:.85rem;font-weight:800;color:var(--gd);text-align:center" id="convVal">1.5%</div></div>
+      <div><label style="font-size:.75rem;font-weight:700;color:var(--muted);display:block;margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.5px">Commission Tier</label><select id="tier" oninput="calcEarnings()" style="width:100%;padding:.5rem;border:2px solid var(--bd);border-radius:8px;font-size:.88rem"><option value="0.05">Seedling — 5%</option><option value="0.065" selected>Grower — 6.5%</option><option value="0.08">LawnStar Pro — 8%</option></select></div>
+    </div>
+    <div style="background:linear-gradient(135deg,#f0faf0,#e8f5e9);border-radius:14px;padding:1.2rem;text-align:center">
+      <div style="font-size:.8rem;color:var(--muted);margin-bottom:.3rem">Estimated Monthly Earnings</div>
+      <div style="font-size:2.5rem;font-weight:900;color:var(--gd)" id="calcResult">A$878</div>
+      <div style="font-size:.75rem;color:var(--muted);margin-top:.2rem">Based on A$890 avg order value</div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNUP -->
+<div class="signup-section" id="signup">
+  <div class="signup-inner">
+    <div style="font-size:2.5rem;margin-bottom:.6rem">🚀</div>
+    <div style="font-size:1.5rem;font-weight:900;margin-bottom:.4rem">Apply to Join the Program</div>
+    <div style="font-size:.88rem;opacity:.85;margin-bottom:.3rem">Free to join · Approved within 24 hours · No minimum traffic requirements</div>
+    <div class="signup-form" id="signupFormWrap">
+      <div class="sf-grid">
+        <div class="sf-group"><label class="sf-label">First Name</label><input class="sf-inp" type="text" id="sf_first" placeholder="Jane"/></div>
+        <div class="sf-group"><label class="sf-label">Last Name</label><input class="sf-inp" type="text" id="sf_last" placeholder="Smith"/></div>
+        <div class="sf-group"><label class="sf-label">Email</label><input class="sf-inp" type="email" id="sf_email" placeholder="jane@example.com"/></div>
+        <div class="sf-group"><label class="sf-label">Phone</label><input class="sf-inp" type="tel" id="sf_phone" placeholder="04XX XXX XXX"/></div>
+        <div class="sf-group"><label class="sf-label">Website / Channel</label><input class="sf-inp" type="url" id="sf_site" placeholder="https://..."/></div>
+        <div class="sf-group"><label class="sf-label">Partner Type</label>
+          <select class="sf-inp" id="sf_type">
+            <option>Content Creator (YouTube/TikTok)</option><option>Blogger / Reviewer</option><option>Landscaper / Gardener</option>
+            <option>Retail Partner</option><option>Property Manager</option><option>Other</option>
+          </select>
+        </div>
+        <div class="sf-group sf-full"><label class="sf-label">Monthly Audience Size</label>
+          <select class="sf-inp" id="sf_audience">
+            <option>Under 1,000</option><option>1,000–10,000</option><option>10,000–50,000</option><option>50,000–200,000</option><option>200,000+</option>
+          </select>
+        </div>
+        <div class="sf-group sf-full"><label class="sf-label">Tell Us About Your Audience</label><textarea class="sf-inp" id="sf_about" rows="3" placeholder="Who are your readers/viewers? What do you publish about?"></textarea></div>
+      </div>
+      <button class="sf-submit" onclick="submitAffiliate()">🚀 Submit Application</button>
+    </div>
+    <div id="signupSuccess" style="display:none;text-align:center;padding:2rem;color:#fff">
+      <div style="font-size:3rem;margin-bottom:.6rem">🎉</div>
+      <div style="font-size:1.2rem;font-weight:900;margin-bottom:.4rem">Application Received!</div>
+      <div style="font-size:.88rem;opacity:.85;line-height:1.7">We'll review your application and email you within <strong>24 hours</strong> with your login and referral link.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div style="font-size:1.3rem;font-weight:900;margin-bottom:.4rem">&#127807; Lawn<span style="color:#76c442">Star</span></div><div style="font-size:.78rem;opacity:.7;line-height:1.7;max-width:240px">Australia's most trusted robot mower destination.</div></div>
+      <div><div class="fc-title">Shop</div><a href="lawnstar-all-mowers.html">All Mowers</a><a href="lawnstar-deals.html">Deals</a><a href="lawnstar-bundle-builder.html">Bundles</a></div>
+      <div><div class="fc-title">Partners</div><a href="lawnstar-affiliate.html">Affiliate Program</a><a href="lawnstar-loyalty.html">Rewards</a><a href="lawnstar-contact.html">Contact</a></div>
+      <div><div class="fc-title">Help</div><a href="lawnstar-warranty.html">Warranty</a><a href="lawnstar-store-locator.html">Find a Store</a><a href="lawnstar-faq.html">FAQ</a></div>
+    </div>
+    <div class="footer-bottom"><span>&#127807; LawnStar &copy; 2026 · ABN 12 345 678 901</span><span>Affiliate program T&amp;Cs apply</span></div>
+  </div>
+</footer>
+
+<script>
+function calcEarnings(){
+  const v=parseInt(document.getElementById('visitors').value);
+  const c=parseFloat(document.getElementById('conv').value)/100;
+  const t=parseFloat(document.getElementById('tier').value);
+  const aov=890;
+  const earn=Math.round(v*c*aov*t);
+  document.getElementById('calcResult').textContent='A$'+earn.toLocaleString();
+  document.getElementById('visVal').textContent=v.toLocaleString();
+  document.getElementById('convVal').textContent=parseFloat(document.getElementById('conv').value)+'%';
+}
+function submitAffiliate(){
+  const f=document.getElementById('sf_first').value.trim();
+  const e=document.getElementById('sf_email').value.trim();
+  if(!f||!e){alert('Please fill in your name and email.');return;}
+  document.getElementById('signupFormWrap').style.display='none';
+  document.getElementById('signupSuccess').style.display='block';
+}
+if(window.innerWidth<=620){document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}
+</script>
+$chatWidget = @'
+
+<!-- LAWNSTAR LIVE CHAT WIDGET -->
+<style>
+#ls-chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:8000;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;font-family:'Segoe UI',system-ui,sans-serif}
+#ls-chat-pop{background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;display:none;animation:chatIn .25s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+#ls-chat-pop.on{display:block}
+.lsc-header{background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.lsc-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.lsc-hinfo{flex:1}
+.lsc-name{color:#fff;font-size:.88rem;font-weight:800}
+.lsc-status{color:rgba(255,255,255,.75);font-size:.72rem;display:flex;align-items:center;gap:.3rem}
+.lsc-dot{width:7px;height:7px;border-radius:50%;background:#76c442;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.lsc-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.1rem;cursor:pointer;padding:.2rem;line-height:1}
+.lsc-msgs{height:220px;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.7rem;background:#f8fbf8}
+.lsc-msg{max-width:82%;padding:.6rem .85rem;border-radius:14px;font-size:.8rem;line-height:1.5;animation:msgIn .2s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lsc-msg.bot{background:#fff;border:1px solid #e2e8f0;align-self:flex-start;border-radius:4px 14px 14px 14px;color:#1a1a2e}
+.lsc-msg.user{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
+.lsc-chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .9rem .7rem;background:#f8fbf8}
+.lsc-chip{background:#e8f5e9;color:#2d7a3a;border:1px solid #c8e6c9;border-radius:20px;padding:.25rem .75rem;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lsc-chip:hover{background:#2d7a3a;color:#fff}
+.lsc-input-row{display:flex;gap:0;border-top:1px solid #e2e8f0;background:#fff}
+.lsc-input{flex:1;border:none;outline:none;padding:.75rem .9rem;font-size:.85rem;font-family:inherit;background:transparent}
+.lsc-send{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;padding:.5rem .85rem;cursor:pointer;font-size:1rem;transition:opacity .2s}
+.lsc-send:hover{opacity:.85}
+.lsc-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1b5e20,#2d7a3a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(45,122,58,.4);transition:all .25s;position:relative}
+.lsc-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(45,122,58,.55)}
+.lsc-notif{position:absolute;top:-2px;right:-2px;background:#e53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.lsc-typing{display:flex;gap:4px;align-items:center;padding:.6rem .85rem;background:#fff;border:1px solid #e2e8f0;border-radius:4px 14px 14px 14px;align-self:flex-start;width:52px}
+.lsc-typing span{width:7px;height:7px;border-radius:50%;background:#76c442;animation:typ .9s infinite}
+.lsc-typing span:nth-child(2){animation-delay:.15s}
+.lsc-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typ{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+<div id="ls-chat-bubble">
+  <div id="ls-chat-pop">
+    <div class="lsc-header">
+      <div class="lsc-avatar">&#127807;</div>
+      <div class="lsc-hinfo">
+        <div class="lsc-name">LawnStar Support</div>
+        <div class="lsc-status"><span class="lsc-dot"></span> Online now &bull; Avg reply &lt; 2 min</div>
+      </div>
+      <button class="lsc-close" onclick="lscToggle()">&#10005;</button>
+    </div>
+    <div class="lsc-msgs" id="lscMsgs"></div>
+    <div class="lsc-chips" id="lscChips">
+      <div class="lsc-chip" onclick="lscQuick('Which mower suits my lawn?')">&#129302; Find my mower</div>
+      <div class="lsc-chip" onclick="lscQuick('What are your current deals?')">&#128293; Deals &amp; sales</div>
+      <div class="lsc-chip" onclick="lscQuick('I need help with my order')">&#128230; Order help</div>
+      <div class="lsc-chip" onclick="lscQuick('Warranty question')">&#128737; Warranty</div>
+    </div>
+    <div class="lsc-input-row">
+      <input class="lsc-input" id="lscInput" placeholder="Ask us anything..." onkeydown="if(event.key==='Enter')lscSend()"/>
+      <button class="lsc-send" onclick="lscSend()">&#10148;</button>
+    </div>
+  </div>
+  <button class="lsc-btn" onclick="lscToggle()" id="lscMainBtn" title="Chat with LawnStar">
+    <span id="lscBtnIcon">&#128172;</span>
+    <div class="lsc-notif" id="lscNotif">1</div>
+  </button>
+</div>
+<script>
+(function(){
+var open=false,welcomed=false;
+var RESPONSES={
+  'which mower':'Great question! Can you tell me your lawn size? Under 500m2, 500-1000m2, or over 1000m2? I can find the perfect match &#128269;',
+  'lawn size':'For up to 1,000m2, the Mammotion Yuka 1000 (A$899) is our top pick. For 1,000–3,000m2, the Segway Navimow i108E is brilliant. For larger lawns, Mammotion Luba 2 AWD covers up to 5,000m2! &#127807;',
+  'deal':'Right now we have up to 30% off! Use code <strong>LAWN10</strong> at checkout for an extra 10% off everything. <a href="lawnstar-deals.html" style="color:#76c442;font-weight:700">See all deals &#8594;</a>',
+  'order':'I can help with that! Please email orders@lawnstar.com.au with your order number, or use our <a href="lawnstar-track.html" style="color:#76c442;font-weight:700">order tracker</a>. &#128230;',
+  'warranty':'All our mowers come with at least 3 years warranty (manufacturer + LawnStar top-up). You can <a href="lawnstar-warranty.html" style="color:#76c442;font-weight:700">view full warranty details here</a>. &#128737;',
+  'price':'Our mowers range from A$899 to A$6,900 depending on features. The most popular is the Segway Navimow i108E at A$1,299. Want me to help find one in your budget?',
+  'install':'Great news — we offer professional installation from A$199! Our technicians set up the boundary wire, configure the app, and do a test run. <a href="lawnstar-store-locator.html" style="color:#76c442;font-weight:700">Book via a local store</a>.',
+  'compare':'Our <a href="lawnstar-compare.html" style="color:#76c442;font-weight:700">comparison tool</a> lets you compare up to 4 mowers side by side with animated score charts. Really handy! &#9878;',
+  'bundle':'Yes! We have bundle deals where you save 10% when you add 2+ accessories. Check out the <a href="lawnstar-bundle-builder.html" style="color:#76c442;font-weight:700">Bundle Builder</a> &#127873;',
+  'shipping':'We offer free shipping on all orders over A$500 Australia-wide. Standard delivery is 3–7 business days. Express available. &#128666;',
+  'default':'Thanks for your message! A LawnStar expert will reply within 2 minutes. In the meantime, our <a href="lawnstar-faq.html" style="color:#76c442;font-weight:700">FAQ page</a> might have a quick answer. &#128075;'
+};
+function addMsg(txt,type,delay){
+  delay=delay||0;
+  setTimeout(function(){
+    var msgs=document.getElementById('lscMsgs');
+    if(!msgs)return;
+    // Show typing for bot
+    if(type==='bot'&&delay>0){
+      var typ=document.createElement('div');typ.className='lsc-typing';typ.id='lsc-typing-ind';
+      typ.innerHTML='<span></span><span></span><span></span>';
+      msgs.appendChild(typ);msgs.scrollTop=msgs.scrollHeight;
+      setTimeout(function(){
+        var t=document.getElementById('lsc-typing-ind');if(t)t.remove();
+        var m=document.createElement('div');m.className='lsc-msg '+type;m.innerHTML=txt;
+        msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+      },900);
+    } else {
+      var m=document.createElement('div');m.className='lsc-msg '+(type||'bot');m.innerHTML=txt;
+      msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+    }
+  },delay);
+}
+function getReply(txt){
+  var t=txt.toLowerCase();
+  for(var k in RESPONSES){if(t.indexOf(k)>-1)return RESPONSES[k];}
+  return RESPONSES['default'];
+}
+window.lscToggle=function(){
+  open=!open;
+  var pop=document.getElementById('ls-chat-pop');
+  var notif=document.getElementById('lscNotif');
+  var icon=document.getElementById('lscBtnIcon');
+  if(open){
+    pop.classList.add('on');
+    if(notif)notif.style.display='none';
+    if(icon)icon.textContent='\u2715';
+    if(!welcomed){
+      welcomed=true;
+      addMsg('&#127807; Hey! Welcome to <strong>LawnStar</strong>. I\'m here to help you find the perfect robot mower &#129302;','bot',100);
+      addMsg('What can I help you with today?','bot',1200);
+    }
+  } else {
+    pop.classList.remove('on');
+    if(icon)icon.textContent='\u{1F4AC}';
+  }
+};
+window.lscSend=function(){
+  var inp=document.getElementById('lscInput');
+  var txt=inp.value.trim();
+  if(!txt)return;
+  addMsg(txt,'user');
+  inp.value='';
+  addMsg(getReply(txt),'bot',400);
+};
+window.lscQuick=function(txt){
+  addMsg(txt,'user');
+  addMsg(getReply(txt),'bot',400);
+  document.getElementById('lscChips').style.display='none';
+};
+// Show greeting bubble after 8s
+setTimeout(function(){
+  if(!open){
+    var notif=document.getElementById('lscNotif');
+    if(notif)notif.style.display='flex';
+  }
+},8000);
+})();
+</script>
+</body>
+</html>

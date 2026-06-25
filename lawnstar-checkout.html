@@ -1,0 +1,723 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lawn Star — Checkout</title>
+<style>
+:root{--g:#2d7a3a;--gd:#1b5e20;--ac:#76c442;--bg:#f4f9f4;--text:#1a1a2e;--muted:#6b7280;--bd:#e2e8f0;--err:#e53935}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+nav{background:linear-gradient(135deg,var(--gd),var(--g));height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.logo{color:#fff;font-size:1.5rem;font-weight:900;display:flex;align-items:center;gap:.4rem;text-decoration:none}
+.logo span{color:var(--ac)}
+.nav-links{display:flex;align-items:center;gap:.5rem}
+.nbtn{padding:.38rem .85rem;border-radius:20px;font-weight:700;font-size:.82rem;border:2px solid rgba(255,255,255,.3);color:#fff;background:transparent;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-block}
+.nbtn:hover{background:rgba(255,255,255,.15)}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem}
+.hbg span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:var(--gd);padding:.8rem 1.5rem;gap:.5rem;z-index:99;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.mob-menu.on{display:flex}
+.mob-menu a{color:#fff;font-weight:700;font-size:.9rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.1);text-decoration:none}
+.steps-bar{background:#fff;border-bottom:1px solid var(--bd);padding:1rem 2rem;display:flex;justify-content:center;gap:0}
+.step{display:flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:700;color:var(--muted)}
+.step.on{color:var(--g)}.step.done{color:var(--g)}
+.step-num{width:28px;height:28px;border-radius:50%;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0;background:#fff;transition:all .3s}
+.step.on .step-num{border-color:var(--g);background:var(--g);color:#fff}
+.step.done .step-num{border-color:var(--g);background:var(--g);color:#fff}
+.step-div{width:40px;height:2px;background:var(--bd);margin:0 .4rem;transition:background .3s}
+.step-div.on{background:var(--g)}
+.co-wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:start}
+.co-main{display:flex;flex-direction:column;gap:1.2rem}
+.co-aside{display:flex;flex-direction:column;gap:1rem}
+.panel{background:#fff;border-radius:16px;padding:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.panel-title{font-size:.92rem;font-weight:800;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem}
+.form-row.full{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:.3rem}
+label{font-size:.78rem;font-weight:700;color:var(--muted)}
+input,select{padding:.58rem .85rem;border:2px solid var(--bd);border-radius:10px;font-size:.88rem;outline:none;font-family:inherit;transition:border .2s;background:#fff;color:var(--text)}
+input:focus,select:focus{border-color:var(--g)}
+input.err{border-color:var(--err)}select.err{border-color:var(--err)}
+.err-msg{font-size:.72rem;color:var(--err);display:none}
+.err-msg.on{display:block}
+.sec{display:none}.sec.on{display:block;animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.pay-tabs{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.ptab{padding:.4rem .9rem;border-radius:20px;border:2px solid var(--bd);font-size:.8rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s}
+.ptab:hover,.ptab.on{border-color:var(--g);color:var(--g);background:#f0faf0}
+.card-icons{display:flex;gap:.4rem;margin-bottom:.9rem}
+.ci-box{width:44px;height:28px;border-radius:5px;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;color:var(--muted);background:#f8fafc}
+.bnpl-opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin-bottom:.7rem}
+.bnpl-opt{border:2px solid var(--bd);border-radius:12px;padding:.7rem .5rem;text-align:center;cursor:pointer;transition:all .2s}
+.bnpl-opt:hover,.bnpl-opt.on{border-color:var(--g);background:#f0faf0}
+.bnpl-name{font-size:.88rem;font-weight:800}
+.bnpl-sub{font-size:.7rem;color:var(--muted);margin-top:.2rem}
+.order-item{display:flex;align-items:center;gap:.8rem;padding:.65rem 0;border-bottom:1px solid var(--bd)}
+.order-item:last-child{border-bottom:none}
+.oi-img{width:52px;height:52px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);flex-shrink:0}
+.oi-name{font-size:.85rem;font-weight:700;line-height:1.3}
+.oi-brand{font-size:.72rem;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.oi-price{font-size:.9rem;font-weight:900;color:var(--gd);margin-left:auto;white-space:nowrap}
+.oi-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.75rem;padding:.15rem .35rem;border-radius:6px;transition:all .2s}
+.oi-remove:hover{color:var(--err);background:#fce4ec}
+.qty-ctrl{display:flex;align-items:center;gap:.3rem;margin-top:.2rem}
+.qty-btn{width:22px;height:22px;border:1px solid var(--bd);background:#fff;border-radius:5px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.qty-btn:hover{border-color:var(--g);color:var(--g)}
+.qty-num{font-size:.8rem;font-weight:700;width:22px;text-align:center}
+.totals{display:flex;flex-direction:column;gap:.45rem;padding-top:.8rem;border-top:1px solid var(--bd)}
+.total-row{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted)}
+.total-row.grand{font-size:1.05rem;font-weight:900;color:var(--text);border-top:2px solid var(--bd);padding-top:.6rem;margin-top:.2rem}
+.total-row .val{font-weight:700}
+.total-row.disc .val{color:#2d7a3a}
+.promo-wrap{display:flex;gap:.5rem;margin:1rem 0 .5rem}
+.promo-inp{flex:1;padding:.48rem .8rem;border:2px solid var(--bd);border-radius:10px;font-size:.85rem;outline:none;font-family:inherit}
+.promo-inp:focus{border-color:var(--g)}
+.promo-btn{padding:.48rem 1rem;background:var(--g);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:.85rem}
+.del-opts{display:flex;flex-direction:column;gap:.5rem}
+.del-opt{border:2px solid var(--bd);border-radius:12px;padding:.75rem 1rem;display:flex;align-items:center;gap:.8rem;cursor:pointer;transition:all .2s}
+.del-opt:hover,.del-opt.on{border-color:var(--g);background:#f0faf0}
+.del-icon{font-size:1.4rem}
+.del-name{font-size:.85rem;font-weight:700}
+.del-eta{font-size:.75rem;color:var(--muted)}
+.del-price{margin-left:auto;font-size:.88rem;font-weight:800;color:var(--gd)}
+.btn-next{width:100%;padding:.7rem;background:var(--g);color:#fff;border:none;border-radius:12px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;margin-top:.5rem}
+.btn-next:hover{background:var(--gd)}
+.btn-back-lnk{text-align:center;font-size:.8rem;color:var(--muted);margin-top:.6rem;cursor:pointer}
+.btn-back-lnk:hover{color:var(--g)}
+.btn-place{width:auto;padding:.75rem 2rem;background:linear-gradient(135deg,var(--gd),var(--g));color:#fff;border:none;border-radius:14px;font-weight:800;font-size:1rem;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(45,122,58,.3)}
+.btn-place:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,122,58,.4)}
+.trust-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.3rem}
+.tbadge{display:flex;align-items:center;gap:.3rem;font-size:.72rem;color:var(--muted);font-weight:600}
+.success-screen{display:none;max-width:560px;margin:3rem auto;text-align:center;background:#fff;border-radius:20px;padding:2.5rem;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.success-screen.on{display:block;animation:fi .5s ease}
+.success-steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin:1.2rem 0}
+.sstep{background:var(--bg);border-radius:12px;padding:.7rem .5rem;text-align:center}
+.sstep-icon{font-size:1.3rem}
+.sstep-label{font-size:.72rem;font-weight:700;color:var(--muted);margin-top:.2rem}
+.order-num{display:inline-block;background:#f0faf0;border:2px solid #c8e6c9;border-radius:12px;padding:.5rem 1.2rem;font-size:1rem;font-weight:800;color:var(--gd);margin-bottom:1rem}
+footer{background:var(--gd);color:#fff;text-align:center;padding:1.4rem;font-size:.82rem;margin-top:2rem}
+@media(max-width:820px){.co-wrap{grid-template-columns:1fr}.nav-links{display:none}.hbg{display:flex}}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}.bnpl-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="dealsBanner" style="background:linear-gradient(90deg,#b71c1c,#e53935,#b71c1c);color:#fff;text-align:center;padding:.5rem 1rem;font-size:.82rem;font-weight:700;position:relative;z-index:101">
+  &#128293; <strong>FLASH SALE:</strong> Up to 30% off selected models this week &nbsp;&#183;&nbsp; Use code <strong>LAWN10</strong> for extra 10% &nbsp;
+  <a href="lawnstar-deals.html" style="color:#ffd700;text-decoration:underline;font-weight:800">Shop Deals &#8594;</a>
+  <button onclick="this.parentElement.style.display='none'" style="position:absolute;right:.8rem;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;opacity:.7">&#10005;</button>
+</div>
+<nav>
+  <a class="logo" href="lawnstar-homepage.html">🌿 Lawn<span>Star</span></a>
+  <div class="nav-links" id="navLinks">
+    <a class="nbtn" href="lawnstar-homepage.html">🏠 Home</a>
+    <a class="nbtn" href="lawnstar-all-mowers.html">🤖 All Mowers</a>
+    <a class="nbtn" href="lawnstar-quiz.html">🧠 Quiz</a>
+    <a class="nbtn" href="lawnstar-brands.html">🏷️ Brands</a>
+    <a class="nbtn" href="lawnstar-guide.html">📖 Guide</a>
+    <a class="nbtn" href="lawnstar-blog.html">&#128221; Blog</a>
+    <a class="nbtn" href="lawnstar-deals.html" style="background:rgba(229,57,53,.7);border-color:rgba(229,57,53,.9)">🔥 Deals</a>
+    <a class="nbtn" href="lawnstar-compare.html">⚖️ Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+    <a class="nbtn"     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html">⭐ Reviews</a>
+    <a class="nbtn" href="lawnstar-faq.html">❓ FAQ</a>
+    <a class="nbtn" href="lawnstar-contact.html">📬 Contact</a>
+    <a class="nbtn" href="lawnstar-loyalty.html">Rewards</a>
+    <a class="nbtn" href="lawnstar-track.html">&#128230; Track Order</a>
+    <a class="nbtn" href="lawnstar-vs-petrol.html">Robot vs Petrol</a>
+    <a class="nbtn" href="lawnstar-checkout.html" style="background:rgba(118,196,66,.25);border-color:#76c442">Cart</a>
+  </div>
+  <div class="hbg" id="hbg" onclick="document.getElementById('mobMenu').classList.toggle('on')"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="lawnstar-homepage.html">🏠 Home</a>
+  <a href="lawnstar-all-mowers.html">🤖 All Mowers</a>
+  <a href="lawnstar-quiz.html">🧠 Quiz</a>
+  <a href="lawnstar-guide.html">📖 Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+  <a href="lawnstar-deals.html">🔥 Deals</a>
+  <a href="lawnstar-faq.html">❓ FAQ</a>
+  <a href="lawnstar-contact.html">📬 Contact</a>
+  <a href="lawnstar-loyalty.html">Rewards</a>
+  <a href="lawnstar-track.html">&#128230; Track Order</a>
+  <a href="lawnstar-vs-petrol.html">Robot vs Petrol</a>
+  <a href="lawnstar-checkout.html">Cart</a>
+</div>
+
+<div class="steps-bar" id="stepsBar">
+  <div class="step on" id="st1"><div class="step-num">1</div><span>Cart</span></div>
+  <div class="step-div" id="sd1"></div>
+  <div class="step" id="st2"><div class="step-num">2</div><span>Delivery</span></div>
+  <div class="step-div" id="sd2"></div>
+  <div class="step" id="st3"><div class="step-num">3</div><span>Payment</span></div>
+  <div class="step-div" id="sd3"></div>
+  <div class="step" id="st4"><div class="step-num">4</div><span>Review</span></div>
+</div>
+
+<div class="co-wrap" id="coWrap">
+  <div class="co-main">
+
+    <!-- STEP 1: CART -->
+    <div id="sec1" class="sec on">
+      <div class="panel">
+        <div class="panel-title">🛒 Your Cart</div>
+        <div id="cartItems"></div>
+        <div class="promo-wrap">
+          <input class="promo-inp" id="promoInp" type="text" placeholder="Promo code — try LAWN10"/>
+          <button class="promo-btn" onclick="applyPromo()">Apply</button>
+        </div>
+        <div id="promoOk" style="font-size:.78rem;color:var(--g);font-weight:700;display:none">✅ LAWN10 applied — 10% off!</div>
+        <div class="totals" id="totals1"></div>
+      </div>
+      <button class="btn-next" onclick="goStep(2)">Continue to Delivery →</button>
+      <div class="btn-back-lnk" onclick="window.location='lawnstar-all-mowers.html'">← Continue Shopping</div>
+    </div>
+
+    <!-- STEP 2: DELIVERY -->
+    <div id="sec2" class="sec">
+      <div class="panel">
+        <div class="panel-title">🚚 Delivery Address</div>
+        <div class="form-row">
+          <div class="form-group"><label>First Name *</label><input id="fName" type="text" placeholder="Alex"/><span class="err-msg" id="e-fName">Required</span></div>
+          <div class="form-group"><label>Last Name *</label><input id="lName" type="text" placeholder="Smith"/><span class="err-msg" id="e-lName">Required</span></div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group"><label>Street Address *</label><input id="addr" type="text" placeholder="42 Eucalyptus Drive"/><span class="err-msg" id="e-addr">Required</span></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Suburb *</label><input id="suburb" type="text" placeholder="Bondi Junction"/><span class="err-msg" id="e-suburb">Required</span></div>
+          <div class="form-group"><label>Postcode *</label><input id="postcode" type="text" placeholder="2022" maxlength="4"/><span class="err-msg" id="e-postcode">4-digit postcode</span></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>State *</label>
+            <select id="state"><option value="">Select state</option><option>NSW</option><option>VIC</option><option>QLD</option><option>WA</option><option>SA</option><option>TAS</option><option>ACT</option><option>NT</option></select>
+            <span class="err-msg" id="e-state">Required</span></div>
+          <div class="form-group"><label>Phone *</label><input id="phone" type="tel" placeholder="0400 000 000"/><span class="err-msg" id="e-phone">Required</span></div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group"><label>Email *</label><input id="email" type="email" placeholder="alex@example.com.au"/><span class="err-msg" id="e-email">Valid email required</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">📅 Delivery Method</div>
+        <div class="del-opts">
+          <div class="del-opt on" id="del0" onclick="pickDel(0,0,'Standard Free (2–5 days)')">
+            <div class="del-icon">🚚</div>
+            <div><div class="del-name">Standard Delivery</div><div class="del-eta">2–5 business days · Australia-wide</div></div>
+            <div class="del-price">FREE</div>
+          </div>
+          <div class="del-opt" id="del1" onclick="pickDel(1,15,'Express (1–2 days)')">
+            <div class="del-icon">⚡</div>
+            <div><div class="del-name">Express Delivery</div><div class="del-eta">1–2 business days · Metro areas</div></div>
+            <div class="del-price">A$15</div>
+          </div>
+          <div class="del-opt" id="del2" onclick="pickDel(2,0,'Click & Collect — Sydney CBD')">
+            <div class="del-icon">🏪</div>
+            <div><div class="del-name">Click & Collect</div><div class="del-eta">Ready tomorrow · Sydney CBD</div></div>
+            <div class="del-price">FREE</div>
+          </div>
+        </div>
+      </div>
+      <button class="btn-next" onclick="valStep2()">Continue to Payment →</button>
+      <div class="btn-back-lnk" onclick="goStep(1)">← Back to Cart</div>
+    </div>
+
+    <!-- STEP 3: PAYMENT -->
+    <div id="sec3" class="sec">
+      <div class="panel">
+        <div class="panel-title">💳 Payment Method</div>
+        <div class="pay-tabs">
+          <div class="ptab on" id="pt0" onclick="payTab(0)">💳 Credit Card</div>
+          <div class="ptab" id="pt1" onclick="payTab(1)">🟢 PayPal</div>
+          <div class="ptab" id="pt2" onclick="payTab(2)">📲 Buy Now Pay Later</div>
+        </div>
+        <div id="payCard">
+          <div class="card-icons">
+            <div class="ci-box">VISA</div><div class="ci-box">MC</div><div class="ci-box">AMEX</div><div class="ci-box">JCB</div>
+          </div>
+          <div class="form-row full"><div class="form-group"><label>Cardholder Name *</label><input id="cName" type="text" placeholder="Alex Smith"/></div></div>
+          <div class="form-row full"><div class="form-group"><label>Card Number *</label><input id="cNum" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)"/></div></div>
+          <div class="form-row">
+            <div class="form-group"><label>Expiry *</label><input id="cExp" type="text" placeholder="MM/YY" maxlength="5" oninput="fmtExp(this)"/></div>
+            <div class="form-group"><label>CVV *</label><input id="cCvv" type="text" placeholder="123" maxlength="4"/></div>
+          </div>
+        </div>
+        <div id="payPP" style="display:none;text-align:center;padding:1.5rem 0">
+          <div style="font-size:2.5rem;margin-bottom:.6rem">🟢</div>
+          <div style="font-size:.9rem;color:var(--muted);margin-bottom:1rem">You'll be redirected to PayPal to complete payment securely.</div>
+          <div style="background:#f0faf0;border-radius:10px;padding:.6rem 1rem;font-size:.82rem;color:var(--g);font-weight:600;display:inline-block">🔒 256-bit SSL encrypted checkout</div>
+        </div>
+        <div id="payBNPL" style="display:none">
+          <div style="font-size:.82rem;color:var(--muted);margin-bottom:.8rem">Split into 4 interest-free fortnightly instalments:</div>
+          <div class="bnpl-opts">
+            <div class="bnpl-opt on" id="bnpl0" onclick="pickBNPL(0)"><div class="bnpl-name">Afterpay</div><div class="bnpl-sub">4 × fortnightly</div></div>
+            <div class="bnpl-opt" id="bnpl1" onclick="pickBNPL(1)"><div class="bnpl-name">Zip Pay</div><div class="bnpl-sub">Weekly or monthly</div></div>
+            <div class="bnpl-opt" id="bnpl2" onclick="pickBNPL(2)"><div class="bnpl-name">Humm</div><div class="bnpl-sub">Up to 60 months</div></div>
+          </div>
+          <div id="bnplNote" style="background:#f0faf0;border-radius:10px;padding:.6rem .9rem;font-size:.8rem;color:var(--g);font-weight:600"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">🔒 Secure Checkout</div>
+        <div class="trust-row">
+          <div class="tbadge">🔒 SSL Encrypted</div>
+          <div class="tbadge">🛡️ PCI Compliant</div>
+          <div class="tbadge">✅ Safe Checkout</div>
+          <div class="tbadge">🇦🇺 Australian Business</div>
+        </div>
+      </div>
+      <button class="btn-next" onclick="valStep3()">Review Order →</button>
+      <div class="btn-back-lnk" onclick="goStep(2)">← Back to Delivery</div>
+    </div>
+
+    <!-- STEP 4: REVIEW -->
+    <div id="sec4" class="sec">
+      <div class="panel">
+        <div class="panel-title">📋 Review Your Order</div>
+        <div id="reviewContent"></div>
+      </div>
+      <div class="panel" style="background:linear-gradient(135deg,var(--gd),var(--g));color:#fff">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+          <div>
+            <div style="font-size:.82rem;opacity:.8;margin-bottom:.2rem">Total to pay today</div>
+            <div style="font-size:1.8rem;font-weight:900" id="finalTotal">A$0</div>
+            <div style="font-size:.75rem;opacity:.7">inc. GST · Free standard delivery</div>
+          </div>
+          <button class="btn-place" onclick="placeOrder()">✅ Place Order</button>
+        </div>
+      </div>
+      <div class="btn-back-lnk" onclick="goStep(3)">← Back to Payment</div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="co-aside">
+    <div class="panel">
+      <div class="panel-title">📦 Order Summary</div>
+      <div id="summaryItems"></div>
+      <div class="totals" id="summaryTotals"></div>
+    </div>
+    <div class="panel">
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.7">
+        <div style="font-weight:700;color:var(--text);margin-bottom:.4rem">🛡️ LawnStar Guarantee</div>
+        🚚 Free delivery Australia-wide<br>
+        🔄 30-day hassle-free returns<br>
+        🛡️ 2-year manufacturer warranty<br>
+        📲 Afterpay / Zip Pay / Humm accepted
+      </div>
+    </div>
+    <div class="panel">
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.8">
+        <div style="font-weight:700;color:var(--text);margin-bottom:.3rem">💬 Need Help?</div>
+        📞 1800 LAWNSTAR<br>
+        📧 help@lawnstar.com.au<br>
+        🕐 Mon–Fri 8am–6pm AEST
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="success-screen" id="successScreen">
+  <div style="font-size:5rem;margin-bottom:.8rem">🎉</div>
+  <div style="font-size:1.6rem;font-weight:900;margin-bottom:.4rem">Order Confirmed!</div>
+  <div class="order-num" id="orderNum"></div>
+  <div style="font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:1.2rem">G'day! Your robot lawn mower is on its way. A confirmation email with tracking details is heading to your inbox now.</div>
+  <div class="success-steps">
+    <div class="sstep"><div class="sstep-icon">📧</div><div class="sstep-label">Confirmation<br>Email Sent</div></div>
+    <div class="sstep"><div class="sstep-icon">📦</div><div class="sstep-label">Packed &<br>Dispatched</div></div>
+    <div class="sstep"><div class="sstep-icon">🚚</div><div class="sstep-label">Delivered<br>2–5 Days</div></div>
+  </div>
+  <div style="display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem">
+    <a href="lawnstar-homepage.html" style="background:var(--g);color:#fff;padding:.65rem 1.4rem;border-radius:22px;font-weight:700;font-size:.88rem;text-decoration:none">🏠 Back to Home</a>
+    <a href="lawnstar-guide.html" style="background:#f0faf0;color:var(--g);padding:.65rem 1.4rem;border-radius:22px;font-weight:700;font-size:.88rem;text-decoration:none;border:2px solid #c8e6c9">📖 Setup Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+  </div>
+</div>
+
+<footer style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:3rem 2rem 1.5rem;margin-top:2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2rem">
+      <div>
+        <div style="font-size:1.4rem;font-weight:900;margin-bottom:.6rem">&#127807; Lawn<span style="color:#76c442">Star</span></div>
+        <div style="font-size:.82rem;opacity:.75;line-height:1.7;max-width:260px">Australia&#39;s most trusted destination for AI robot lawn mowers. Free delivery, 2-year warranty, 30-day returns.</div>
+        <div style="display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap">
+          <a href="lawnstar-loyalty.html" style="background:#76c442;color:#1b5e20;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:800;text-decoration:none">&#127942; Join Rewards</a>
+          <a href="lawnstar-checkout.html" style="background:rgba(255,255,255,.15);color:#fff;padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.3)">&#128722; Cart</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Shop</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-all-mowers.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129302; All Mowers</a>
+          <a href="lawnstar-deals.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128293; Current Deals</a>
+          <a href="lawnstar-brands.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127991;&#65039; Brands</a>
+          <a href="lawnstar-compare.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9878;&#65039; Compare</a>
+    <a class="nbtn" href="lawnstar-bundle-builder.html">&#127873; Bundles</a>
+          <a href="lawnstar-vs-petrol.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#9876;&#65039; Robot vs Petrol</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128722; Checkout</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Learn</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128218; Buying Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+          <a href="lawnstar-quiz.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#129504; Find My Mower Quiz</a>
+          <a     <a class="nbtn" href="lawnstar-store-locator.html">&#128205; Stores</a>
+    href="lawnstar-reviews.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#11088; Customer Reviews</a>
+          <a href="lawnstar-faq.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#10067; FAQ</a>
+          <a href="lawnstar-loyalty.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#127942; GreenRewards</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.6;margin-bottom:.8rem">Help</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="lawnstar-contact.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128140; Contact Us</a>
+          <a href="lawnstar-track.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128230; Track My Order</a>
+          <a href="lawnstar-checkout.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128521; Returns &amp; Refunds</a>
+          <a href="lawnstar-guide.html" style="color:rgba(255,255,255,.8);font-size:.83rem;text-decoration:none">&#128295; Setup Guide</a>
+  <a href="lawnstar-blog.html">&#128221; Blog</a>
+        </div>
+        <div style="margin-top:1.2rem;font-size:.78rem;opacity:.65;line-height:1.7">
+          &#128222; 1800 LAWNSTAR<br>
+          &#128231; help@lawnstar.com.au<br>
+          &#128336; Mon&#8211;Fri 8am&#8211;6pm AEST
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.15);padding-top:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem">
+      <div style="font-size:.75rem;opacity:.6">&#127807; <strong>LawnStar</strong> &copy; 2026 &nbsp;&#183;&nbsp; All prices AUD inc. GST &nbsp;&#183;&nbsp; ABN 12 345 678 901 &nbsp;&#183;&nbsp; Free delivery Australia-wide</div>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#128274; SSL Secured</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Afterpay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Zip Pay</span>
+        <span style="background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .6rem;font-size:.72rem">&#127881; Humm</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const _saved=localStorage.getItem("ls_cart");
+let cart=_saved?JSON.parse(_saved):[{id:1,em:"?",br:"Husqvarna",nm:"Automower 430X",p:4619,qty:1},{id:2,em:"?",br:"Mammotion",nm:"Yuka 1000",p:1389,qty:1}];
+let promoApplied=false,deliveryCost=0,deliveryLabel='Standard Free (2–5 days)',selectedPayTab=0;
+
+function goStep(n){
+  for(let i=1;i<=4;i++){
+    document.getElementById('sec'+i).classList.toggle('on',i===n);
+    const st=document.getElementById('st'+i);
+    st.classList.remove('on','done');
+    if(i<n)st.classList.add('done');
+    else if(i===n)st.classList.add('on');
+    if(i<4)document.getElementById('sd'+i).classList.toggle('on',i<n);
+  }
+  if(n===4)buildReview();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderCart(){
+  const d=document.getElementById('cartItems');
+  if(!cart.length){d.innerHTML='<div style="text-align:center;padding:2rem;color:var(--muted)">🛒 Cart empty — <a href="lawnstar-all-mowers.html" style="color:var(--g);font-weight:700">browse mowers</a></div>';return;}
+  d.innerHTML=cart.map(c=>`<div class="order-item">
+    <div class="oi-img">${c.em}</div>
+    <div style="flex:1"><div class="oi-brand">${c.br}</div><div class="oi-name">${c.nm}</div>
+    <div class="qty-ctrl"><button class="qty-btn" onclick="adjQty(${c.id},-1)">−</button><div class="qty-num">${c.qty}</div><button class="qty-btn" onclick="adjQty(${c.id},1)">+</button></div></div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.3rem">
+      <div class="oi-price">A$${(c.p*c.qty).toLocaleString()}</div>
+      <button class="oi-remove" onclick="removeItem(${c.id})">✕ Remove</button>
+    </div></div>`).join('');
+  renderTotals('totals1');renderSummary();
+}
+
+function adjQty(id,d){const it=cart.find(x=>x.id===id);if(it){it.qty=Math.max(1,it.qty+d);renderCart();}}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);renderCart();}
+function subtotal(){return cart.reduce((s,c)=>s+c.p*c.qty,0);}
+
+function renderTotals(tid){
+  const sub=subtotal(),disc=promoApplied?Math.round(sub*.10):0,total=sub-disc+deliveryCost;
+  const el=document.getElementById(tid);if(!el)return;
+  el.innerHTML=`<div class="total-row"><span>Subtotal</span><span class="val">A$${sub.toLocaleString()}</span></div>
+    ${disc?`<div class="total-row disc"><span>Promo LAWN10 (−10%)</span><span class="val">−A$${disc.toLocaleString()}</span></div>`:''}
+    <div class="total-row"><span>Delivery</span><span class="val">${deliveryCost?'A$'+deliveryCost:'FREE 🚚'}</span></div>
+    <div class="total-row grand"><span>Total (inc. GST)</span><span>A$${total.toLocaleString()}</span></div>`;
+  const ft=document.getElementById('finalTotal');if(ft)ft.textContent='A$'+total.toLocaleString();
+}
+
+function renderSummary(){
+  document.getElementById('summaryItems').innerHTML=cart.map(c=>`<div class="order-item">
+    <div class="oi-img" style="width:42px;height:42px;font-size:1.4rem">${c.em}</div>
+    <div style="flex:1"><div class="oi-brand" style="font-size:.65rem">${c.br}</div><div class="oi-name" style="font-size:.8rem">${c.nm} ×${c.qty}</div></div>
+    <div class="oi-price" style="font-size:.85rem">A$${(c.p*c.qty).toLocaleString()}</div></div>`).join('');
+  renderTotals('summaryTotals');
+}
+
+function applyPromo(){
+  if(document.getElementById('promoInp').value.trim().toUpperCase()==='LAWN10'){
+    promoApplied=true;document.getElementById('promoOk').style.display='block';renderCart();
+  }else{document.getElementById('promoInp').style.borderColor='var(--err)';setTimeout(()=>document.getElementById('promoInp').style.borderColor='',1500);}
+}
+
+function pickDel(idx,cost,label){
+  deliveryCost=cost;deliveryLabel=label;
+  for(let i=0;i<3;i++)document.getElementById('del'+i).classList.toggle('on',i===idx);
+  renderTotals('totals1');renderSummary();
+}
+
+function valStep2(){
+  const fields=[['fName',''],['lName',''],['addr',''],['suburb',''],['postcode',/^\d{4}$/],['state',''],['phone',''],['email',/^[^\s@]+@[^\s@]+\.[^\s@]+$/]];
+  let ok=true;
+  fields.forEach(([id,rule])=>{
+    const el=document.getElementById(id),em=document.getElementById('e-'+id),v=el.value.trim();
+    const fail=!v||(rule instanceof RegExp&&!rule.test(v));
+    el.classList.toggle('err',fail);em.classList.toggle('on',fail);
+    if(fail)ok=false;
+  });
+  if(ok)goStep(3);
+}
+
+function valStep3(){
+  if(selectedPayTab===0){
+    if(!document.getElementById('cName').value.trim()||document.getElementById('cNum').value.replace(/\s/g,'').length!==16||document.getElementById('cExp').value.length!==5||document.getElementById('cCvv').value.length<3){alert('Please complete all card details.');return;}
+  }
+  goStep(4);
+}
+
+function payTab(i){
+  selectedPayTab=i;
+  [0,1,2].forEach(j=>document.getElementById('pt'+j).classList.toggle('on',j===i));
+  document.getElementById('payCard').style.display=i===0?'block':'none';
+  document.getElementById('payPP').style.display=i===1?'block':'none';
+  document.getElementById('payBNPL').style.display=i===2?'block':'none';
+}
+
+const BNPL_N=['4 × interest-free fortnightly payments via Afterpay.','Weekly or monthly instalments with Zip Pay.','Up to 60 monthly instalments with Humm — ideal for larger orders.'];
+function pickBNPL(i){[0,1,2].forEach(j=>document.getElementById('bnpl'+j).classList.toggle('on',j===i));document.getElementById('bnplNote').textContent=BNPL_N[i];}
+pickBNPL(0);
+
+function fmtCard(el){let v=el.value.replace(/\D/g,'').substring(0,16);el.value=v.replace(/(\d{4})/g,'$1 ').trim();}
+function fmtExp(el){let v=el.value.replace(/\D/g,'').substring(0,4);if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);el.value=v;}
+
+function buildReview(){
+  const fn=document.getElementById('fName').value,ln=document.getElementById('lName').value;
+  const addr=document.getElementById('addr').value,sub=document.getElementById('suburb').value;
+  const st=document.getElementById('state').value,pc=document.getElementById('postcode').value;
+  const pms=['Credit / Debit Card','PayPal','Buy Now Pay Later'];
+  document.getElementById('reviewContent').innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+      <div style="background:var(--bg);border-radius:12px;padding:.9rem">
+        <div style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:.4rem">📍 Delivering To</div>
+        <div style="font-size:.85rem;font-weight:700">${fn} ${ln}</div>
+        <div style="font-size:.82rem;color:var(--muted);line-height:1.5">${addr}<br>${sub} ${st} ${pc}</div>
+        <div style="font-size:.75rem;color:var(--g);font-weight:600;margin-top:.3rem">📅 ${deliveryLabel}</div>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;padding:.9rem">
+        <div style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:.4rem">💳 Payment</div>
+        <div style="font-size:.88rem;font-weight:700">${pms[selectedPayTab]}</div>
+        ${selectedPayTab===0&&document.getElementById('cNum').value?`<div style="font-size:.8rem;color:var(--muted)">•••• •••• •••• ${document.getElementById('cNum').value.replace(/\s/g,'').slice(-4)}</div>`:''}
+      </div>
+    </div>
+    ${cart.map(c=>`<div class="order-item"><div class="oi-img">${c.em}</div><div style="flex:1"><div class="oi-brand">${c.br}</div><div class="oi-name">${c.nm} ×${c.qty}</div></div><div class="oi-price">A$${(c.p*c.qty).toLocaleString()}</div></div>`).join('')}
+    <div class="totals" style="margin-top:.5rem">${document.getElementById('summaryTotals').innerHTML}</div>`;
+}
+
+function placeOrder(){
+  document.getElementById('coWrap').style.display='none';
+  document.getElementById('stepsBar').style.display='none';
+  document.getElementById('successScreen').classList.add('on');
+  document.getElementById('orderNum').textContent='Order #LS-'+Date.now().toString().slice(-7);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+renderCart();
+window.addEventListener('resize',()=>{if(window.innerWidth>820){document.getElementById('mobMenu').classList.remove('on');document.getElementById('hbg').style.display='none';document.getElementById('navLinks').style.display='flex';}else{document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}});
+if(window.innerWidth<=820){document.getElementById('hbg').style.display='flex';document.getElementById('navLinks').style.display='none';}
+</script>
+<!-- EXIT INTENT POPUP -->
+<div id="exitPop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center;animation:epfi .3s ease">
+  <div style="background:#fff;border-radius:24px;max-width:460px;width:90%;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+    <div style="background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:2rem;text-align:center;color:#fff">
+      <div style="font-size:3rem;margin-bottom:.5rem">&#128293;</div>
+      <div style="font-size:1.3rem;font-weight:900;margin-bottom:.3rem">Wait! Don&#39;t Go Yet</div>
+      <div style="font-size:.88rem;opacity:.85">Grab an extra 10% off before you leave</div>
+    </div>
+    <div style="padding:1.8rem;text-align:center">
+      <div style="background:#f0faf0;border:2px dashed #76c442;border-radius:12px;padding:.8rem 1.2rem;margin-bottom:1rem">
+        <div style="font-size:.75rem;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:1px">Your exclusive code</div>
+        <div style="font-size:1.6rem;font-weight:900;color:#1b5e20;letter-spacing:2px">STAY10</div>
+        <div style="font-size:.75rem;color:#6b7280;margin-top:.2rem">10% off Â· Valid 24 hours only</div>
+      </div>
+      <a href="lawnstar-all-mowers.html" style="display:block;background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;padding:.75rem;border-radius:12px;font-weight:800;font-size:.95rem;text-decoration:none;margin-bottom:.7rem" onclick="document.getElementById('exitPop').style.display='none'">&#129302; Shop Now &amp; Save 10%</a>
+      <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="background:none;border:none;color:#6b7280;font-size:.8rem;cursor:pointer;text-decoration:underline">No thanks, I&#39;ll pay full price</button>
+    </div>
+    <button onclick="document.getElementById('exitPop').style.display='none';localStorage.setItem('ls_exit_seen','1')" style="position:absolute;top:.8rem;right:.8rem;background:rgba(255,255,255,.2);border:none;border-radius:50%;width:30px;height:30px;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center">&#10005;</button>
+  </div>
+</div>
+<style>@keyframes epfi{from{opacity:0}to{opacity:1}}</style>
+<script>
+(function(){
+  if(localStorage.getItem('ls_exit_seen')) return;
+  var shown=false;
+  document.addEventListener('mouseleave',function(e){
+    if(e.clientY<=0&&!shown){
+      shown=true;
+      var pop=document.getElementById('exitPop');
+      if(pop){pop.style.display='flex';}
+    }
+  });
+  setTimeout(function(){
+    if(!shown){shown=true;var pop=document.getElementById('exitPop');if(pop)pop.style.display='flex';}
+  },45000);
+})();
+</script>
+$chatWidget = @'
+
+<!-- LAWNSTAR LIVE CHAT WIDGET -->
+<style>
+#ls-chat-bubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:8000;display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;font-family:'Segoe UI',system-ui,sans-serif}
+#ls-chat-pop{background:#fff;border-radius:18px;box-shadow:0 8px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;display:none;animation:chatIn .25s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+#ls-chat-pop.on{display:block}
+.lsc-header{background:linear-gradient(135deg,#1b5e20,#2d7a3a);padding:1rem 1.1rem;display:flex;align-items:center;gap:.7rem}
+.lsc-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.lsc-hinfo{flex:1}
+.lsc-name{color:#fff;font-size:.88rem;font-weight:800}
+.lsc-status{color:rgba(255,255,255,.75);font-size:.72rem;display:flex;align-items:center;gap:.3rem}
+.lsc-dot{width:7px;height:7px;border-radius:50%;background:#76c442;display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.lsc-close{background:none;border:none;color:rgba(255,255,255,.8);font-size:1.1rem;cursor:pointer;padding:.2rem;line-height:1}
+.lsc-msgs{height:220px;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.7rem;background:#f8fbf8}
+.lsc-msg{max-width:82%;padding:.6rem .85rem;border-radius:14px;font-size:.8rem;line-height:1.5;animation:msgIn .2s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lsc-msg.bot{background:#fff;border:1px solid #e2e8f0;align-self:flex-start;border-radius:4px 14px 14px 14px;color:#1a1a2e}
+.lsc-msg.user{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;align-self:flex-end;border-radius:14px 4px 14px 14px}
+.lsc-chips{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .9rem .7rem;background:#f8fbf8}
+.lsc-chip{background:#e8f5e9;color:#2d7a3a;border:1px solid #c8e6c9;border-radius:20px;padding:.25rem .75rem;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.lsc-chip:hover{background:#2d7a3a;color:#fff}
+.lsc-input-row{display:flex;gap:0;border-top:1px solid #e2e8f0;background:#fff}
+.lsc-input{flex:1;border:none;outline:none;padding:.75rem .9rem;font-size:.85rem;font-family:inherit;background:transparent}
+.lsc-send{background:linear-gradient(135deg,#1b5e20,#2d7a3a);color:#fff;border:none;padding:.5rem .85rem;cursor:pointer;font-size:1rem;transition:opacity .2s}
+.lsc-send:hover{opacity:.85}
+.lsc-btn{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1b5e20,#2d7a3a);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(45,122,58,.4);transition:all .25s;position:relative}
+.lsc-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(45,122,58,.55)}
+.lsc-notif{position:absolute;top:-2px;right:-2px;background:#e53935;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.lsc-typing{display:flex;gap:4px;align-items:center;padding:.6rem .85rem;background:#fff;border:1px solid #e2e8f0;border-radius:4px 14px 14px 14px;align-self:flex-start;width:52px}
+.lsc-typing span{width:7px;height:7px;border-radius:50%;background:#76c442;animation:typ .9s infinite}
+.lsc-typing span:nth-child(2){animation-delay:.15s}
+.lsc-typing span:nth-child(3){animation-delay:.3s}
+@keyframes typ{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+</style>
+<div id="ls-chat-bubble">
+  <div id="ls-chat-pop">
+    <div class="lsc-header">
+      <div class="lsc-avatar">&#127807;</div>
+      <div class="lsc-hinfo">
+        <div class="lsc-name">LawnStar Support</div>
+        <div class="lsc-status"><span class="lsc-dot"></span> Online now &bull; Avg reply &lt; 2 min</div>
+      </div>
+      <button class="lsc-close" onclick="lscToggle()">&#10005;</button>
+    </div>
+    <div class="lsc-msgs" id="lscMsgs"></div>
+    <div class="lsc-chips" id="lscChips">
+      <div class="lsc-chip" onclick="lscQuick('Which mower suits my lawn?')">&#129302; Find my mower</div>
+      <div class="lsc-chip" onclick="lscQuick('What are your current deals?')">&#128293; Deals &amp; sales</div>
+      <div class="lsc-chip" onclick="lscQuick('I need help with my order')">&#128230; Order help</div>
+      <div class="lsc-chip" onclick="lscQuick('Warranty question')">&#128737; Warranty</div>
+    </div>
+    <div class="lsc-input-row">
+      <input class="lsc-input" id="lscInput" placeholder="Ask us anything..." onkeydown="if(event.key==='Enter')lscSend()"/>
+      <button class="lsc-send" onclick="lscSend()">&#10148;</button>
+    </div>
+  </div>
+  <button class="lsc-btn" onclick="lscToggle()" id="lscMainBtn" title="Chat with LawnStar">
+    <span id="lscBtnIcon">&#128172;</span>
+    <div class="lsc-notif" id="lscNotif">1</div>
+  </button>
+</div>
+<script>
+(function(){
+var open=false,welcomed=false;
+var RESPONSES={
+  'which mower':'Great question! Can you tell me your lawn size? Under 500m2, 500-1000m2, or over 1000m2? I can find the perfect match &#128269;',
+  'lawn size':'For up to 1,000m2, the Mammotion Yuka 1000 (A$899) is our top pick. For 1,000–3,000m2, the Segway Navimow i108E is brilliant. For larger lawns, Mammotion Luba 2 AWD covers up to 5,000m2! &#127807;',
+  'deal':'Right now we have up to 30% off! Use code <strong>LAWN10</strong> at checkout for an extra 10% off everything. <a href="lawnstar-deals.html" style="color:#76c442;font-weight:700">See all deals &#8594;</a>',
+  'order':'I can help with that! Please email orders@lawnstar.com.au with your order number, or use our <a href="lawnstar-track.html" style="color:#76c442;font-weight:700">order tracker</a>. &#128230;',
+  'warranty':'All our mowers come with at least 3 years warranty (manufacturer + LawnStar top-up). You can <a href="lawnstar-warranty.html" style="color:#76c442;font-weight:700">view full warranty details here</a>. &#128737;',
+  'price':'Our mowers range from A$899 to A$6,900 depending on features. The most popular is the Segway Navimow i108E at A$1,299. Want me to help find one in your budget?',
+  'install':'Great news — we offer professional installation from A$199! Our technicians set up the boundary wire, configure the app, and do a test run. <a href="lawnstar-store-locator.html" style="color:#76c442;font-weight:700">Book via a local store</a>.',
+  'compare':'Our <a href="lawnstar-compare.html" style="color:#76c442;font-weight:700">comparison tool</a> lets you compare up to 4 mowers side by side with animated score charts. Really handy! &#9878;',
+  'bundle':'Yes! We have bundle deals where you save 10% when you add 2+ accessories. Check out the <a href="lawnstar-bundle-builder.html" style="color:#76c442;font-weight:700">Bundle Builder</a> &#127873;',
+  'shipping':'We offer free shipping on all orders over A$500 Australia-wide. Standard delivery is 3–7 business days. Express available. &#128666;',
+  'default':'Thanks for your message! A LawnStar expert will reply within 2 minutes. In the meantime, our <a href="lawnstar-faq.html" style="color:#76c442;font-weight:700">FAQ page</a> might have a quick answer. &#128075;'
+};
+function addMsg(txt,type,delay){
+  delay=delay||0;
+  setTimeout(function(){
+    var msgs=document.getElementById('lscMsgs');
+    if(!msgs)return;
+    // Show typing for bot
+    if(type==='bot'&&delay>0){
+      var typ=document.createElement('div');typ.className='lsc-typing';typ.id='lsc-typing-ind';
+      typ.innerHTML='<span></span><span></span><span></span>';
+      msgs.appendChild(typ);msgs.scrollTop=msgs.scrollHeight;
+      setTimeout(function(){
+        var t=document.getElementById('lsc-typing-ind');if(t)t.remove();
+        var m=document.createElement('div');m.className='lsc-msg '+type;m.innerHTML=txt;
+        msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+      },900);
+    } else {
+      var m=document.createElement('div');m.className='lsc-msg '+(type||'bot');m.innerHTML=txt;
+      msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;
+    }
+  },delay);
+}
+function getReply(txt){
+  var t=txt.toLowerCase();
+  for(var k in RESPONSES){if(t.indexOf(k)>-1)return RESPONSES[k];}
+  return RESPONSES['default'];
+}
+window.lscToggle=function(){
+  open=!open;
+  var pop=document.getElementById('ls-chat-pop');
+  var notif=document.getElementById('lscNotif');
+  var icon=document.getElementById('lscBtnIcon');
+  if(open){
+    pop.classList.add('on');
+    if(notif)notif.style.display='none';
+    if(icon)icon.textContent='\u2715';
+    if(!welcomed){
+      welcomed=true;
+      addMsg('&#127807; Hey! Welcome to <strong>LawnStar</strong>. I\'m here to help you find the perfect robot mower &#129302;','bot',100);
+      addMsg('What can I help you with today?','bot',1200);
+    }
+  } else {
+    pop.classList.remove('on');
+    if(icon)icon.textContent='\u{1F4AC}';
+  }
+};
+window.lscSend=function(){
+  var inp=document.getElementById('lscInput');
+  var txt=inp.value.trim();
+  if(!txt)return;
+  addMsg(txt,'user');
+  inp.value='';
+  addMsg(getReply(txt),'bot',400);
+};
+window.lscQuick=function(txt){
+  addMsg(txt,'user');
+  addMsg(getReply(txt),'bot',400);
+  document.getElementById('lscChips').style.display='none';
+};
+// Show greeting bubble after 8s
+setTimeout(function(){
+  if(!open){
+    var notif=document.getElementById('lscNotif');
+    if(notif)notif.style.display='flex';
+  }
+},8000);
+})();
+</script>
+</body>
+</html>
